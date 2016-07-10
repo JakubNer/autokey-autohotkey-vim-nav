@@ -5,7 +5,8 @@ Python files are to be loaded by Linux autokey (https://code.google.com/archive/
 
 *all.ahk* file to be loaded by Windows AutoHotKey.
 
-i like to map CAPS LOCK to HYPER in LINUX and LCTRL in Windows hence the mappings.  To modify Windows registry use RandyRants key mapper.
+I like to map CAPS LOCK to HYPER in Linux and LCTRL in Windows hence the mappings.  To modify Windows registry use RandyRants Sharpkeys key mapper.
+
 For Linux add `xmodmap $HOME/.xmodmap` on startup and have your .xmodmap file with:
 
 ```
