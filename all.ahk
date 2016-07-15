@@ -134,12 +134,14 @@ SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 }
 
 ; selection movements with Shift
+>^z:: 
 >^!h:: 
 {
     SendInput {Browser_Back}
     return
 }
 ; selection movements with Shift
+>^x:: 
 >^!l:: 
 {
     SendInput {Browser_Forward}
