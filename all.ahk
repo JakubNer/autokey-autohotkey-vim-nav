@@ -2,148 +2,162 @@
 SendMode Input  ; Recommended for new scripts due to its superior speed and reliability.
 SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 
+; HotKey to Initiate CAPSLOCK {{{
+CAPSLOCK::
+    {                                
+        Gui, 99:+ToolWindow
+        Gui, 99:Show,NoActivate x-1 w1, Capslock Is Down
+        keywait, Capslock
+        Gui, 99:Destroy
+    }
+Return ; }}}
+
+#IfWinExist, Capslock Is Down
+
 ; cursor movements
->^h:: 
+h:: 
 {
     SendInput {Left}
     return
 }
->^j:: 
+j:: 
 {
     SendInput {Down}
     return
 }
->^k:: 
+k:: 
 {
     SendInput {Up}
     return
 }
->^l:: 
+l:: 
 {
     SendInput {Right}
     return
 }
->^g:: 
+g:: 
 {
     SendInput ^{Home}
     return
 }
->^+g:: 
++g:: 
 {
     SendInput ^{End}
     return
 }
->^b:: 
+b:: 
 {
     SendInput {PgUp}
     return
 }
->^f:: 
+f:: 
 {
     SendInput {PgDn}
     return
 }
->^e::
+e::
 {
     SendInput ^{Up}
     return
 }
->^y::
+y::
 {
     SendInput ^{Down}
     return
 }
 
 ; page movements
->^w:: 
+w:: 
 {
     SendInput ^{Right}
     return
 }
->^q:: 
+q:: 
 {
     SendInput ^{Left}
     return
 }
->^d:: 
+d:: 
 {
     SendInput {Delete}
     return
 }
->^0:: ; Add to the inputNumber if inputNumber != null, otherwise HOME
+0:: ; Add to the inputNumber if inputNumber != null, otherwise HOME
 {
     SendInput {Home}
     return
 }
->^-:: 
+-:: 
 {
     SendInput {End}
     return
 }
->^$:: 
+$:: 
 {
     SendInput {End}
     return
 }
 
 ; selection movements with Shift
->^+h:: 
++h:: 
 {
     SendInput +{Left}
     return
 }
->^+j:: 
++j:: 
 {
     SendInput +{Down}
     return
 }
->^+k:: 
++k:: 
 {
     SendInput +{Up}
     return
 }
->^+l::
++l::
 {
     SendInput +{Right}
     return
 }
->^+w:: 
++w:: 
 {
     SendInput +^{Right}
     return
 }
->^+q:: 
++q:: 
 {
     SendInput +^{Left}
     return
 }
->^+d:: 
++d:: 
 {
     SendInput +{Delete}
     return
 }
->^):: 
+):: 
 {
     SendInput +{Home}
     return
 }
->^_:: 
+_:: 
 {
     SendInput +{End}
     return
 }
 
 ; selection movements with Shift
->^z:: 
->^!h:: 
+z:: 
+!h:: 
 {
     SendInput {Browser_Back}
     return
 }
 ; selection movements with Shift
->^x:: 
->^!l:: 
+x:: 
+!l:: 
 {
     SendInput {Browser_Forward}
     return
 }
+
+#IfWinExist
