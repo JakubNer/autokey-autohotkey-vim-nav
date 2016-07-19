@@ -160,4 +160,39 @@ x::
     return
 }
 
+; mouse presses
+*a::
+{
+	If lmbPressed {
+		return
+	}
+	lmbPressed := true
+	Click down
+	return
+}
+
+*a UP::
+{
+	lmbPressed := false
+	Click up
+	return
+}
+
+*s::
+{
+	If lmbPressed {
+		return
+	}
+	lmbPressed := true
+	Click down right
+	return
+}
+
+*s UP::
+{
+	lmbPressed := false
+	Click up right
+	return
+}
+
 #IfWinExist
