@@ -145,54 +145,102 @@ _::
     return
 }
 
-; selection movements with Shift
+; Browser back/forward
 z:: 
 !h:: 
 {
-    SendInput {Browser_Back}
+    SendInput !{Left}
     return
 }
-; selection movements with Shift
 x:: 
 !l:: 
 {
-    SendInput {Browser_Forward}
+    SendInput !{Right}
+    return
+}
++z:: 
++!h:: 
+{
+    SendInput !^{Left}
+    return
+}
++x:: 
++!l:: 
+{
+    SendInput !^{Right}
     return
 }
 
-; mouse presses
-*a::
+; https://autohotkey.com/board/topic/30816-simulate-scroll-wheel-using-right-mouse-button/
+$*MButton::
+Hotkey, $*MButton Up, MButtonup, off
+;KeyWait, MButton, T0.4
+;If ErrorLevel = 1
+;{
+   Hotkey, $*MButton Up, MButtonup, on
+   MouseGetPos, ox, oy
+   SetTimer, WatchTheMouse, 5
+   movedx := 0
+   movedy := 0
+   pixelsMoved := 0
+;   TrayTip, Scrolling started, Emulating scroll wheel
+;}
+;Else
+;   Send {MButton}
+return
+
+MButtonup:
+Hotkey, $*MButton Up, MButtonup, off
+SetTimer, WatchTheMouse, off
+;TrayTip
+If (pixelsMoved = 0)
 {
-	If lmbPressed {
-		return
-	}
-	lmbPressed := true
-	Click down
-	return
+    ;The mouse was not moved, send the click event
+    ; (Default action is 'Back', replace these with a different action here if desired)
+    Send {MButton}
+    Send {MButtonUp}
+}
+return
+
+WatchTheMouse:
+MouseGetPos, nx, ny
+movedx := movedx+nx-ox
+movedy := movedy+ny-oy
+
+pixelsMoved := pixelsMoved + Abs(nx-ox) + Abs(ny-oy)
+
+timesX := Abs(movedx) / 4
+ControlGetFocus, control, A
+Loop, %timesX%
+{
+    If (movedx > 0)
+    {
+        SendMessage, 0x114, 1, 0, %control%, A ; 0x114 is WM_HSCROLL
+        movedx := movedx - 4
+    }
+    Else
+    {
+        SendMessage, 0x114, 0, 0, %control%, A ; 0x114 is WM_HSCROLL
+        movedx := movedx + 4
+    }
 }
 
-*a UP::
+timesY := Abs(movedy) / 4
+Loop, %timesY%
 {
-	lmbPressed := false
-	Click up
-	return
-}
+    If (movedy > 0)
+    {
+        Click WheelDown
+        movedy := movedy - 4
+    }
+    Else
+    {
+        Click WheelUp
+        movedy := movedy + 4
+    }
+}   
 
-*s::
-{
-	If lmbPressed {
-		return
-	}
-	lmbPressed := true
-	Click down right
-	return
-}
-
-*s UP::
-{
-	lmbPressed := false
-	Click up right
-	return
-}
+MouseMove ox, oy
+return
 
 #IfWinExist
