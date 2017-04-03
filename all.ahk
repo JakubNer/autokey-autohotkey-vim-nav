@@ -183,7 +183,7 @@ $*MButton::
 KeyWait, MButton, T0.2
 If ErrorLevel = 1
 {
-    Sensitivity = 5 ; how far it takes before the scroll happens
+    Slowdown = 2
     MouseGetPos, X1, Y1, , c, 2
     SetTimer, MBScroll, 20
 }
@@ -192,19 +192,12 @@ Else
 return
 
 MBScroll:
-
-MouseGetPos, X2, Y2
-
-If Abs(Y2-Y1) >= Sensitivity
-
-{
-
-;	SendMessage, 0x115, % (Y2 > Y1), 0, , Ahk_ID %c%
-
-   SendInput, % "{Blind}{Wheel" (Y2 > Y1 ? "Down}" : "Up}")
-
-	MouseMove, 0, % Y1 - Y2, 0, R
-
-}
-
-return
+    MouseGetPos, X2, Y2
+    If Abs(Y2-Y1) >= 1
+    {
+        Loop, % Abs(Y2-Y1) / Slowdown {
+            SendInput, % "{Blind}{Wheel" (Y2 > Y1 ? "Down}" : "Up}")
+        }
+        MouseMove, 0, % Y1 - Y2, 0, R
+        return
+    }
