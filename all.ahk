@@ -175,66 +175,36 @@ x::
 
 
 
-; https://autohotkey.com/board/topic/30816-simulate-scroll-wheel-using-right-mouse-button/
+
+$*MButton Up::SetTimer, MBScroll, off
+
 $*MButton::
-Hotkey, $*MButton Up, MButtonup, off
-   Hotkey, $*MButton Up, MButtonup, on
-   MouseGetPos, ox, oy
-   SetTimer, WatchTheMouse, 5
-   movedx := 0
-   movedy := 0
-   pixelsMoved := 0
+
+KeyWait, MButton, T0.2
+If ErrorLevel = 1
+{
+    Sensitivity = 5 ; how far it takes before the scroll happens
+    MouseGetPos, X1, Y1, , c, 2
+    SetTimer, MBScroll, 20
+}
+Else
+   Send {MButton}
 return
 
-MButtonup:
-Hotkey, $*MButton Up, MButtonup, off
-SetTimer, WatchTheMouse, off
-If (pixelsMoved = 0)
+MBScroll:
+
+MouseGetPos, X2, Y2
+
+If Abs(Y2-Y1) >= Sensitivity
+
 {
-    ;The mouse was not moved, send the click event
-    ; (Default action is 'Back', replace these with a different action here if desired)
-    Send {MButton}
-    Send {MButtonUp}
-}
-return
 
-WatchTheMouse:
-MouseGetPos, nx, ny
-movedx := movedx+nx-ox
-movedy := movedy+ny-oy
+;	SendMessage, 0x115, % (Y2 > Y1), 0, , Ahk_ID %c%
 
-pixelsMoved := pixelsMoved + Abs(nx-ox) + Abs(ny-oy)
+   SendInput, % "{Blind}{Wheel" (Y2 > Y1 ? "Down}" : "Up}")
 
-timesX := Abs(movedx) / 4
-ControlGetFocus, control, A
-Loop, %timesX%
-{
-    If (movedx > 0)
-    {
-        SendMessage, 0x114, 1, 0, %control%, A ; 0x114 is WM_HSCROLL
-        movedx := movedx - 4
-    }
-    Else
-    {
-        SendMessage, 0x114, 0, 0, %control%, A ; 0x114 is WM_HSCROLL
-        movedx := movedx + 4
-    }
+	MouseMove, 0, % Y1 - Y2, 0, R
+
 }
 
-timesY := Abs(movedy) / 4
-Loop, %timesY%
-{
-    If (movedy > 0)
-    {
-        Click WheelDown
-        movedy := movedy - 4
-    }
-    Else
-    {
-        Click WheelUp
-        movedy := movedy + 4
-    }
-}   
-
-MouseMove ox, oy
 return
