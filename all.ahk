@@ -14,6 +14,19 @@ Return ; }}}
 
 #IfWinExist, Capslock Is Down
 
+; virtual desktops
+a::
+{
+    SendInput ^#{Left}
+    return
+}
+s::
+{
+    SendInput ^#{Right}
+    return
+}
+
+
 ; cursor movements
 h:: 
 {
