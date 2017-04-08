@@ -196,7 +196,6 @@ $*MButton::
 KeyWait, MButton, T0.2
 If ErrorLevel = 1
 {
-    Slowdown = 2
     MouseGetPos, X1, Y1, , c, 2
     SetTimer, MBScroll, 20
 }
@@ -206,11 +205,26 @@ return
 
 MBScroll:
     MouseGetPos, X2, Y2
-    If Abs(Y2-Y1) >= 1
+    deltay := Abs(Y2-Y1) 
+    deltax := Abs(X2-X1)
+    If deltay >= 1
     {
-        Loop, % Abs(Y2-Y1) / Slowdown {
+        speed := (deltay > 10) ? deltay : 1
+        Loop, % speed {
             SendInput, % "{Blind}{Wheel" (Y2 > Y1 ? "Down}" : "Up}")
         }
         MouseMove, 0, % Y1 - Y2, 0, R
-        return
     }
+    If deltax >= 1
+    {
+      If (X2 > X1)
+      {
+          SendMessage, 0x114, 1, 0, %control%, A ; 0x114 is WM_HSCROLL
+      }
+      Else
+      {
+          SendMessage, 0x114, 0, 0, %control%, A ; 0x114 is WM_HSCROLL
+      }   
+      MouseMove, % X1 - X2, 0, 0, R
+    }    
+    return
