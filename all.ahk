@@ -212,22 +212,22 @@ MBScroll:
     {
         speed := 0
         counter := counter + 1
-        if deltay > 12
+        if deltay > 16
         {
-          speed := deltay
+          speed := 3
         } 
-        else if deltay > 9
+        else if deltay > 12
         {
           speed := 1
         }
-        else if deltay > 6 
+        else if deltay > 8 
         {
           if mod(counter,2) == 0
           {
             speed := 1
           }
         }
-        else if deltay > 3
+        else if deltay > 4
         {
           if mod(counter,3) == 0
           {
