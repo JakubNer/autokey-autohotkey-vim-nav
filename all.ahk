@@ -183,6 +183,16 @@ x::
     SendInput !^{Right}
     return
 }
+i:: 
+{
+    SendInput {Up}{Up}{Up}{Up}{Up}
+    return
+}
+u:: 
+{
+    SendInput {down}{down}{down}{down}{down}
+    return
+}
 
 #IfWinExist
 
