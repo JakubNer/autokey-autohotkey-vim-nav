@@ -3,7 +3,7 @@ Scripts for Linux's autokey and Windows autohotkey to allow vim like navigation 
 
 Python files are to be loaded by Linux autokey (https://code.google.com/archive/p/autokey/).
 
-*all.ahk* file to be loaded by Windows AutoHotKey.
+*vim.ahk* file to be loaded by Windows AutoHotKey.  *mouse.ahk* has the middle button scrolling code if desired.
 
 I like to map CAPS LOCK to HYPER in Linux and LCTRL in Windows hence the mappings.  To modify Windows registry use RandyRants Sharpkeys key mapper.
 
