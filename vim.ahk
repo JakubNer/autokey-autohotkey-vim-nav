@@ -196,6 +196,8 @@ u::
     return
 }
 
+c::F13
+
 +Capslock::
 CapsLock::Suspend Off
 CapsLock Up::Suspend On
