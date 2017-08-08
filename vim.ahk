@@ -14,13 +14,10 @@ a::
 }
 s::
 {
-    SendInput #{Left}
-    Sleep, 100
-    SendInput {Enter}
-    Sleep, 100
-    SendInput !{Tab}
+    Send #{Right}
     return
-}!a::
+}
+!a::
 {
     SendInput ^#{Left}
     return
