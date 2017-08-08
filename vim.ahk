@@ -6,13 +6,26 @@ ListLines Off
 
 Suspend On
 
-; virtual desktops
+; window management
 a::
+{
+    WinMaximize, A
+    return
+}
+s::
+{
+    SendInput #{Left}
+    Sleep, 100
+    SendInput {Enter}
+    Sleep, 100
+    SendInput !{Tab}
+    return
+}!a::
 {
     SendInput ^#{Left}
     return
 }
-s::
+!s::
 {
     SendInput ^#{Right}
     return
@@ -196,7 +209,7 @@ u::
     return
 }
 
-c::F13
+r::F13
 
 +Capslock::
 CapsLock::Suspend Off
