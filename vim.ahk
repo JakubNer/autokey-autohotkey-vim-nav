@@ -6,28 +6,41 @@ ListLines Off
 
 Suspend On
 
-; window management
+; window 10 select the right virtual desktop (out of 4)
 a::
 {
-    WinMaximize, A
+    SendInput ^#{Left}
+    SendInput ^#{Left}
+    SendInput ^#{Left}
+    SendInput ^#{Left}
     return
 }
 s::
 {
-    Send #{Right}
+    SendInput ^#{Left}
+    SendInput ^#{Left}
+    SendInput ^#{Left}
+    SendInput ^#{Left}
+    SendInput ^#{Right}
     return
 }
 !a::
 {
+    SendInput ^#{Right}
+    SendInput ^#{Right}
+    SendInput ^#{Right}
+    SendInput ^#{Right}
     SendInput ^#{Left}
     return
 }
 !s::
 {
     SendInput ^#{Right}
+    SendInput ^#{Right}
+    SendInput ^#{Right}
+    SendInput ^#{Right}
     return
 }
-
 
 ; cursor movements
 h:: 
