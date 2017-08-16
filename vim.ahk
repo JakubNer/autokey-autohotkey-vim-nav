@@ -4,6 +4,8 @@ SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 SetBatchLines -1
 ListLines Off
 
+SetCapsLockState, AlwaysOff
+
 Suspend On
 
 ; avoid bad state of CAPS pressed when not down
@@ -275,4 +277,4 @@ u::
 r::F13
 
 CapsLock::Suspend Off
-CapsLock Up::Suspend On
+~*CapsLock Up::Suspend On
