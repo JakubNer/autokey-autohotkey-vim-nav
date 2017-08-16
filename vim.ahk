@@ -8,10 +8,10 @@ Suspend On
 
 ; avoid bad state of CAPS pressed when not down
 GetKeyState, state, CapsLock
-if state = U 
+if state = D
 {
   Suspend On
-  SetNumlockState, off
+  SetCapsLockState, off
 }
 
 ; window management 
@@ -273,5 +273,5 @@ u::
 
 r::F13
 
-CapsLock::Suspend Off
-CapsLock Up::Suspend On
+~*CapsLock::Suspend Off
+~*CapsLock Up::Suspend On
