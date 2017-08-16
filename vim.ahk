@@ -12,6 +12,7 @@ if state = D
 {
   Suspend On
   SetCapsLockState, off
+  Send {CapsLock Up}
 }
 
 ; window management 
@@ -273,5 +274,5 @@ u::
 
 r::F13
 
-~*CapsLock::Suspend Off
-~*CapsLock Up::Suspend On
+CapsLock::Suspend Off
+CapsLock Up::Suspend On
