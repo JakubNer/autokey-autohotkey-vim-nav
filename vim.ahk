@@ -6,6 +6,14 @@ ListLines Off
 
 Suspend On
 
+; avoid bad state of CAPS pressed when not down
+GetKeyState, state, CapsLock
+if state = U 
+{
+  Suspend On
+  SetNumlockState, off
+}
+
 ; window management 
 a::
 {
@@ -265,10 +273,5 @@ u::
 
 r::F13
 
-+Capslock::
-{
-  Suspend On
-  Send {CapsLock Up}
-}
 CapsLock::Suspend Off
 CapsLock Up::Suspend On
