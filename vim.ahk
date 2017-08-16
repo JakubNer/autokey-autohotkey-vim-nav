@@ -6,17 +6,33 @@ ListLines Off
 
 Suspend On
 
-; window 10 select the right virtual desktop (out of 4)
+; window management 
 a::
 {
+    WinMaximize, A
+    return
+}
+s::
+{
+    Send #{Right}
+    return
+}
+
+; window 10 select the right virtual desktop (out of 4)
+!q::
+{
+    SendInput ^#{Left}
+    SendInput ^#{Left}
     SendInput ^#{Left}
     SendInput ^#{Left}
     SendInput ^#{Left}
     SendInput ^#{Left}
     return
 }
-s::
+!w::
 {
+    SendInput ^#{Left}
+    SendInput ^#{Left}
     SendInput ^#{Left}
     SendInput ^#{Left}
     SendInput ^#{Left}
@@ -26,6 +42,32 @@ s::
 }
 !a::
 {
+    SendInput ^#{Left}
+    SendInput ^#{Left}
+    SendInput ^#{Left}
+    SendInput ^#{Left}
+    SendInput ^#{Left}
+    SendInput ^#{Left}
+    SendInput ^#{Right}
+    SendInput ^#{Right}
+    return
+}
+!s::
+{
+    SendInput ^#{Right}
+    SendInput ^#{Right}
+    SendInput ^#{Right}
+    SendInput ^#{Right}
+    SendInput ^#{Right}
+    SendInput ^#{Right}
+    SendInput ^#{Left}
+    SendInput ^#{Left}
+    return
+}
+!z::
+{
+    SendInput ^#{Right}
+    SendInput ^#{Right}
     SendInput ^#{Right}
     SendInput ^#{Right}
     SendInput ^#{Right}
@@ -33,8 +75,10 @@ s::
     SendInput ^#{Left}
     return
 }
-!s::
+!x::
 {
+    SendInput ^#{Right}
+    SendInput ^#{Right}
     SendInput ^#{Right}
     SendInput ^#{Right}
     SendInput ^#{Right}
@@ -222,5 +266,9 @@ u::
 r::F13
 
 +Capslock::
+{
+  Suspend On
+  Send {CapsLock Up}
+}
 CapsLock::Suspend Off
 CapsLock Up::Suspend On
