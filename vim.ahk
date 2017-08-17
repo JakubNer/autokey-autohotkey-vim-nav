@@ -17,23 +17,13 @@ if state = D
   Send {CapsLock Up}
 }
 
-; window management 
-a::
-{
-    WinMaximize, A
-    return
-}
-s::
-{
-    Send #{Right}
-    return
-}
+; 7+ taskbar tweak task switch: map F14 (0x7D) to 7+tt action 101, F15 (0x7E) to 7+tt action 102 (in advanced options/keyboard shortcuts)
+a::F14
+s::F15
 
-; window 10 select the right virtual desktop (out of 4)
+; windows 10 select the right virtual desktop (out of 4)
 !q::
 {
-    SendInput ^#{Left}
-    SendInput ^#{Left}
     SendInput ^#{Left}
     SendInput ^#{Left}
     SendInput ^#{Left}
@@ -45,20 +35,13 @@ s::
     SendInput ^#{Left}
     SendInput ^#{Left}
     SendInput ^#{Left}
-    SendInput ^#{Left}
-    SendInput ^#{Left}
-    SendInput ^#{Left}
     SendInput ^#{Right}
     return
 }
 !a::
 {
-    SendInput ^#{Left}
-    SendInput ^#{Left}
-    SendInput ^#{Left}
-    SendInput ^#{Left}
-    SendInput ^#{Left}
-    SendInput ^#{Left}
+    SendInput ^#{Right}
+    SendInput ^#{Right}
     SendInput ^#{Right}
     SendInput ^#{Right}
     return
@@ -69,31 +52,19 @@ s::
     SendInput ^#{Right}
     SendInput ^#{Right}
     SendInput ^#{Right}
-    SendInput ^#{Right}
-    SendInput ^#{Right}
-    SendInput ^#{Left}
     SendInput ^#{Left}
     return
 }
+
+; window management 
 !z::
 {
-    SendInput ^#{Right}
-    SendInput ^#{Right}
-    SendInput ^#{Right}
-    SendInput ^#{Right}
-    SendInput ^#{Right}
-    SendInput ^#{Right}
-    SendInput ^#{Left}
+    WinMaximize, A
     return
 }
 !x::
 {
-    SendInput ^#{Right}
-    SendInput ^#{Right}
-    SendInput ^#{Right}
-    SendInput ^#{Right}
-    SendInput ^#{Right}
-    SendInput ^#{Right}
+    Send #{Right}
     return
 }
 
