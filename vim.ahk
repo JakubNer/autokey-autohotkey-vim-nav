@@ -22,7 +22,7 @@ a::F14
 s::F15
 
 ; windows 10 select the right virtual desktop (out of 4)
-!q::
+1::
 {
     SendInput ^#{Left}
     SendInput ^#{Left}
@@ -30,7 +30,7 @@ s::F15
     SendInput ^#{Left}
     return
 }
-!w::
+2::
 {
     SendInput ^#{Left}
     SendInput ^#{Left}
@@ -38,7 +38,7 @@ s::F15
     SendInput ^#{Right}
     return
 }
-!a::
+3::
 {
     SendInput ^#{Right}
     SendInput ^#{Right}
@@ -46,7 +46,7 @@ s::F15
     SendInput ^#{Right}
     return
 }
-!s::
+4::
 {
     SendInput ^#{Right}
     SendInput ^#{Right}
@@ -57,17 +57,16 @@ s::F15
 }
 
 ; window management 
-!z::
+`::
 {
     WinMaximize, A
     return
 }
-!x::
+tab::
 {
     Send #{Right}
     return
 }
-
 ; cursor movements
 h:: 
 {
