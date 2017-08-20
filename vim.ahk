@@ -44,6 +44,7 @@ s::F15
     SendInput ^#{Right}
     SendInput ^#{Right}
     SendInput ^#{Right}
+    SendInput ^#{Left}
     return
 }
 4::
@@ -52,7 +53,6 @@ s::F15
     SendInput ^#{Right}
     SendInput ^#{Right}
     SendInput ^#{Right}
-    SendInput ^#{Left}
     return
 }
 
