@@ -57,12 +57,12 @@ s::F15
 }
 
 ; window management 
-`::
+MButton::
 {
     WinMaximize, A
     return
 }
-tab::
+RButton::
 {
     Send #{Right}
     return
