@@ -24,35 +24,22 @@ s::F15
 ; windows 10 select the right virtual desktop (out of 4)
 1::
 {
-    SendInput ^#{Left}
-    SendInput ^#{Left}
-    SendInput ^#{Left}
-    SendInput ^#{Left}
+    SendInput ^#{Left}^#{Left}^#{Left}
     return
 }
 2::
 {
-    SendInput ^#{Left}
-    SendInput ^#{Left}
-    SendInput ^#{Left}
-    SendInput ^#{Right}
+    SendInput ^#{Left}^#{Left}^#{Left}^#{Right}
     return
 }
 3::
 {
-    SendInput ^#{Right}
-    SendInput ^#{Right}
-    SendInput ^#{Right}
-    SendInput ^#{Right}
-    SendInput ^#{Left}
+    SendInput ^#{Right}^#{Right}^#{Right}^#{Left}
     return
 }
 4::
 {
-    SendInput ^#{Right}
-    SendInput ^#{Right}
-    SendInput ^#{Right}
-    SendInput ^#{Right}
+    SendInput ^#{Right}^#{Right}^#{Right}
     return
 }
 
