@@ -21,17 +21,6 @@ if state = D
 a::F14
 s::F15
 
-; win10 select taskbar apps
-1::#1
-2::#2
-3::#3
-4::#4
-5::#5
-6::#6
-7::#7
-8::#8
-9::#9
-
 ; win10 window management 
 MButton::
 {
