@@ -31,7 +31,6 @@ s::F15
 7::#7
 8::#8
 9::#9
-0::#0
 
 ; win10 window management 
 MButton::
