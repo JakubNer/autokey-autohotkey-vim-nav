@@ -21,29 +21,19 @@ if state = D
 a::F14
 s::F15
 
-; windows 10 select the right virtual desktop (out of 4)
-1::
-{
-    SendInput ^#{Left}^#{Left}^#{Left}
-    return
-}
-2::
-{
-    SendInput ^#{Left}^#{Left}^#{Left}^#{Right}
-    return
-}
-3::
-{
-    SendInput ^#{Right}^#{Right}^#{Right}^#{Left}
-    return
-}
-4::
-{
-    SendInput ^#{Right}^#{Right}^#{Right}
-    return
-}
+; win10 select taskbar apps
+1::#1
+2::#2
+3::#3
+4::#4
+5::#5
+6::#6
+7::#7
+8::#8
+9::#9
+0::#0
 
-; window management 
+; win10 window management 
 MButton::
 {
     WinMaximize, A
