@@ -21,6 +21,11 @@ if state = D
 a::F14
 s::F15
 
+; space>click
+SPACE::LButton
+v::RButton
+c::MButton
+
 ; win10 window management 
 MButton::
 {
