@@ -1,4 +1,5 @@
 #NoEnv  ; Recommended for performance and compatibility with future AutoHotkey releases.
+DetectHiddenWindows, On
 SendMode Input  ; Recommended for new scripts due to its superior speed and reliability.
 SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 SetBatchLines -1
@@ -17,25 +18,31 @@ if state = D
   Send {CapsLock Up}
 }
 
-; 7+ taskbar tweak task switch: map F14 (0x7D) to 7+tt action 101, F15 (0x7E) to 7+tt action 102 (in advanced options/keyboard shortcuts)
-a::F14
-s::F15
-
 ; space>click
 SPACE::LButton
 v::RButton
 c::MButton
 
-; win10 window management 
-MButton::
+;; bug.n windows management
+s::
 {
-    WinMaximize, A
-    return
+    ControlSetText, Edit2, % "View_activateWindow(0, +1)", bug.n_BAR_0
 }
-RButton::
+
+a::
 {
-    Send #{Right}
-    return
+    ControlSetText, Edit2, % "View_activateWindow(0, -1)", bug.n_BAR_0
+}
+
++s::
+{
+    ControlSetText, Edit2, % "View_shuffleWindow(0, +1)", bug.n_BAR_0
+}
+
++a::
+{
+    ControlSetText, Edit2, % "View_shuffleWindow(0, -1)", bug.n_BAR_0
+
 }
 ; cursor movements
 h:: 
@@ -214,7 +221,9 @@ u::
     return
 }
 
+;; for Ditto
 r::F13
+
 
 CapsLock::Suspend Off
 ~*CapsLock Up::Suspend On
