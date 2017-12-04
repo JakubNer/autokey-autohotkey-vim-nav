@@ -23,27 +23,10 @@ SPACE::LButton
 v::RButton
 c::MButton
 
-;; bug.n windows management
-s::
-{
-    ControlSetText, Edit2, % "View_activateWindow(0, +1)", bug.n_BAR_0
-}
+;; scrolling
+s::WheelDown
+a::WheelUp
 
-a::
-{
-    ControlSetText, Edit2, % "View_activateWindow(0, -1)", bug.n_BAR_0
-}
-
-+s::
-{
-    ControlSetText, Edit2, % "View_shuffleWindow(0, +1)", bug.n_BAR_0
-}
-
-+a::
-{
-    ControlSetText, Edit2, % "View_shuffleWindow(0, -1)", bug.n_BAR_0
-
-}
 ; cursor movements
 h:: 
 {
