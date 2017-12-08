@@ -1,3 +1,5 @@
+#Include desktop_switcher.ahk
+
 #NoEnv  ; Recommended for performance and compatibility with future AutoHotkey releases.
 DetectHiddenWindows, On
 SendMode Input  ; Recommended for new scripts due to its superior speed and reliability.
@@ -18,10 +20,35 @@ if state = D
   Send {CapsLock Up}
 }
 
-; space>click
-SPACE::LButton
-v::RButton
-c::MButton
+; Virtual Desktops
+!q::switchDesktopByNumber(1)
+!w::switchDesktopByNumber(2)
+!e::switchDesktopByNumber(3)
+!r::switchDesktopByNumber(4)
+!f::switchDesktopByNumber(5)
+!z::switchDesktopByNumber(6)
+!x::switchDesktopByNumber(7)
+!c::switchDesktopByNumber(8)
+!v::switchDesktopByNumber(9)
+
+
+;; Windows snapping to sides and maximizing
+;; Make sure to turn off "show what I can snap next to it" in Windows' "multitasking settings"
+!a::
+{
+    Send #{Left}
+    return
+}
+!s::
+{
+    WinMaximize, A
+    return
+}
+!d::
+{
+    Send #{Right}
+    return
+}
 
 ;; scrolling
 s::WheelDown
