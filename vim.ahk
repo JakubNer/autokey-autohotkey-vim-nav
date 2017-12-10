@@ -1,4 +1,5 @@
 #Include desktop_switcher.ahk
+#Include portrait_snap.ahk
 
 #NoEnv  ; Recommended for performance and compatibility with future AutoHotkey releases.
 DetectHiddenWindows, On
@@ -22,15 +23,17 @@ if state = D
 
 ; Virtual Desktops
 !q::switchDesktopByNumber(1)
-!w::switchDesktopByNumber(2)
-!e::switchDesktopByNumber(3)
-!r::switchDesktopByNumber(4)
-!f::switchDesktopByNumber(5)
-!z::switchDesktopByNumber(6)
-!x::switchDesktopByNumber(7)
-!c::switchDesktopByNumber(8)
-!v::switchDesktopByNumber(9)
+!e::switchDesktopByNumber(2)
+!r::switchDesktopByNumber(3)
+!f::switchDesktopByNumber(4)
+!z::switchDesktopByNumber(5)
+!c::switchDesktopByNumber(6)
+!v::switchDesktopByNumber(7)
 
+c::
+{
+    Send #{Tab}
+}
 
 ;; Windows snapping to sides and maximizing
 ;; Make sure to turn off "show what I can snap next to it" in Windows' "multitasking settings"
@@ -47,6 +50,18 @@ if state = D
 !d::
 {
     Send #{Right}
+    return
+}
+!w::
+{
+    WinRestore, A
+    ResizeWin(0)
+    return
+}
+!x::
+{
+    WinRestore, A
+    ResizeWin(1)
     return
 }
 
