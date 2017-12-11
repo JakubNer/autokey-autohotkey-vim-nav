@@ -54,6 +54,19 @@ if state = D
     return
 }
 
+!t::
+{
+    if toggle_taskbar := !toggle_taskbar
+
+       WinHide ahk_class Shell_TrayWnd
+
+    else
+
+       WinShow ahk_class Shell_TrayWnd
+
+    return
+}
+
 ;; scrolling
 s::WheelDown
 a::WheelUp
