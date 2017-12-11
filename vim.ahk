@@ -1,5 +1,6 @@
 #Include desktop_switcher.ahk
 #Include portrait_snap.ahk
+#Include app_memorize_restore.ahk
 
 #NoEnv  ; Recommended for performance and compatibility with future AutoHotkey releases.
 DetectHiddenWindows, On
@@ -22,38 +23,43 @@ if state = D
 }
 
 ; Virtual Desktops
-!q::switchDesktopByNumber(1)
-!w::switchDesktopByNumber(2)
-!e::switchDesktopByNumber(3)
-!r::switchDesktopByNumber(4)
-!f::switchDesktopByNumber(5)
-!v::switchDesktopByNumber(6)
-!c::switchDesktopByNumber(7)
-!x::switchDesktopByNumber(8)
+!a::memorizeOrRestore(1,"!a")
+!s::memorizeOrRestore(2,"!s")
+!d::memorizeOrRestore(3,"!d")
+!f::memorizeOrRestore(4,"!f")
+!z::memorizeOrRestore(5,"!z")
+!x::memorizeOrRestore(6,"!x")
+!c::memorizeOrRestore(7,"!c")
+!v::memorizeOrRestore(8,"!v")
+!u::memorizeOrRestore(9,"!u")
+!i::memorizeOrRestore(10,"!i")
+!o::memorizeOrRestore(11,"!o")
+!j::memorizeOrRestore(12,"!j")
+!k::memorizeOrRestore(13,"!k")
+!l::memorizeOrRestore(14,"!l")
 
 ;; Windows snapping to sides and maximizing
 ;; Make sure to turn off "show what I can snap next to it" in Windows' "multitasking settings"
-!a::
+!q::
 {
     SendEvent {LWin down}{Left down}{LWin up}{Left up}
     return
 }
-!s::
+!w::
 {
     WinMaximize, A
     return
 }
-!z::
-{
-    WinMinimize, A
-    return
-}
-!d::
+!e::
 {
     SendEvent {LWin down}{Right down}{LWin up}{Right up}
     return
 }
-
+!r::
+{
+    WinMinimize, A
+    return
+}
 !t::
 {
     if toggle_taskbar := !toggle_taskbar
@@ -68,8 +74,17 @@ if state = D
 }
 
 ;; scrolling
-s::WheelDown
-a::WheelUp
+s::
+{
+    SendInput {WheelDown}
+    return
+}
+
+a::
+{
+    SendInput {WheelUp}
+    return
+}
 
 ; cursor movements
 h:: 
@@ -204,25 +219,21 @@ _::
 
 ; Browser back/forward
 z:: 
-!h:: 
 {
     SendInput !{Left}
     return
 }
 x:: 
-!l:: 
 {
     SendInput !{Right}
     return
 }
 +z:: 
-+!h:: 
 {
     SendInput !^{Left}
     return
 }
 +x:: 
-+!l:: 
 {
     SendInput !^{Right}
     return
@@ -235,16 +246,6 @@ i::
 u:: 
 {
     SendInput {down}{down}{down}{down}{down}
-    return
-}
-!i:: 
-{
-    SendInput {Up}{Up}{Up}{Up}{Up}{Up}{Up}{Up}{Up}{Up}{Up}{Up}{Up}{Up}{Up}{Up}{Up}{Up}{Up}{Up}
-    return
-}
-!u:: 
-{
-    SendInput {down}{down}{down}{down}{down}{down}{down}{down}{down}{down}{down}{down}{down}{down}{down}{down}{down}{down}{down}{down}
     return
 }
 
