@@ -23,23 +23,19 @@ if state = D
 
 ; Virtual Desktops
 !q::switchDesktopByNumber(1)
-!e::switchDesktopByNumber(2)
-!r::switchDesktopByNumber(3)
-!f::switchDesktopByNumber(4)
-!z::switchDesktopByNumber(5)
-!c::switchDesktopByNumber(6)
-!v::switchDesktopByNumber(7)
-
-c::
-{
-    Send #{Tab}
-}
+!w::switchDesktopByNumber(2)
+!e::switchDesktopByNumber(3)
+!r::switchDesktopByNumber(4)
+!f::switchDesktopByNumber(5)
+!v::switchDesktopByNumber(6)
+!c::switchDesktopByNumber(7)
+!x::switchDesktopByNumber(8)
 
 ;; Windows snapping to sides and maximizing
 ;; Make sure to turn off "show what I can snap next to it" in Windows' "multitasking settings"
 !a::
 {
-    Send #{Left}
+    SendEvent {LWin down}{Left down}{LWin up}{Left up}
     return
 }
 !s::
@@ -47,21 +43,14 @@ c::
     WinMaximize, A
     return
 }
+!z::
+{
+    WinMinimize, A
+    return
+}
 !d::
 {
-    Send #{Right}
-    return
-}
-!w::
-{
-    WinRestore, A
-    ResizeWin(0)
-    return
-}
-!x::
-{
-    WinRestore, A
-    ResizeWin(1)
+    SendEvent {LWin down}{Right down}{LWin up}{Right up}
     return
 }
 
