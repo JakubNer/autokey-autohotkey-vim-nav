@@ -37,6 +37,8 @@ if state = D
 !j::memorizeOrRestore(12,"!j")
 !k::memorizeOrRestore(13,"!k")
 !l::memorizeOrRestore(14,"!l")
+!g::memorizeOrRestore(15,"!g")
+!b::memorizeOrRestore(16,"!b")
 
 ;; Windows snapping to sides and maximizing
 ;; Make sure to turn off "show what I can snap next to it" in Windows' "multitasking settings"
