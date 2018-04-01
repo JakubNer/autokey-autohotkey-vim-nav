@@ -1,5 +1,3 @@
-#Include desktop_switcher.ahk
-#Include portrait_snap.ahk
 #Include app_memorize_restore.ahk
 
 #NoEnv  ; Recommended for performance and compatibility with future AutoHotkey releases.
@@ -115,42 +113,42 @@ a::
 }
 
 ; cursor movements
-h:: 
+h::
 {
     SendInput {Left}
     return
 }
-j:: 
+j::
 {
     SendInput {Down}
     return
 }
-k:: 
+k::
 {
     SendInput {Up}
     return
 }
-l:: 
+l::
 {
     SendInput {Right}
     return
 }
-g:: 
+g::
 {
     SendInput ^{Home}
     return
 }
-+g:: 
++g::
 {
     SendInput ^{End}
     return
 }
-b:: 
+b::
 {
     SendInput {PgUp}
     return
 }
-f:: 
+f::
 {
     SendInput {PgDn}
     return
@@ -167,49 +165,49 @@ y::
 }
 
 ; page movements
-w:: 
+w::
 {
     SendInput ^{Right}
     return
 }
-q:: 
+q::
 {
     SendInput ^{Left}
     return
 }
-d:: 
+d::
 {
     SendInput {Delete}
     return
 }
-0:: ; Add to the inputNumber if inputNumber != null, otherwise HOME
+0::
 {
     SendInput {Home}
     return
 }
--:: 
+-::
 {
     SendInput {End}
     return
 }
-$:: 
+$::
 {
     SendInput {End}
     return
 }
 
 ; selection movements with Shift
-+h:: 
++h::
 {
     SendInput +{Left}
     return
 }
-+j:: 
++j::
 {
     SendInput +{Down}
     return
 }
-+k:: 
++k::
 {
     SendInput +{Up}
     return
@@ -219,61 +217,71 @@ $::
     SendInput +{Right}
     return
 }
-+w:: 
++w::
 {
     SendInput +^{Right}
     return
 }
-+q:: 
++q::
 {
     SendInput +^{Left}
     return
 }
-+d:: 
++d::
 {
     SendInput +{Delete}
     return
 }
-):: 
+)::
 {
     SendInput +{Home}
     return
 }
-_:: 
+_::
 {
     SendInput +{End}
     return
 }
 
 ; Browser back/forward
-z:: 
+z::
 {
     SendInput !{Left}
     return
 }
-x:: 
+x::
 {
     SendInput !{Right}
     return
 }
-+z:: 
++z::
 {
     SendInput !^{Left}
     return
 }
-+x:: 
++x::
 {
     SendInput !^{Right}
     return
 }
-i:: 
+i::
 {
     SendInput {Up}{Up}{Up}{Up}{Up}
     return
 }
-u:: 
+u::
 {
     SendInput {down}{down}{down}{down}{down}
+    return
+}
++i::
+{
+    SendInput +{Up}+{Up}+{Up}+{Up}+{Up}
+    return
+}
++u::
+{
+    SendInput +{down}+{down}+{down}+{down}+{down}
     return
 }
 
