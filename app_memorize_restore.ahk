@@ -4,25 +4,87 @@ APP_MEM_OUTPUT_VAR := Object()
 ; restore the app window by ID on single press of 'key'
 ; 'which' indicates which memory index to store this ID at, e.g. 1,2,3...
 ;
-; sample use: 
-;   !q::memorizeOrRestore(1,"!q")
+; sample use:
+;   +!q::memorize(1)
+;   !q::restore(1)
 ;
-memorizeOrRestore(which,key)
+
+APP_MEM_MEMORIZED_APPS := Object()
+APP_MEM_NUM_PRESSES := 0
+
+memorize(which)
 {
-    global APP_MEM_OUTPUT_VAR
-    global APP_MEM_OUTPUT_VAR_BEFORE_CLICK
-    
-    if (A_PriorHotkey <> key or A_TimeSincePriorHotkey > 400)
+    global APP_MEM_MEMORIZED_APPS
+    global APP_MEM_PREVIOUS_APP
+    global APP_MEM_NUM_PRESSES
+
+    if (A_PriorHotkey <> A_ThisHotkey or A_TimeSincePriorHotkey > 500)
     {
         ; single press
-        WinGet, APP_MEM_OUTPUT_VAR_BEFORE_CLICK, ID, A
-        input_var :=  APP_MEM_OUTPUT_VAR[which]
+        APP_MEM_NUM_PRESSES := 1
+        APP_MEM_PREVIOUS_APP := APP_MEM_MEMORIZED_APPS[APP_MEM_NUM_PRESSES, which]
+        WinGet, APP_MEM_CURRENT_APP, ID, A
+        APP_MEM_MEMORIZED_APPS[APP_MEM_NUM_PRESSES, which] := APP_MEM_CURRENT_APP
+        return
+    }
+
+    if (A_PriorHotkey == A_ThisHotkey and APP_MEM_NUM_PRESSES == 1 and A_TimeSincePriorHotkey < 500)
+    {
+        ; double press
+        APP_MEM_NUM_PRESSES := 2
+        APP_MEM_MEMORIZED_APPS[APP_MEM_NUM_PRESSES - 1, which] := APP_MEM_PREVIOUS_APP
+        APP_MEM_PREVIOUS_APP := APP_MEM_MEMORIZED_APPS[APP_MEM_NUM_PRESSES, which]
+        WinGet, APP_MEM_CURRENT_APP, ID, A
+        APP_MEM_MEMORIZED_APPS[APP_MEM_NUM_PRESSES, which] := APP_MEM_CURRENT_APP
+        return
+    }
+
+    if (A_PriorHotkey == A_ThisHotkey and APP_MEM_NUM_PRESSES == 2 and A_TimeSincePriorHotkey < 500)
+    {
+        ; triple press
+        APP_MEM_NUM_PRESSES := 3
+        APP_MEM_MEMORIZED_APPS[APP_MEM_NUM_PRESSES - 1, which] := APP_MEM_PREVIOUS_APP
+        APP_MEM_PREVIOUS_APP := APP_MEM_MEMORIZED_APPS[APP_MEM_NUM_PRESSES, which]
+        WinGet, APP_MEM_CURRENT_APP, ID, A
+        APP_MEM_MEMORIZED_APPS[APP_MEM_NUM_PRESSES, which] := APP_MEM_CURRENT_APP
+        return
+    }
+
+    return
+}
+
+restore(which)
+{
+    global APP_MEM_MEMORIZED_APPS
+    global APP_MEM_NUM_PRESSES
+
+    if (A_PriorHotkey <> A_ThisHotkey or A_TimeSincePriorHotkey > 500)
+    {
+        ; single press
+        APP_MEM_NUM_PRESSES := 1
+        input_var :=  APP_MEM_MEMORIZED_APPS[APP_MEM_NUM_PRESSES, which]
         WinActivate, ahk_id %input_var%
         return
     }
-    ; double press    
-    APP_MEM_OUTPUT_VAR[which] := APP_MEM_OUTPUT_VAR_BEFORE_CLICK
-    WinActivate, ahk_id %APP_MEM_OUTPUT_VAR_BEFORE_CLICK%
+
+    if (A_PriorHotkey == A_ThisHotkey and APP_MEM_NUM_PRESSES == 1 and A_TimeSincePriorHotkey < 500)
+    {
+        ; double press
+        APP_MEM_NUM_PRESSES := 2
+        input_var :=  APP_MEM_MEMORIZED_APPS[APP_MEM_NUM_PRESSES, which]
+        WinActivate, ahk_id %input_var%
+        return
+    }
+
+    if (A_PriorHotkey == A_ThisHotkey and APP_MEM_NUM_PRESSES == 2 and A_TimeSincePriorHotkey < 500)
+    {
+        ; triple press
+        APP_MEM_NUM_PRESSES := 3
+        input_var :=  APP_MEM_MEMORIZED_APPS[APP_MEM_NUM_PRESSES, which]
+        WinActivate, ahk_id %input_var%
+        return
+    }
+
     return
 }
 
