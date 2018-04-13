@@ -12,16 +12,26 @@ APP_MEM_OUTPUT_VAR := Object()
 APP_MEM_TIMEOUT := 400
 APP_MEM_MEMORIZED_APPS := Object()
 APP_MEM_NUM_PRESSES := 0
+APP_MEM_MEMORIZED := ""
 
-memorize_app(which) {
+app_mem_info() {
+  global APP_MEM_MEMORIZED
+  MsgBox %APP_MEM_MEMORIZED%
+}
+
+memorize_app(which,tag) {
   global APP_MEM_MEMORIZED_APPS
   global APP_MEM_NUM_PRESSES
+  global APP_MEM_MEMORIZED
   WinGet, APP_MEM_CURRENT_APP, ID, A
+  Winget,APP_TITLE,ProcessName,A
   APP_MEM_MEMORIZED_APPS[APP_MEM_NUM_PRESSES, which] := APP_MEM_CURRENT_APP  
+  APP_MEM_MEMORIZED = %APP_MEM_MEMORIZED%`r`n%APP_TITLE% (%APP_MEM_NUM_PRESSES% x %tag%)
+  TrayTip %APP_TITLE%, (%APP_MEM_NUM_PRESSES% x %tag%),,1
   return
 }
 
-memorize(which)
+memorize(which,tag)
 {
     global APP_MEM_NUM_PRESSES
     global APP_MEM_TIMEOUT
@@ -30,7 +40,7 @@ memorize(which)
     {
         ; single press
         APP_MEM_NUM_PRESSES := 1
-        fn := Func("memorize_app").Bind(which)
+        fn := Func("memorize_app").Bind(which,tag)
         SetTimer, %fn%, -%APP_MEM_TIMEOUT%
         return
     }
