@@ -27,7 +27,7 @@ memorize_app(which,tag) {
   Winget,APP_TITLE,ProcessName,A
   APP_MEM_MEMORIZED_APPS[APP_MEM_NUM_PRESSES, which] := APP_MEM_CURRENT_APP  
   APP_MEM_MEMORIZED = %APP_MEM_MEMORIZED%`r`n%APP_TITLE% (%APP_MEM_NUM_PRESSES% x %tag%)
-  TrayTip %APP_TITLE%, (%APP_MEM_NUM_PRESSES% x %tag%),,1
+  MsgBox ,,, %APP_TITLE% (%APP_MEM_NUM_PRESSES% x %tag%), 1
   return
 }
 
