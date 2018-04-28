@@ -1,4 +1,5 @@
 #Include app_memorize_restore.ahk
+#Include window.ahk
 
 #NoEnv  ; Recommended for performance and compatibility with future AutoHotkey releases.
 DetectHiddenWindows, On
@@ -69,7 +70,16 @@ if state = D
 ;; Make sure to turn off "show what I can snap next to it" in Windows' "multitasking settings"
 !q::
 {
-    SendEvent {LWin down}{Left down}{LWin up}{Left up}
+    KeyWait, q
+    KeyWait, q, D T.3
+    If (!ErrorLevel)
+    {
+      TopFourToCorners()
+    }
+    Else 
+    {
+      SendEvent {LWin down}{Left down}{LWin up}{Left up}
+    }
     return
 }
 !w::
