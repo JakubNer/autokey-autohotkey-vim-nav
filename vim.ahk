@@ -74,6 +74,7 @@ if state = D
     KeyWait, q, D T.3
     If (!ErrorLevel)
     {
+      ;;  CAPS-ALT-Q x 2 to make top 4 windows (in ALT TAB order) to snap into screen corners in order top left, top right, bottom left, bottom right, preserving ALT TAB order.
       TopFourToCorners()
     }
     Else 
