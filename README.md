@@ -56,6 +56,8 @@ I organize my task bar icons in the order that I always map some common applicat
 
 I like to quickly snap Windows to the left-half of a wide screen, right-half of a wide screen, or to take up the full screen:
 
+**2x** `CAPS-ALT-Q` make top 4 windows (in ALT TAB order) snap to screen corners in order top left, top right, bottom left, bottom right, preserving ALT TAB order.
+
 `CAPS+ALT+q` window to left
 
 `CAPS+ALT+w` window full size
