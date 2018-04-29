@@ -21,228 +21,20 @@ if state = D
   Send {CapsLock Up}
 }
 
-; Virtual Desktops
-+!a::memorize(1,"a")
-!a::restore(1)
-+!s::memorize(2,"s")
-!s::restore(2)
-+!d::memorize(3,"d")
-!d::restore(3)
-+!f::memorize(4,"f")
-!f::restore(4)
-+!z::memorize(5,"z")
-!z::restore(5)
-+!x::memorize(6,"x")
-!x::restore(6)
-+!c::memorize(7,"c")
-!c::restore(7)
-+!v::memorize(8,"v")
-!v::restore(8)
-+!u::memorize(9,"u")
-!u::restore(9)
-+!i::memorize(10,"i")
-!i::restore(10)
-+!o::memorize(11,"o")
-!o::restore(11)
-+!j::memorize(12,"j")
-!j::restore(12)
-+!k::memorize(13,"k")
-!k::restore(13)
-+!l::memorize(14,"l")
-!l::restore(14)
-+!g::memorize(15,"g")
-!g::restore(15)
-+!b::memorize(16,"b")
-!b::restore(16)
-+!1::memorize(17,"1")
-!1::restore(17)
-+!2::memorize(18,"2")
-!2::restore(18)
-+!3::memorize(19,"3")
-!3::restore(19)
-+!4::memorize(20,"4")
-!4::restore(20)
-+!5::memorize(21,"5")
-!5::restore(21)
-!y::app_mem_info()
-
-;; Windows snapping to sides and maximizing
-;; Make sure to turn off "show what I can snap next to it" in Windows' "multitasking settings"
-!q::
+;; modifier into alt_mode
+space::
 {
-    SendEvent {LWin down}{Left down}{LWin up}{Left up}
-    return
-}
-!w::
-{
-    WinMaximize, A
-    return
-}
-!e::
-{
-    SendEvent {LWin down}{Right down}{LWin up}{Right up}
-    return
-}
-!r::
-{
-    KeyWait, r
-    KeyWait, r, D T.3
-    If (!ErrorLevel)
-    {
-      ;; CAPS-ALT-Q x 2 to restore top 4 windows from being snapped to corners
-      RestoreFromTopFourToCorners()
-    }
-    Else 
-    {
-      ;;  CAPS-ALT-Q to make top 4 windows (in ALT TAB order) to snap into screen corners in order top left, top right, bottom left, bottom right, preserving ALT TAB order.
-      TopFourToCorners()
-    }
-    return
-}
-!t::
-{
-    if toggle_taskbar := !toggle_taskbar
-
-       WinHide ahk_class Shell_TrayWnd
-
-    else
-
-       WinShow ahk_class Shell_TrayWnd
-
-    return
+  if (alt_mode) {
+    alt_mode := false
+  } else {
+    alt_mode := true
+  }
+  return
 }
 
-;; scrolling
-s::
-{
-    SendInput {WheelDown}
-    return
-}
-
-a::
-{
-    SendInput {WheelUp}
-    return
-}
-
-; cursor movements
-h::
-{
-    SendInput {Left}
-    return
-}
-j::
-{
-    SendInput {Down}
-    return
-}
-k::
-{
-    SendInput {Up}
-    return
-}
-l::
-{
-    SendInput {Right}
-    return
-}
-g::
-{
-    SendInput ^{Home}
-    return
-}
-+g::
-{
-    SendInput ^{End}
-    return
-}
-b::
-{
-    SendInput {PgUp}
-    return
-}
-f::
-{
-    SendInput {PgDn}
-    return
-}
-e::
-{
-    SendInput ^{Up}
-    return
-}
-y::
-{
-    SendInput ^{Down}
-    return
-}
-
-; page movements
-w::
-{
-    SendInput ^{Right}
-    return
-}
-q::
-{
-    SendInput ^{Left}
-    return
-}
-d::
-{
-    SendInput {Delete}
-    return
-}
-0::
-{
-    SendInput {Home}
-    return
-}
 -::
 {
     SendInput {End}
-    return
-}
-$::
-{
-    SendInput {End}
-    return
-}
-
-; selection movements with Shift
-+h::
-{
-    SendInput +{Left}
-    return
-}
-+j::
-{
-    SendInput +{Down}
-    return
-}
-+k::
-{
-    SendInput +{Up}
-    return
-}
-+l::
-{
-    SendInput +{Right}
-    return
-}
-+w::
-{
-    SendInput +^{Right}
-    return
-}
-+q::
-{
-    SendInput +^{Left}
-    return
-}
-+d::
-{
-    SendInput +{Delete}
     return
 }
 )::
@@ -255,52 +47,488 @@ _::
     SendInput +{End}
     return
 }
-
-; Browser back/forward
-z::
+0::
 {
-    SendInput !{Left}
+    SendInput {Home}
+    return
+}  
++1::
+{
+    if (alt_mode) {
+      memorize(17,"1")
+      alt_mode := false
+      return
+    }
+}
+1::
+{
+    if (alt_mode) {
+      restore(17)
+      alt_mode := false
+      return
+    }
+}
++2::
+{
+    if (alt_mode) {
+      memorize(18,"2")
+      alt_mode := false
+      return
+    }
+}
+2::
+{
+    if (alt_mode) {
+      restore(18)
+      alt_mode := false
+      return
+    }
+}
++3::
+{
+    if (alt_mode) {
+      memorize(19,"3")
+      alt_mode := false
+      return
+    }
+}
+3::
+{
+    if (alt_mode) {
+      restore(19)
+      alt_mode := false
+      return
+    }
+}
++4::
+{
+    if (alt_mode) {
+      memorize(20,"4")
+      alt_mode := false
+      return
+    }
+}
+4::
+{
+    if (alt_mode) {
+      restore(20)
+      alt_mode := false
+      return
+    }
+}
++5::
+{
+    if (alt_mode) {
+      memorize(21,"5")
+      alt_mode := false
+      return
+    }
+}
+5::
+{
+    if (alt_mode) {
+      restore(21)
+      alt_mode := false
+      return
+    }
+}
+a::
+{
+    if (alt_mode) {
+      restore(1)
+      alt_mode := false
+      return
+    }
+    SendInput {WheelUp}
     return
 }
-x::
++a::
 {
-    SendInput !{Right}
+    if (alt_mode) {
+      memorize(1,"a")    
+      alt_mode := false
+      return
+    }
+}
+b::
+{
+    if (alt_mode) {
+      restore(16)
+      alt_mode := false
+      return
+    }
+    SendInput {PgUp}
     return
 }
-+z::
++b::
 {
-    SendInput !^{Left}
+    if (alt_mode) {
+      memorize(16,"b")
+      alt_mode := false
+      return
+    }  
+}
++c::
+{
+    if (alt_mode) {
+      memorize(7,"c")
+      alt_mode := false
+      return
+    }
+}
+c::
+{
+    if (alt_mode) {
+      restore(7)
+      alt_mode := false
+      return
+    }
+}
+d::
+{
+    if (alt_mode) {
+      restore(3)
+      alt_mode := false
+      return
+    }
+    SendInput {Delete}
     return
 }
-+x::
++d::
 {
-    SendInput !^{Right}
+    if (alt_mode) {
+      memorize(3,"d")
+      alt_mode := false
+      return
+    }
+    SendInput +{Delete}
+    return
+}
+e::
+{
+    if (alt_mode) {
+      SendEvent {LWin down}{Right down}{LWin up}{Right up}
+      alt_mode := false
+      return
+    }
+    SendInput ^{Up}
+    return
+}
+f::
+{
+    if (alt_mode) {
+      restore(4)
+      alt_mode := false
+      return
+    }
+    SendInput {PgDn}
+    return
+}
++f::
+{
+    if (alt_mode) {
+      memorize(4,"f")
+      alt_mode := false
+      return
+    }
+}
+g::
+{
+    if (alt_mode) {
+      restore(15)
+      alt_mode := false
+      return
+    }
+    SendInput ^{Home}
+    return
+}
++g::
+{
+    if (alt_mode) {
+      memorize(15,"g")
+      alt_mode := false
+      return
+    }
+    SendInput ^{End}
+    return
+}
+h::
+{
+    SendInput {Left}
+    return
+}
++h::
+{
+    SendInput +{Left}
     return
 }
 i::
 {
+    if (alt_mode) {
+      restore(10)
+      alt_mode := false
+      return
+    }
     SendInput {Up}{Up}{Up}{Up}{Up}
-    return
-}
-u::
-{
-    SendInput {down}{down}{down}{down}{down}
     return
 }
 +i::
 {
+    if (alt_mode) {
+      memorize(10,"i")
+      alt_mode := false
+      return
+    }
     SendInput +{Up}+{Up}+{Up}+{Up}+{Up}
+    return
+}
+j::
+{
+    if (alt_mode) {
+      restore(12)
+      alt_mode := false
+      return
+    }
+    SendInput {Down}
+    return
+}
++j::
+{
+    if (alt_mode) {
+      memorize(12,"j")
+      alt_mode := false
+      return
+    }
+    SendInput +{Down}
+    return
+}
+k::
+{
+    if (alt_mode) {
+      restore(13)
+      alt_mode := false
+      return
+    }
+    SendInput {Up}
+    return
+}
++k::
+{
+    if (alt_mode) {
+      memorize(13,"k")
+      alt_mode := false
+      return
+    }
+    SendInput +{Up}
+    return
+}
+l::
+{
+    if (alt_mode) {
+      restore(14)
+      alt_mode := false
+      return
+    }
+    SendInput {Right}
+    return
+}
++l::
+{
+    if (alt_mode) {
+      memorize(14,"l")
+      alt_mode := false
+      return
+    }
+    SendInput +{Right}
+    return
+}
++o::
+{
+    if (alt_mode) {
+      memorize(11,"o")
+      alt_mode := false
+      return
+    }
+}
+o::
+{
+    if (alt_mode) {
+      restore(11)
+      alt_mode := false
+      return
+    }
+}
+q::
+{
+    if (alt_mode) {
+      SendEvent {LWin down}{Left down}{LWin up}{Left up}
+      alt_mode := false
+      return
+    }
+    SendInput ^{Left}
+    return
+}
++q::
+{
+    SendInput +^{Left}
+    return
+}
+r::
+{
+    if (alt_mode) {
+      ;; Windows snapping to sides and maximizing
+      ;; Make sure to turn off "show what I can snap next to it" in Windows' "multitasking settings"
+      KeyWait, r
+      KeyWait, r, D T.3
+      If (!ErrorLevel)
+      {
+        ;; CAPS-ALT-Q x 2 to restore top 4 windows from being snapped to corners
+        RestoreFromTopFourToCorners()
+      }
+      Else 
+      {
+        ;;  CAPS-ALT-Q to make top 4 windows (in ALT TAB order) to snap into screen corners in order top left, top right, bottom left, bottom right, preserving ALT TAB order.
+        TopFourToCorners()
+      }     
+      alt_mode := false
+      return
+    }
+    ;; for Ditto
+    SendInput {F13}
+    return
+}
+s::
+{
+    if (alt_mode) {
+      restore(2)
+      alt_mode := false
+      return
+    }
+    SendInput {WheelDown}
+    return
+}
++s::
+{
+    if (alt_mode) {
+      memorize(2,"s")
+      alt_mode := false
+      return
+    }
+}
+t::
+{
+    if (alt_mode) {
+      if toggle_taskbar := !toggle_taskbar {
+         WinHide ahk_class Shell_TrayWnd
+      } else {
+         WinShow ahk_class Shell_TrayWnd
+      }
+      alt_mode := false
+      return
+    }
+    return
+}
+u::
+{
+    if (alt_mode) {
+      restore(9)
+      alt_mode := false
+      return
+    }
+    SendInput {down}{down}{down}{down}{down}
     return
 }
 +u::
 {
+    if (alt_mode) {
+      memorize(9,"u")
+      alt_mode := false
+      return
+    }
     SendInput +{down}+{down}+{down}+{down}+{down}
     return
 }
-
-;; for Ditto
-r::F13
-
++v::
+{
+    if (alt_mode) {
+      memorize(8,"v")
+      alt_mode := false
+      return
+    }
+}    
+v::
+{
+    if (alt_mode) {
+      restore(8)
+      alt_mode := false
+      return
+    }
+}
+w::
+{
+    if (alt_mode) {
+      WinMaximize, A
+      alt_mode := false
+      return
+    }
+    SendInput ^{Right}
+    return
+}
++w::
+{
+    SendInput +^{Right}
+    return
+}
+x::
+{
+    if (alt_mode) {
+      restore(6)
+      alt_mode := false
+      return
+    }
+    SendInput !{Right}
+    return
+}
++x::
+{
+    if (alt_mode) {
+      memorize(6,"x")
+      alt_mode := false
+      return
+    }
+    SendInput !^{Right}
+    return
+}
+y::
+{
+    if (alt_mode) {
+      app_mem_info()
+      alt_mode := false
+      return
+    }
+    SendInput ^{Down}
+    return
+}
+z::
+{
+    if (alt_mode) {
+      restore(5)
+      alt_mode := false
+      return
+    }
+    SendInput !{Left}
+    return
+}
++z::
+{
+    if (alt_mode) {
+      memorize(5,"z")
+      alt_mode := false
+      return
+    }
+    SendInput !^{Left}
+    return
+}
 
 CapsLock::Suspend Off
 ~*CapsLock Up::Suspend On

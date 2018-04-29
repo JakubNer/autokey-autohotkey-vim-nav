@@ -26,29 +26,29 @@ The following keys allow memorization of application windows for quick recall:
 
 `1,2,3,4,5,a,s,d,f,g,z,x,c,v,b,u,i,o,j,k,l`
 
-To memorize an application window hold ALT,SHIFT--in addition to CAPS LOCK--and single, double, or triple tap one of the above keys.
+To memorize an application window hold CAPS LOCK then press SPACE, then hold SHIFT while single, double, or triple tapping one of the above keys.
 
-To recall an application windows  hold down ALT--in addition to CAPS LOCK--and single, double, or triple tap the corresponding key.
+To recall an application windows  hold CAPS LOCK then press SPACE, then single, double, or triple tap the corresponding key.
 
 #### Example
 
 I organize my task bar icons in the order that I always map some common applications, then re-mapping on restart is quick and painless (I also rarely restart):
 
-`CAPS+ALT+a` ConEmu
+`CAPS+SPACE,CAPS+a` ConEmu
 
-`CAPS+ALT+s` Notepad++
+`CAPS+SPACE,CAPS+s` Notepad++
 
-`CAPS+ALT+d` IntelliJ IDEA
+`CAPS+SPACE,CAPS+d` IntelliJ IDEA
 
-**2x** `CAPS+ALT+d` Atom
+**2x** `CAPS+SPACE,CAPS+d` Atom
 
-`CAPS+ALT+f` IntelliJ IDEA REPL Window
+`CAPS+SPACE,CAPS+f` IntelliJ IDEA REPL Window
 
-`CAPS+ALT+z` Outlook
+`CAPS+SPACE,CAPS+z` Outlook
 
-`CAPS+ALT+x` Slack
+`CAPS+SPACE,CAPS+x` Slack
 
-**2x** `CAPS+ALT+x` WhatsApp
+**2x** `CAPS+SPACE,CAPSE+x` WhatsApp
 
 ... etc.
 
@@ -56,17 +56,17 @@ I organize my task bar icons in the order that I always map some common applicat
 
 I like to quickly snap Windows to the left-half of a wide screen, right-half of a wide screen, or to take up the full screen:
 
-`CAPS+ALT+r` make top 4 windows (in ALT TAB order) snap to screen corners in order top left, top right, bottom left, bottom right, preserving ALT TAB order.
+`CAPS+SPACE,CAPS+r` make top 4 windows (in ALT TAB order) snap to screen corners in order top left, top right, bottom left, bottom right, preserving ALT TAB order.
 
-**2x** `CAPS+ALT+r` restore top 4 windows back from being snapped to corners: reverse `CAPS+ALT+r`.
+**2x** `CAPS+SPACE,CAPSE+r` restore top 4 windows back from being snapped to corners: reverse `CAPS+SPACE,CAPS+r`.
 
-`CAPS+ALT+q` window to left
+`CAPS+SPACE,CAPS+q` window to left
 
-`CAPS+ALT+w` window full size
+`CAPS+SPACE,CAPS+w` window full size
 
-`CAPS+ALT+e` window to right
+`CAPS+SPACE,CAPS+e` window to right
 
-`CAPS+ALT+t` toggle task bar visibility on/off
+`CAPS+SPACE,CAPS+t` toggle task bar visibility on/off
 
 ### Mouse scrolling and Navigation
 
@@ -118,7 +118,7 @@ Laptop keyboards are notorious for different annoying layouts.  Vim navigation t
 
 `CAPS+0` start of line, home
 
-`CAPS+$`, `CAPS+-` end of line, end
+`CAPS+-` end of line, end
 
 `CAPS+i` 5 x up key
 
