@@ -28,9 +28,14 @@ space::
     alt_mode := false
   } else {
     alt_mode := true
+    SetTimer, alt_mode_off, 1000 
   }
   return
 }
+
+alt_mode_off:
+    alt_mode := false
+return
 
 -::
 {
@@ -55,88 +60,77 @@ _::
 +1::
 {
     if (alt_mode) {
-      memorize(17,"1")
-      alt_mode := false
+      memorize(17,"1")     
       return
     }
 }
 1::
 {
     if (alt_mode) {
-      restore(17)
-      alt_mode := false
+      restore(17)     
       return
     }
 }
 +2::
 {
     if (alt_mode) {
-      memorize(18,"2")
-      alt_mode := false
+      memorize(18,"2")      
       return
     }
 }
 2::
 {
     if (alt_mode) {
-      restore(18)
-      alt_mode := false
+      restore(18)      
       return
     }
 }
 +3::
 {
     if (alt_mode) {
-      memorize(19,"3")
-      alt_mode := false
+      memorize(19,"3")      
       return
     }
 }
 3::
 {
     if (alt_mode) {
-      restore(19)
-      alt_mode := false
+      restore(19)      
       return
     }
 }
 +4::
 {
     if (alt_mode) {
-      memorize(20,"4")
-      alt_mode := false
+      memorize(20,"4")      
       return
     }
 }
 4::
 {
     if (alt_mode) {
-      restore(20)
-      alt_mode := false
+      restore(20)      
       return
     }
 }
 +5::
 {
     if (alt_mode) {
-      memorize(21,"5")
-      alt_mode := false
+      memorize(21,"5")      
       return
     }
 }
 5::
 {
     if (alt_mode) {
-      restore(21)
-      alt_mode := false
+      restore(21)      
       return
     }
 }
 a::
 {
     if (alt_mode) {
-      restore(1)
-      alt_mode := false
+      restore(1)      
       return
     }
     SendInput {WheelUp}
@@ -145,16 +139,14 @@ a::
 +a::
 {
     if (alt_mode) {
-      memorize(1,"a")    
-      alt_mode := false
+      memorize(1,"a")          
       return
     }
 }
 b::
 {
     if (alt_mode) {
-      restore(16)
-      alt_mode := false
+      restore(16)      
       return
     }
     SendInput {PgUp}
@@ -163,32 +155,28 @@ b::
 +b::
 {
     if (alt_mode) {
-      memorize(16,"b")
-      alt_mode := false
+      memorize(16,"b")      
       return
     }  
 }
 +c::
 {
     if (alt_mode) {
-      memorize(7,"c")
-      alt_mode := false
+      memorize(7,"c")      
       return
     }
 }
 c::
 {
     if (alt_mode) {
-      restore(7)
-      alt_mode := false
+      restore(7)      
       return
     }
 }
 d::
 {
     if (alt_mode) {
-      restore(3)
-      alt_mode := false
+      restore(3)      
       return
     }
     SendInput {Delete}
@@ -197,8 +185,7 @@ d::
 +d::
 {
     if (alt_mode) {
-      memorize(3,"d")
-      alt_mode := false
+      memorize(3,"d")      
       return
     }
     SendInput +{Delete}
@@ -207,8 +194,7 @@ d::
 e::
 {
     if (alt_mode) {
-      SendEvent {LWin down}{Right down}{LWin up}{Right up}
-      alt_mode := false
+      SendEvent {LWin down}{Right down}{LWin up}{Right up}      
       return
     }
     SendInput ^{Up}
@@ -217,8 +203,7 @@ e::
 f::
 {
     if (alt_mode) {
-      restore(4)
-      alt_mode := false
+      restore(4)      
       return
     }
     SendInput {PgDn}
@@ -227,16 +212,14 @@ f::
 +f::
 {
     if (alt_mode) {
-      memorize(4,"f")
-      alt_mode := false
+      memorize(4,"f")      
       return
     }
 }
 g::
 {
     if (alt_mode) {
-      restore(15)
-      alt_mode := false
+      restore(15)      
       return
     }
     SendInput ^{Home}
@@ -245,8 +228,7 @@ g::
 +g::
 {
     if (alt_mode) {
-      memorize(15,"g")
-      alt_mode := false
+      memorize(15,"g")      
       return
     }
     SendInput ^{End}
@@ -265,8 +247,7 @@ h::
 i::
 {
     if (alt_mode) {
-      restore(10)
-      alt_mode := false
+      restore(10)      
       return
     }
     SendInput {Up}{Up}{Up}{Up}{Up}
@@ -275,8 +256,7 @@ i::
 +i::
 {
     if (alt_mode) {
-      memorize(10,"i")
-      alt_mode := false
+      memorize(10,"i")      
       return
     }
     SendInput +{Up}+{Up}+{Up}+{Up}+{Up}
@@ -285,8 +265,7 @@ i::
 j::
 {
     if (alt_mode) {
-      restore(12)
-      alt_mode := false
+      restore(12)      
       return
     }
     SendInput {Down}
@@ -295,8 +274,7 @@ j::
 +j::
 {
     if (alt_mode) {
-      memorize(12,"j")
-      alt_mode := false
+      memorize(12,"j")      
       return
     }
     SendInput +{Down}
@@ -305,8 +283,7 @@ j::
 k::
 {
     if (alt_mode) {
-      restore(13)
-      alt_mode := false
+      restore(13)      
       return
     }
     SendInput {Up}
@@ -315,8 +292,7 @@ k::
 +k::
 {
     if (alt_mode) {
-      memorize(13,"k")
-      alt_mode := false
+      memorize(13,"k")      
       return
     }
     SendInput +{Up}
@@ -325,8 +301,7 @@ k::
 l::
 {
     if (alt_mode) {
-      restore(14)
-      alt_mode := false
+      restore(14)      
       return
     }
     SendInput {Right}
@@ -335,8 +310,7 @@ l::
 +l::
 {
     if (alt_mode) {
-      memorize(14,"l")
-      alt_mode := false
+      memorize(14,"l")      
       return
     }
     SendInput +{Right}
@@ -345,24 +319,21 @@ l::
 +o::
 {
     if (alt_mode) {
-      memorize(11,"o")
-      alt_mode := false
+      memorize(11,"o")      
       return
     }
 }
 o::
 {
     if (alt_mode) {
-      restore(11)
-      alt_mode := false
+      restore(11)      
       return
     }
 }
 q::
 {
     if (alt_mode) {
-      SendEvent {LWin down}{Left down}{LWin up}{Left up}
-      alt_mode := false
+      SendEvent {LWin down}{Left down}{LWin up}{Left up}      
       return
     }
     SendInput ^{Left}
@@ -389,8 +360,7 @@ r::
       {
         ;;  CAPS-ALT-Q to make top 4 windows (in ALT TAB order) to snap into screen corners in order top left, top right, bottom left, bottom right, preserving ALT TAB order.
         TopFourToCorners()
-      }     
-      alt_mode := false
+      }           
       return
     }
     ;; for Ditto
@@ -400,8 +370,7 @@ r::
 s::
 {
     if (alt_mode) {
-      restore(2)
-      alt_mode := false
+      restore(2)      
       return
     }
     SendInput {WheelDown}
@@ -410,8 +379,7 @@ s::
 +s::
 {
     if (alt_mode) {
-      memorize(2,"s")
-      alt_mode := false
+      memorize(2,"s")      
       return
     }
 }
@@ -422,8 +390,7 @@ t::
          WinHide ahk_class Shell_TrayWnd
       } else {
          WinShow ahk_class Shell_TrayWnd
-      }
-      alt_mode := false
+      }      
       return
     }
     return
@@ -431,8 +398,7 @@ t::
 u::
 {
     if (alt_mode) {
-      restore(9)
-      alt_mode := false
+      restore(9)      
       return
     }
     SendInput {down}{down}{down}{down}{down}
@@ -441,8 +407,7 @@ u::
 +u::
 {
     if (alt_mode) {
-      memorize(9,"u")
-      alt_mode := false
+      memorize(9,"u")      
       return
     }
     SendInput +{down}+{down}+{down}+{down}+{down}
@@ -451,24 +416,21 @@ u::
 +v::
 {
     if (alt_mode) {
-      memorize(8,"v")
-      alt_mode := false
+      memorize(8,"v")      
       return
     }
 }    
 v::
 {
     if (alt_mode) {
-      restore(8)
-      alt_mode := false
+      restore(8)      
       return
     }
 }
 w::
 {
     if (alt_mode) {
-      WinMaximize, A
-      alt_mode := false
+      WinMaximize, A      
       return
     }
     SendInput ^{Right}
@@ -482,8 +444,7 @@ w::
 x::
 {
     if (alt_mode) {
-      restore(6)
-      alt_mode := false
+      restore(6)      
       return
     }
     SendInput !{Right}
@@ -492,8 +453,7 @@ x::
 +x::
 {
     if (alt_mode) {
-      memorize(6,"x")
-      alt_mode := false
+      memorize(6,"x")      
       return
     }
     SendInput !^{Right}
@@ -502,8 +462,7 @@ x::
 y::
 {
     if (alt_mode) {
-      app_mem_info()
-      alt_mode := false
+      app_mem_info()      
       return
     }
     SendInput ^{Down}
@@ -512,8 +471,7 @@ y::
 z::
 {
     if (alt_mode) {
-      restore(5)
-      alt_mode := false
+      restore(5)      
       return
     }
     SendInput !{Left}
@@ -522,8 +480,7 @@ z::
 +z::
 {
     if (alt_mode) {
-      memorize(5,"z")
-      alt_mode := false
+      memorize(5,"z")      
       return
     }
     SendInput !^{Left}
