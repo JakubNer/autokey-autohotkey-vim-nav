@@ -1,17 +1,19 @@
 ;; script by MrMaxP: https://autohotkey.com/board/topic/108780-move-window-to-half-quarter-of-current-monitor/
 ;; script by ophthalmos:  https://autohotkey.com/boards/viewtopic.php?t=13288
-
+  
 ;; My function to reset last 4 windows to corners
 TopFourToCorners()
 {
-  Global
-  AltTabTotalNum = 0;
-  AltTabListID_1 =    ; hwnd from last active windows
-  AltTabListID_2 =    ; hwnd from previous active windows
-  AltTabListID_3 = ;
-  AltTabListID_4 = ; 
+  global AltTabTotalNum  
+  global AltTabListID_1 
+  global AltTabListID_2 
+  global AltTabListID_3 
+  global AltTabListID_4 
+ 
   AltTabWindows()
-  
+
+  RememberWindowsDimensions()
+
   ;; do them in this order so tab order remains as it should
   
   ;; 4th to lower right
@@ -72,18 +74,80 @@ TopFourToCorners()
   return
 }
 
+RememberWindowsDimensions() {
+  global AltTabTotalNum 
+  global AltTabListID_1
+  global AltTabListID_2
+  global AltTabListID_3
+  global AltTabListID_4
+  global array_windows_x
+  global array_windows_y
+  global array_windows_height
+  global array_windows_width
+
+  array_windows_x := []
+  array_windows_y := []
+  array_windows_height := []
+  array_windows_width := []
+  
+  Array := []
+  Array[1] := AltTabListID_1
+  Array[2] := AltTabListID_2
+  Array[3] := AltTabListID_3
+  Array[4] := AltTabListID_4
+  
+  for index, element in Array ; Enumeration is the recommended approach in most cases.
+  {
+    WinGetPos, X, Y, Width, Height, ahk_id %element%
+    array_windows_x[index] := X
+    array_windows_y[index] := Y
+    array_windows_height[index] := Height
+    array_windows_width[index] := Width
+  } 
+}
+
+RestoreFromTopFourToCorners() 
+{
+  global AltTabTotalNum 
+  global AltTabListID_1
+  global AltTabListID_2
+  global AltTabListID_3
+  global AltTabListID_4
+  global array_windows_x
+  global array_windows_y
+  global array_windows_height
+  global array_windows_width
+
+  Array := []
+  Array[1] := AltTabListID_1
+  Array[2] := AltTabListID_2
+  Array[3] := AltTabListID_3
+  Array[4] := AltTabListID_4
+  
+  for index, element in Array ; Enumeration is the recommended approach in most cases.
+  {
+    X := array_windows_x[index]
+    Y := array_windows_y[index]
+    Height := array_windows_height[index]
+    Width := array_windows_width[index]
+    WinMove, ahk_id %element%, , %X%, %Y%, %Width%, %Height%
+  }
+
+}
+
 WS_EX_APPWINDOW = 0x40000 ; provides a taskbar button
 WS_EX_TOOLWINDOW = 0x80 ; removes the window from the alt-tab list
 GW_OWNER = 4
 
 AltTabWindows() {
-  Global
-  AltTabTotalNum := 0 ; the number of windows found
-  AltTabListID_1 =    ; hwnd from last active windows
-  AltTabListID_2 =    ; hwnd from previous active windows
-  AltTabListID_3 = ;
-  AltTabListID_4 = ;
+  Global 
+  AltTabTotalNum := 0
+  AltTabListID_1 = 
+  AltTabListID_2 = 
+  AltTabListID_3 =
+  AltTabListID_4 =
   windowList =
+
   DetectHiddenWindows, Off ; makes DllCall("IsWindowVisible") unnecessary
   WinGet, windowList, List ; gather a list of running programs
   Loop, %windowList%

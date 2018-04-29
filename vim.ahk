@@ -70,17 +70,7 @@ if state = D
 ;; Make sure to turn off "show what I can snap next to it" in Windows' "multitasking settings"
 !q::
 {
-    KeyWait, q
-    KeyWait, q, D T.3
-    If (!ErrorLevel)
-    {
-      ;;  CAPS-ALT-Q x 2 to make top 4 windows (in ALT TAB order) to snap into screen corners in order top left, top right, bottom left, bottom right, preserving ALT TAB order.
-      TopFourToCorners()
-    }
-    Else 
-    {
-      SendEvent {LWin down}{Left down}{LWin up}{Left up}
-    }
+    SendEvent {LWin down}{Left down}{LWin up}{Left up}
     return
 }
 !w::
@@ -95,7 +85,18 @@ if state = D
 }
 !r::
 {
-    WinMinimize, A
+    KeyWait, r
+    KeyWait, r, D T.3
+    If (!ErrorLevel)
+    {
+      ;; CAPS-ALT-Q x 2 to restore top 4 windows from being snapped to corners
+      RestoreFromTopFourToCorners()
+    }
+    Else 
+    {
+      ;;  CAPS-ALT-Q to make top 4 windows (in ALT TAB order) to snap into screen corners in order top left, top right, bottom left, bottom right, preserving ALT TAB order.
+      TopFourToCorners()
+    }
     return
 }
 !t::
