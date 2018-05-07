@@ -353,12 +353,12 @@ r::
       KeyWait, r, D T.3
       If (!ErrorLevel)
       {
-        ;; CAPS-ALT-Q x 2 to restore top 4 windows from being snapped to corners
+        ;; CAPS-R x 2 to restore top 4 windows from being snapped to corners
         RestoreFromTopFourToCorners()
       }
       Else 
       {
-        ;;  CAPS-ALT-Q to make top 4 windows (in ALT TAB order) to snap into screen corners in order top left, top right, bottom left, bottom right, preserving ALT TAB order.
+        ;;  CAPS-R to make top 4 windows (in ALT TAB order) to snap into screen corners in order top left, top right, bottom left, bottom right, preserving ALT TAB order.
         TopFourToCorners()
       }           
       return
