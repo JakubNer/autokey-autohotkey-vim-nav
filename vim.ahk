@@ -133,8 +133,12 @@ a::
       restore(1)      
       return
     }
-    SendInput {WheelUp}
-    return
+	while GetKeyState("a", "P")
+	{
+		Send {WheelUp}
+		Sleep, 20
+	}
+	return
 }
 +a::
 {
@@ -373,8 +377,12 @@ s::
       restore(2)      
       return
     }
-    SendInput {WheelDown}
-    return
+	while GetKeyState("s", "P")
+	{
+		Send {WheelDown}
+		Sleep, 20
+	}
+	return
 }
 +s::
 {
