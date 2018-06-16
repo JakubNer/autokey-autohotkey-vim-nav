@@ -133,12 +133,12 @@ a::
       restore(1)      
       return
     }
-	while GetKeyState("a", "P")
-	{
-		Send {WheelUp}
-		Sleep, 20
-	}
-	return
+    while GetKeyState("a", "P")
+    {
+      Send {WheelUp}
+      Sleep, 45
+    }
+    return
 }
 +a::
 {
@@ -377,12 +377,12 @@ s::
       restore(2)      
       return
     }
-	while GetKeyState("s", "P")
-	{
-		Send {WheelDown}
-		Sleep, 20
-	}
-	return
+    while GetKeyState("s", "P")
+    {
+      Send {WheelDown}
+      Sleep, 45
+    }
+    return
 }
 +s::
 {
