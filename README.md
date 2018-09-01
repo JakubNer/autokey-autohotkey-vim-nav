@@ -24,11 +24,11 @@ Even after a reboot, rebinding the applications is quick and easy for me.
 
 The following keys allow memorization of application windows for quick recall:
 
-`1,2,3,4,5,a,s,d,f,g,z,x,c,v,b,u,i,o,j,k,l`
+`1,2,3,4,5,a,s,d,f,g,z,x,c,v,b`
 
-To memorize an application window hold CAPS LOCK then press SPACE, then hold SHIFT while single, double, or triple tapping one of the above keys.
+To memorize an application window hold CAPS LOCK then press SPACE or TAB, then hold SHIFT while single, double, or triple tapping one of the above keys.
 
-To recall an application windows  hold CAPS LOCK then press SPACE, then single, double, or triple tap the corresponding key.
+To recall an application windows  hold CAPS LOCK then press SPACE or TAB, then single, double, or triple tap the corresponding key.
 
 #### Example
 

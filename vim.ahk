@@ -37,6 +37,22 @@ alt_mode_off:
     alt_mode := false
 return
 
+;; modifier into alt_mode2
+tab::
+{
+  if (alt_mode2) {
+    alt_mode2 := false
+  } else {
+    alt_mode2 := true
+    SetTimer, alt_mode2_off, 1000 
+  }
+  return
+}
+
+alt_mode2_off:
+    alt_mode2 := false
+return
+
 -::
 {
     SendInput {End}
@@ -63,6 +79,10 @@ _::
       memorize(17,"1")     
       return
     }
+    if (alt_mode2) {
+      memorize(26,"+1")          
+      return
+    }    
 }
 1::
 {
@@ -70,6 +90,10 @@ _::
       restore(17)     
       return
     }
+    if (alt_mode2) {
+      restore(26)      
+      return
+    }    
 }
 +2::
 {
@@ -77,6 +101,10 @@ _::
       memorize(18,"2")      
       return
     }
+    if (alt_mode2) {
+      memorize(27,"+2")          
+      return
+    }    
 }
 2::
 {
@@ -84,6 +112,10 @@ _::
       restore(18)      
       return
     }
+    if (alt_mode2) {
+      restore(27)      
+      return
+    }    
 }
 +3::
 {
@@ -91,6 +123,10 @@ _::
       memorize(19,"3")      
       return
     }
+    if (alt_mode2) {
+      memorize(28,"+3")          
+      return
+    }    
 }
 3::
 {
@@ -98,6 +134,10 @@ _::
       restore(19)      
       return
     }
+    if (alt_mode2) {
+      restore(28)      
+      return
+    }    
 }
 +4::
 {
@@ -105,6 +145,10 @@ _::
       memorize(20,"4")      
       return
     }
+    if (alt_mode2) {
+      memorize(29,"+4")          
+      return
+    }    
 }
 4::
 {
@@ -112,6 +156,10 @@ _::
       restore(20)      
       return
     }
+    if (alt_mode2) {
+      restore(29)      
+      return
+    }    
 }
 +5::
 {
@@ -119,6 +167,10 @@ _::
       memorize(21,"5")      
       return
     }
+    if (alt_mode2) {
+      memorize(30,"+5")          
+      return
+    }    
 }
 5::
 {
@@ -126,11 +178,19 @@ _::
       restore(21)      
       return
     }
+    if (alt_mode2) {
+      restore(30)      
+      return
+    }    
 }
 a::
 {
     if (alt_mode) {
       restore(1)      
+      return
+    }
+    if (alt_mode2) {
+      restore(9)      
       return
     }
     while GetKeyState("a", "P")
@@ -146,6 +206,10 @@ a::
       memorize(1,"a")          
       return
     }
+    if (alt_mode2) {
+      memorize(9,"+a")          
+      return
+    }
 }
 b::
 {
@@ -153,6 +217,10 @@ b::
       restore(16)      
       return
     }
+    if (alt_mode2) {
+      restore(25)      
+      return
+    }    
     SendInput {PgUp}
     return
 }
@@ -162,6 +230,10 @@ b::
       memorize(16,"b")      
       return
     }  
+    if (alt_mode2) {
+      memorize(25,"+b")          
+      return
+    }    
 }
 +c::
 {
@@ -169,6 +241,10 @@ b::
       memorize(7,"c")      
       return
     }
+    if (alt_mode2) {
+      memorize(23,"+c")          
+      return
+    }    
 }
 c::
 {
@@ -176,6 +252,10 @@ c::
       restore(7)      
       return
     }
+    if (alt_mode2) {
+      restore(23)      
+      return
+    }    
 }
 d::
 {
@@ -183,6 +263,10 @@ d::
       restore(3)      
       return
     }
+    if (alt_mode2) {
+      restore(11)      
+      return
+    }    
     SendInput {Delete}
     return
 }
@@ -190,6 +274,10 @@ d::
 {
     if (alt_mode) {
       memorize(3,"d")      
+      return
+    }
+    if (alt_mode2) {
+      memorize(11,"+d")          
       return
     }
     SendInput +{Delete}
@@ -210,6 +298,10 @@ f::
       restore(4)      
       return
     }
+    if (alt_mode2) {
+      restore(12)      
+      return
+    }
     SendInput {PgDn}
     return
 }
@@ -219,11 +311,19 @@ f::
       memorize(4,"f")      
       return
     }
+    if (alt_mode2) {
+      memorize(12,"+f")          
+      return
+    }
 }
 g::
 {
     if (alt_mode) {
       restore(15)      
+      return
+    }
+    if (alt_mode2) {
+      restore(13)      
       return
     }
     SendInput ^{Home}
@@ -233,6 +333,10 @@ g::
 {
     if (alt_mode) {
       memorize(15,"g")      
+      return
+    }
+    if (alt_mode2) {
+      memorize(13,"+g")          
       return
     }
     SendInput ^{End}
@@ -250,89 +354,43 @@ h::
 }
 i::
 {
-    if (alt_mode) {
-      restore(10)      
-      return
-    }
     SendInput {Up}{Up}{Up}{Up}{Up}
     return
 }
 +i::
 {
-    if (alt_mode) {
-      memorize(10,"i")      
-      return
-    }
     SendInput +{Up}+{Up}+{Up}+{Up}+{Up}
     return
 }
 j::
 {
-    if (alt_mode) {
-      restore(12)      
-      return
-    }
     SendInput {Down}
     return
 }
 +j::
 {
-    if (alt_mode) {
-      memorize(12,"j")      
-      return
-    }
     SendInput +{Down}
     return
 }
 k::
 {
-    if (alt_mode) {
-      restore(13)      
-      return
-    }
     SendInput {Up}
     return
 }
 +k::
 {
-    if (alt_mode) {
-      memorize(13,"k")      
-      return
-    }
     SendInput +{Up}
     return
 }
 l::
 {
-    if (alt_mode) {
-      restore(14)      
-      return
-    }
     SendInput {Right}
     return
 }
 +l::
 {
-    if (alt_mode) {
-      memorize(14,"l")      
-      return
-    }
     SendInput +{Right}
     return
-}
-+o::
-{
-    if (alt_mode) {
-      memorize(11,"o")      
-      return
-    }
-}
-o::
-{
-    if (alt_mode) {
-      restore(11)      
-      return
-    }
 }
 q::
 {
@@ -377,6 +435,10 @@ s::
       restore(2)      
       return
     }
+    if (alt_mode2) {
+      restore(10)      
+      return
+    }
     while GetKeyState("s", "P")
     {
       Send {WheelDown}
@@ -388,6 +450,10 @@ s::
 {
     if (alt_mode) {
       memorize(2,"s")      
+      return
+    }
+    if (alt_mode2) {
+      memorize(10,"+s")          
       return
     }
 }
@@ -405,19 +471,11 @@ t::
 }
 u::
 {
-    if (alt_mode) {
-      restore(9)      
-      return
-    }
     SendInput {down}{down}{down}{down}{down}
     return
 }
 +u::
 {
-    if (alt_mode) {
-      memorize(9,"u")      
-      return
-    }
     SendInput +{down}+{down}+{down}+{down}+{down}
     return
 }
@@ -427,6 +485,11 @@ u::
       memorize(8,"v")      
       return
     }
+    if (alt_mode2) {
+      memorize(24,"+v")          
+      return
+    }
+
 }    
 v::
 {
@@ -434,6 +497,10 @@ v::
       restore(8)      
       return
     }
+    if (alt_mode2) {
+      restore(24)      
+      return
+    }    
 }
 w::
 {
@@ -455,6 +522,10 @@ x::
       restore(6)      
       return
     }
+    if (alt_mode2) {
+      restore(22)      
+      return
+    }
     SendInput !{Right}
     return
 }
@@ -462,6 +533,10 @@ x::
 {
     if (alt_mode) {
       memorize(6,"x")      
+      return
+    }
+    if (alt_mode2) {
+      memorize(22,"+x")          
       return
     }
     SendInput !^{Right}
@@ -482,6 +557,10 @@ z::
       restore(5)      
       return
     }
+    if (alt_mode2) {
+      restore(14)      
+      return
+    }
     SendInput !{Left}
     return
 }
@@ -489,6 +568,10 @@ z::
 {
     if (alt_mode) {
       memorize(5,"z")      
+      return
+    }
+    if (alt_mode2) {
+      memorize(14,"+a")          
       return
     }
     SendInput !^{Left}
