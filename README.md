@@ -4,6 +4,7 @@ Scripts for Windows AutoHotKey:
 
 * allow vim like navigation across the OS.
 * allow mouse scroll and navigation with keyboard (useful when using bad touchpads)
+* allow quick recall of applications by title (see [app_switch_by_name.ahk](app_switch_by_name.ahk))
 * allow quick binding of application windows to shortcut keys: quick window switching
 
 *vim.ahk* file to be loaded by Windows AutoHotKey.
@@ -20,37 +21,49 @@ CAPS LOCK is no longer used as CAPS LOCK: a pretty useless key made useful, in m
 
 I tried various virtual windows managers over the years including bug.n, etc.  I find the mental task of dealing with virtual windows annoying.  I find binding running applications' windows to a shortcut key the simplest.
 
-Even after a reboot, rebinding the applications is quick and easy for me.
+#### Preconfigured Groups
+
+This approach has pre-configured keybindings that always work as soon as this script is loaded by AutoHotKey.
+
+The following hotkeys are pre-configured:
+
+`a,s,d,f,g,z,x,c,v,b`
+
+To cycle/recall an application window hold CAPS LOCK then press SPACE, then single, double, or triple tap the corresponding key.
+
+The specific applications recalled are controlled by the [app_switch_by_name.ahk](app_switch_by_name.ahk) script.
+
+To reconfigure you must edit the [app_switch_by_name.ahk](app_switch_by_name.ahk) and restart the [vim.ahk](vim.ahk) script in your taskbar.
+
+Looking at the [app_switch_by_name.ahk](app_switch_by_name.ahk) script you will find several `GroupAdd` calls after the `;; COFIGURE APP TITLES TO GROUPS ;;` comment.
+
+The letter after each `switch_` indicates which keybind the group is for.
+
+The last string of each `GroupAdd` line is part of the application's window title to match on; so that the application is automatically part of the corresponding hotkey's group.
+
+Find this title using AutoHotKey's *Window Spy* application.
+
+For example `GroupAdd, switch_x, WhatsApp` means that the `x` hotkey is tied to any window with *WhatsApp* in the title: any *WhatsApp* instance.
+
+Many different title substrings (different apps) can be added to a signle hotkey's group.
+
+#### Memorization to a Group
+
+This approach allows binding of running applications' windows to shortcut keys.
+
+The bindings reset when the system is reboot or when you reset them explicitly (below).
 
 The following keys allow memorization of application windows for quick recall:
 
-`1,2,3,4,5,a,s,d,f,g,z,x,c,v,b`
+`1,2,3,4,5`
 
-To memorize an application window hold CAPS LOCK then press SPACE or TAB, then hold SHIFT while single, double, or triple tapping one of the above keys.
+To memorize an application window hold CAPS LOCK then press SPACE, then hold SHIFT and tap one of the above keys.
 
-To recall an application windows  hold CAPS LOCK then press SPACE or TAB, then single, double, or triple tap the corresponding key.
+You can memorize many applications to the same button and cycle through them.
 
-#### Example
+To cycle/recall an application window hold CAPS LOCK then press SPACE, then single, double, or triple tap the corresponding key.
 
-I organize my task bar icons in the order that I always map some common applications, then re-mapping on restart is quick and painless (I also rarely restart):
-
-`CAPS+SPACE,CAPS+a` ConEmu
-
-`CAPS+SPACE,CAPS+s` Notepad++
-
-`CAPS+SPACE,CAPS+d` IntelliJ IDEA
-
-**2x** `CAPS+SPACE,CAPS+d` Atom
-
-`CAPS+SPACE,CAPS+f` IntelliJ IDEA REPL Window
-
-`CAPS+SPACE,CAPS+z` Outlook
-
-`CAPS+SPACE,CAPS+x` Slack
-
-**2x** `CAPS+SPACE,CAPSE+x` WhatsApp
-
-... etc.
+To reset a keybinding so that no applications are bound to it simply hold CAPS LOCK then pres TAB, then tap one of the above keys.
 
 ### Window Management Key bindings
 

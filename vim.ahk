@@ -1,4 +1,5 @@
 #Include app_memorize_restore.ahk
+#Include app_switch_by_name.ahk
 #Include window.ahk
 
 #NoEnv  ; Recommended for performance and compatibility with future AutoHotkey releases.
@@ -76,121 +77,97 @@ _::
 +1::
 {
     if (alt_mode) {
-      memorize(17,"1")     
+      memorize("1")          
       return
     }
-    if (alt_mode2) {
-      memorize(26,"+1")          
-      return
-    }    
 }
 1::
 {
     if (alt_mode) {
-      restore(17)     
+      restore("1")
       return
     }
     if (alt_mode2) {
-      restore(26)      
+      reset_memory("1")
       return
     }    
 }
 +2::
 {
     if (alt_mode) {
-      memorize(18,"2")      
+      memorize("2")          
       return
     }
-    if (alt_mode2) {
-      memorize(27,"+2")          
-      return
-    }    
 }
 2::
 {
     if (alt_mode) {
-      restore(18)      
+      restore("2")
       return
     }
     if (alt_mode2) {
-      restore(27)      
+      reset_memory("2")
       return
     }    
 }
 +3::
 {
     if (alt_mode) {
-      memorize(19,"3")      
+      memorize("3")          
       return
     }
-    if (alt_mode2) {
-      memorize(28,"+3")          
-      return
-    }    
 }
 3::
 {
     if (alt_mode) {
-      restore(19)      
+      restore("3")
       return
     }
     if (alt_mode2) {
-      restore(28)      
+      reset_memory("3")
       return
     }    
 }
 +4::
 {
     if (alt_mode) {
-      memorize(20,"4")      
+      memorize("4")          
       return
     }
-    if (alt_mode2) {
-      memorize(29,"+4")          
-      return
-    }    
 }
 4::
 {
     if (alt_mode) {
-      restore(20)      
+      restore("4")
       return
     }
     if (alt_mode2) {
-      restore(29)      
+      reset_memory("4")
       return
     }    
 }
 +5::
 {
     if (alt_mode) {
-      memorize(21,"5")      
+      memorize("5")          
       return
     }
-    if (alt_mode2) {
-      memorize(30,"+5")          
-      return
-    }    
 }
 5::
 {
     if (alt_mode) {
-      restore(21)      
+      restore("5")
       return
     }
     if (alt_mode2) {
-      restore(30)      
+      reset_memory("5")
       return
     }    
 }
 a::
 {
     if (alt_mode) {
-      restore(1)      
-      return
-    }
-    if (alt_mode2) {
-      restore(9)      
+      switch("a")
       return
     }
     while GetKeyState("a", "P")
@@ -200,86 +177,33 @@ a::
     }
     return
 }
-+a::
-{
-    if (alt_mode) {
-      memorize(1,"a")          
-      return
-    }
-    if (alt_mode2) {
-      memorize(9,"+a")          
-      return
-    }
-}
 b::
 {
     if (alt_mode) {
-      restore(16)      
+      switch("b")
       return
     }
-    if (alt_mode2) {
-      restore(25)      
-      return
-    }    
     SendInput {PgUp}
     return
-}
-+b::
-{
-    if (alt_mode) {
-      memorize(16,"b")      
-      return
-    }  
-    if (alt_mode2) {
-      memorize(25,"+b")          
-      return
-    }    
-}
-+c::
-{
-    if (alt_mode) {
-      memorize(7,"c")      
-      return
-    }
-    if (alt_mode2) {
-      memorize(23,"+c")          
-      return
-    }    
 }
 c::
 {
     if (alt_mode) {
-      restore(7)      
+      switch("c")
       return
     }
-    if (alt_mode2) {
-      restore(23)      
-      return
-    }    
 }
 d::
 {
     if (alt_mode) {
-      restore(3)      
+      switch("d")
       return
     }
-    if (alt_mode2) {
-      restore(11)      
-      return
-    }    
     SendInput {Delete}
     return
 }
 +d::
 {
-    if (alt_mode) {
-      memorize(3,"d")      
-      return
-    }
-    if (alt_mode2) {
-      memorize(11,"+d")          
-      return
-    }
     SendInput +{Delete}
     return
 }
@@ -295,35 +219,16 @@ e::
 f::
 {
     if (alt_mode) {
-      restore(4)      
-      return
-    }
-    if (alt_mode2) {
-      restore(12)      
+      switch("f")
       return
     }
     SendInput {PgDn}
     return
 }
-+f::
-{
-    if (alt_mode) {
-      memorize(4,"f")      
-      return
-    }
-    if (alt_mode2) {
-      memorize(12,"+f")          
-      return
-    }
-}
 g::
 {
     if (alt_mode) {
-      restore(15)      
-      return
-    }
-    if (alt_mode2) {
-      restore(13)      
+      switch("g")
       return
     }
     SendInput ^{Home}
@@ -331,14 +236,6 @@ g::
 }
 +g::
 {
-    if (alt_mode) {
-      memorize(15,"g")      
-      return
-    }
-    if (alt_mode2) {
-      memorize(13,"+g")          
-      return
-    }
     SendInput ^{End}
     return
 }
@@ -432,11 +329,7 @@ r::
 s::
 {
     if (alt_mode) {
-      restore(2)      
-      return
-    }
-    if (alt_mode2) {
-      restore(10)      
+      switch("s")
       return
     }
     while GetKeyState("s", "P")
@@ -445,17 +338,6 @@ s::
       Sleep, 45
     }
     return
-}
-+s::
-{
-    if (alt_mode) {
-      memorize(2,"s")      
-      return
-    }
-    if (alt_mode2) {
-      memorize(10,"+s")          
-      return
-    }
 }
 t::
 {
@@ -479,28 +361,12 @@ u::
     SendInput +{down}+{down}+{down}+{down}+{down}
     return
 }
-+v::
-{
-    if (alt_mode) {
-      memorize(8,"v")      
-      return
-    }
-    if (alt_mode2) {
-      memorize(24,"+v")          
-      return
-    }
-
-}    
 v::
 {
     if (alt_mode) {
-      restore(8)      
+      switch("v")
       return
     }
-    if (alt_mode2) {
-      restore(24)      
-      return
-    }    
 }
 w::
 {
@@ -519,11 +385,7 @@ w::
 x::
 {
     if (alt_mode) {
-      restore(6)      
-      return
-    }
-    if (alt_mode2) {
-      restore(22)      
+      switch("x")
       return
     }
     SendInput !{Right}
@@ -531,34 +393,18 @@ x::
 }
 +x::
 {
-    if (alt_mode) {
-      memorize(6,"x")      
-      return
-    }
-    if (alt_mode2) {
-      memorize(22,"+x")          
-      return
-    }
     SendInput !^{Right}
     return
 }
 y::
 {
-    if (alt_mode) {
-      app_mem_info()      
-      return
-    }
     SendInput ^{Down}
     return
 }
 z::
 {
     if (alt_mode) {
-      restore(5)      
-      return
-    }
-    if (alt_mode2) {
-      restore(14)      
+      switch("z")
       return
     }
     SendInput !{Left}
@@ -566,14 +412,6 @@ z::
 }
 +z::
 {
-    if (alt_mode) {
-      memorize(5,"z")      
-      return
-    }
-    if (alt_mode2) {
-      memorize(14,"+a")          
-      return
-    }
     SendInput !^{Left}
     return
 }
