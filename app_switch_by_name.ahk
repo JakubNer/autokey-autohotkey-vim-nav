@@ -11,7 +11,7 @@ SetTitleMatchMode, 2
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; COFIGURE APP TITLES TO GROUPS ;;
 
-GroupAdd, switch_a, powershell
+GroupAdd, switch_a, ahk_exe ConEmu64.exe
 GroupAdd, switch_s, Notepad++
 GroupAdd, switch_d, Visual Studio Code
 GroupAdd, switch_f, Sourcetree
