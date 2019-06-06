@@ -29,7 +29,7 @@ The following hotkeys are pre-configured:
 
 `a,s,d,f,g,z,x,c,v,b`
 
-To cycle/recall an application window hold CAPS LOCK then press SPACE, then single, double, or triple tap the corresponding key.
+To cycle/recall an application window hold CAPS LOCK + ALTH then tap the corresponding key repeatedly until you land on the desired open app.
 
 The specific applications recalled are controlled by the [app_switch_by_name.ahk](app_switch_by_name.ahk) script.
 
@@ -57,11 +57,11 @@ The following keys allow memorization of application windows for quick recall:
 
 `1,2,3,4,5`
 
-To memorize an application window hold CAPS LOCK then press SPACE, then hold SHIFT and tap one of the above keys.
+To memorize an application window hold CAPS LOCK then press SPACE and tap one of the above keys.
 
 You can memorize many applications to the same button and cycle through them.
 
-To cycle/recall an application window hold CAPS LOCK then press SPACE, then single, double, or triple tap the corresponding key.
+To cycle/recall an application window hold CAPS LOCK + ALT tap the corresponding key repeatedly until you land on the desires open app.
 
 To reset a keybinding so that no applications are bound to it simply hold CAPS LOCK then pres TAB, then tap one of the above keys.
 
@@ -69,17 +69,17 @@ To reset a keybinding so that no applications are bound to it simply hold CAPS L
 
 I like to quickly snap Windows to the left-half of a wide screen, right-half of a wide screen, or to take up the full screen:
 
-`CAPS+SPACE,CAPS+r` make top 4 windows (in ALT TAB order) snap to screen corners in order top left, top right, bottom left, bottom right, preserving ALT TAB order.
+`CAPS+ ALT + r` make top 4 windows (in ALT TAB order) snap to screen corners in order top left, top right, bottom left, bottom right, preserving ALT TAB order.
 
-**2x** `CAPS+SPACE,CAPSE+r` restore top 4 windows back from being snapped to corners: reverse `CAPS+SPACE,CAPS+r`.
+**2x** `CAPS + ALT + r` restore top 4 windows back from being snapped to corners: reverse `CAPS + ALT + r`.
 
-`CAPS+SPACE,CAPS+q` window to left
+`CAPS + ALT + q` window to left
 
-`CAPS+SPACE,CAPS+w` window full size
+`CAPS + ALT + w` window full size
 
-`CAPS+SPACE,CAPS+e` window to right
+`CAPS + ALT + e` window to right
 
-`CAPS+SPACE,CAPS+t` toggle task bar visibility on/off
+`CAPS + ALT + t` toggle task bar visibility on/off
 
 ### Mouse scrolling and Navigation
 

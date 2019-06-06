@@ -74,17 +74,10 @@ _::
     SendInput {Home}
     return
 }  
-+1::
-{
-    if (alt_mode) {
-      memorize("1")          
-      return
-    }
-}
 1::
 {
     if (alt_mode) {
-      restore("1")
+      memorize("1")          
       return
     }
     if (alt_mode2) {
@@ -92,17 +85,15 @@ _::
       return
     }    
 }
-+2::
+!1::
 {
-    if (alt_mode) {
-      memorize("2")          
-      return
-    }
+  restore("1")
+  return
 }
 2::
 {
     if (alt_mode) {
-      restore("2")
+      memorize("2")          
       return
     }
     if (alt_mode2) {
@@ -110,17 +101,15 @@ _::
       return
     }    
 }
-+3::
+!2::
 {
-    if (alt_mode) {
-      memorize("3")          
-      return
-    }
+  restore("2")
+  return
 }
 3::
 {
     if (alt_mode) {
-      restore("3")
+      memorize("3")
       return
     }
     if (alt_mode2) {
@@ -128,17 +117,15 @@ _::
       return
     }    
 }
-+4::
+!3:: 
 {
-    if (alt_mode) {
-      memorize("4")          
-      return
-    }
+    restore("3")
+    return
 }
 4::
 {
     if (alt_mode) {
-      restore("4")
+      memorize("4")          
       return
     }
     if (alt_mode2) {
@@ -146,17 +133,15 @@ _::
       return
     }    
 }
-+5::
+!4:: 
 {
-    if (alt_mode) {
-      memorize("5")          
-      return
-    }
+    restore("4")
+    return
 }
 5::
 {
     if (alt_mode) {
-      restore("5")
+      memorize("5")          
       return
     }
     if (alt_mode2) {
@@ -164,12 +149,13 @@ _::
       return
     }    
 }
+!5::
+{
+    restore("5")
+    return
+}
 a::
 {
-    if (alt_mode) {
-      switch("a")
-      return
-    }
     while GetKeyState("a", "P")
     {
       Send {WheelUp}
@@ -177,28 +163,28 @@ a::
     }
     return
 }
+!a:: 
+{
+    switch("a")
+    return
+}
 b::
 {
-    if (alt_mode) {
-      switch("b")
-      return
-    }
     SendInput {PgUp}
     return
 }
-c::
+!b:: 
 {
-    if (alt_mode) {
-      switch("c")
-      return
-    }
+    switch("b")
+    return
+}
+!c::
+{
+    switch("c")
+    return
 }
 d::
 {
-    if (alt_mode) {
-      switch("d")
-      return
-    }
     SendInput {Delete}
     return
 }
@@ -207,36 +193,44 @@ d::
     SendInput +{Delete}
     return
 }
+!d:: 
+{
+    switch("d")
+    return
+}
 e::
 {
-    if (alt_mode) {
-      SendEvent {LWin down}{Right down}{LWin up}{Right up}      
-      return
-    }
     SendInput ^{Up}
+    return
+}
+!e:: 
+{
+    SendEvent {LWin down}{Right down}{LWin up}{Right up}      
     return
 }
 f::
 {
-    if (alt_mode) {
-      switch("f")
-      return
-    }
     SendInput {PgDn}
+    return
+}
+!f:: 
+{
+    switch("f")
     return
 }
 g::
 {
-    if (alt_mode) {
-      switch("g")
-      return
-    }
     SendInput ^{Home}
     return
 }
 +g::
 {
     SendInput ^{End}
+    return
+}
+!g:: 
+{
+    switch("g")
     return
 }
 h::
@@ -291,10 +285,6 @@ l::
 }
 q::
 {
-    if (alt_mode) {
-      SendEvent {LWin down}{Left down}{LWin up}{Left up}      
-      return
-    }
     SendInput ^{Left}
     return
 }
@@ -303,35 +293,37 @@ q::
     SendInput +^{Left}
     return
 }
+!q:: 
+{
+    SendEvent {LWin down}{Left down}{LWin up}{Left up}      
+    return
+}
 r::
 {
-    if (alt_mode) {
-      ;; Windows snapping to sides and maximizing
-      ;; Make sure to turn off "show what I can snap next to it" in Windows' "multitasking settings"
-      KeyWait, r
-      KeyWait, r, D T.3
-      If (!ErrorLevel)
-      {
-        ;; CAPS-R x 2 to restore top 4 windows from being snapped to corners
-        RestoreFromTopFourToCorners()
-      }
-      Else 
-      {
-        ;;  CAPS-R to make top 4 windows (in ALT TAB order) to snap into screen corners in order top left, top right, bottom left, bottom right, preserving ALT TAB order.
-        TopFourToCorners()
-      }           
-      return
-    }
     ;; for Ditto
     SendInput {F13}
     return
 }
+!r::
+{
+    ;; Windows snapping to sides and maximizing
+    ;; Make sure to turn off "show what I can snap next to it" in Windows' "multitasking settings"
+    KeyWait, r
+    KeyWait, r, D T.3
+    If (!ErrorLevel)
+    {
+      ;; CAPS-R x 2 to restore top 4 windows from being snapped to corners
+      RestoreFromTopFourToCorners()
+    }
+    Else 
+    {
+      ;;  CAPS-R to make top 4 windows (in ALT TAB order) to snap into screen corners in order top left, top right, bottom left, bottom right, preserving ALT TAB order.
+      TopFourToCorners()
+    }           
+    return
+}
 s::
 {
-    if (alt_mode) {
-      switch("s")
-      return
-    }
     while GetKeyState("s", "P")
     {
       Send {WheelDown}
@@ -339,16 +331,18 @@ s::
     }
     return
 }
-t::
+!s:: 
 {
-    if (alt_mode) {
-      if toggle_taskbar := !toggle_taskbar {
-         WinHide ahk_class Shell_TrayWnd
-      } else {
-         WinShow ahk_class Shell_TrayWnd
-      }      
-      return
-    }
+    switch("s")
+    return
+}
+!t::
+{
+    if toggle_taskbar := !toggle_taskbar {
+        WinHide ahk_class Shell_TrayWnd
+    } else {
+        WinShow ahk_class Shell_TrayWnd
+    }      
     return
 }
 u::
@@ -361,19 +355,13 @@ u::
     SendInput +{down}+{down}+{down}+{down}+{down}
     return
 }
-v::
+!v::
 {
-    if (alt_mode) {
-      switch("v")
-      return
-    }
+    switch("v")
+    return
 }
 w::
 {
-    if (alt_mode) {
-      WinMaximize, A      
-      return
-    }
     SendInput ^{Right}
     return
 }
@@ -382,18 +370,24 @@ w::
     SendInput +^{Right}
     return
 }
+!w::
+{
+    WinMaximize, A      
+    return
+}
 x::
 {
-    if (alt_mode) {
-      switch("x")
-      return
-    }
     SendInput !{Right}
     return
 }
 +x::
 {
     SendInput !^{Right}
+    return
+}
+!x:: 
+{
+    switch("x")
     return
 }
 y::
@@ -403,16 +397,17 @@ y::
 }
 z::
 {
-    if (alt_mode) {
-      switch("z")
-      return
-    }
     SendInput !{Left}
     return
 }
 +z::
 {
     SendInput !^{Left}
+    return
+}
+!z:: 
+{
+    switch("z")
     return
 }
 
