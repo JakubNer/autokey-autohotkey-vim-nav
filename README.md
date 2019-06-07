@@ -65,11 +65,21 @@ To cycle/recall an application window hold CAPS LOCK + ALT tap the corresponding
 
 To reset a keybinding so that no applications are bound to it simply hold CAPS LOCK then pres TAB, then tap one of the above keys.
 
+#### Preconfigured Apps to Run
+
+Looking at the [app_switch_by_name.ahk](app_switch_by_name.ahk) script you will find several `APP_TO_RUN_ON_KEY[".."] := "..."` statements after the `;; COFIGURE APP TO RUN ;;` comment.
+
+These are the apps that can be started with pressing one of the following hotkeys after pressing CAPS + SPACE:
+
+`a,s,d,f,g,z,x,c,v,b`
+
+To run the app defined with `APP_TO_RUN_ON_KEY["a"]` press CAPS + SPACE the "a".
+
 ### Window Management Key bindings
 
 I like to quickly snap Windows to the left-half of a wide screen, right-half of a wide screen, or to take up the full screen:
 
-`CAPS+ ALT + r` make top 4 windows (in ALT TAB order) snap to screen corners in order top left, top right, bottom left, bottom right, preserving ALT TAB order.
+`CAPS + ALT + r` make top 4 windows (in ALT TAB order) snap to screen corners in order top left, top right, bottom left, bottom right, preserving ALT TAB order.
 
 **2x** `CAPS + ALT + r` restore top 4 windows back from being snapped to corners: reverse `CAPS + ALT + r`.
 

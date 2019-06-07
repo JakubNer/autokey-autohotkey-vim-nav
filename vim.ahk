@@ -156,6 +156,10 @@ _::
 }
 a::
 {
+    if (alt_mode) {
+        run("a")
+        return
+    }
     while GetKeyState("a", "P")
     {
       Send {WheelUp}
@@ -170,6 +174,10 @@ a::
 }
 b::
 {
+    if (alt_mode) {
+        run("b")
+        return
+    }
     SendInput {PgUp}
     return
 }
@@ -178,6 +186,13 @@ b::
     switch("b")
     return
 }
+c::
+{
+    if (alt_mode) {
+        run("c")
+        return
+    }
+}
 !c::
 {
     switch("c")
@@ -185,6 +200,10 @@ b::
 }
 d::
 {
+    if (alt_mode) {
+        run("d")
+        return
+    }
     SendInput {Delete}
     return
 }
@@ -210,6 +229,10 @@ e::
 }
 f::
 {
+    if (alt_mode) {
+        run("f")
+        return
+    }
     SendInput {PgDn}
     return
 }
@@ -220,6 +243,10 @@ f::
 }
 g::
 {
+    if (alt_mode) {
+        run("g")
+        return
+    }
     SendInput ^{Home}
     return
 }
@@ -324,6 +351,10 @@ r::
 }
 s::
 {
+    if (alt_mode) {
+        run("s")
+        return
+    }
     while GetKeyState("s", "P")
     {
       Send {WheelDown}
@@ -355,6 +386,13 @@ u::
     SendInput +{down}+{down}+{down}+{down}+{down}
     return
 }
+v::
+{
+    if (alt_mode) {
+        run("v")
+        return
+    }
+}
 !v::
 {
     switch("v")
@@ -377,6 +415,10 @@ w::
 }
 x::
 {
+    if (alt_mode) {
+        run("x")
+        return
+    }
     SendInput !{Right}
     return
 }
@@ -397,6 +439,10 @@ y::
 }
 z::
 {
+    if (alt_mode) {
+        run("z")
+        return
+    }
     SendInput !{Left}
     return
 }

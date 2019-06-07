@@ -5,8 +5,12 @@ APP_MEM_OUTPUT_VAR := Object()
 ; sample use:
 ;   q::switch("c")
 ;
+; for run:
+;   q::run("c")
 
 SetTitleMatchMode, 2 
+
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; COFIGURE APP TITLES TO GROUPS ;;
@@ -40,11 +44,26 @@ GroupAdd, switch_c, Firefox
 GroupAdd, switch_v, Chromium
 ; GroupAdd, switch_b, ??
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;
+;; COFIGURE APP TO RUN ;;
+
+APP_TO_RUN_ON_KEY := {}
+
+APP_TO_RUN_ON_KEY["a"] := "C:\Program Files\Alacritty\alacritty.exe"
+
 
 
 switch(which)
 {
   GroupActivate, switch_%which%, R
   return
+}
+
+run(which) 
+{
+  global APP_TO_RUN_ON_KEY
+  app := APP_TO_RUN_ON_KEY[which]
+  Run, %app%
 }
