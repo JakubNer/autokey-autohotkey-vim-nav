@@ -52,8 +52,7 @@ GroupAdd, switch_v, Chromium
 APP_TO_RUN_ON_KEY := {}
 
 APP_TO_RUN_ON_KEY["a"] := "C:\Program Files\Alacritty\alacritty.exe"
-
-
+APP_TO_RUN_ON_KEY["c"] := "C:\Program Files\Mozilla Firefox\firefox.exe"
 
 switch(which)
 {
