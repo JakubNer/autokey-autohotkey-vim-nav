@@ -12,6 +12,7 @@ SetTitleMatchMode, 2
 ;; COFIGURE APP TITLES TO GROUPS ;;
 
 GroupAdd, switch_a, ahk_exe ConEmu64.exe
+GroupAdd, switch_a, Alacritty
 GroupAdd, switch_a, ahk_exe mintty.exe
 GroupAdd, switch_a, ahk_exe bash.exe
 GroupAdd, switch_s, Notepad++
