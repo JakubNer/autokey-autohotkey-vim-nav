@@ -17,7 +17,6 @@ SetTitleMatchMode, 2
 GroupAdd, switch_a, Alacritty
 GroupAdd, switch_a, MINGW64
 GroupAdd, switch_a, Docker Quickstart Terminal
-GroupAdd, switch_a, - OneNote
 GroupAdd, switch_s, Notepad++
 GroupAdd, switch_s, miMind
 GroupAdd, switch_s, Freeplane
@@ -27,6 +26,7 @@ GroupAdd, switch_f, Sourcetree
 GroupAdd, switch_f, Google Web Designer
 GroupAdd, switch_f, Postman
 GroupAdd, switch_f, VirtualBox 
+GroupAdd, switch_f, - OneNote
 GroupAdd, switch_g, Snip & Sketch
 GroupAdd, switch_g, ahk_exe PaintDotNet.exe
 GroupAdd, switch_g, Astah
@@ -56,7 +56,8 @@ GroupAdd, switch_b, Adobe Acrobat Reader
 
 APP_TO_RUN_ON_KEY := {}
 
-APP_TO_RUN_ON_KEY["a"] := "C:\Program Files\Alacritty\alacritty.exe"
+APP_TO_RUN_ON_KEY["a"] := "c:\windows\system32\cmd.exe"
+APP_TO_RUN_ON_KEY["s"] := "powershell -Command ""Start-Process cmd -Verb RunAs"""
 APP_TO_RUN_ON_KEY["c"] := "C:\Program Files (x86)\Google\Chrome\Application\chrome.exe"
 APP_TO_RUN_ON_KEY["v"] := "C:\Users\jakub\AppData\Local\Chromium\Application\chrome.exe --profile-directory=""Profile 1"""
 
