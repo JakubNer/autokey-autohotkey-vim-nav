@@ -9,15 +9,15 @@ APP_MEM_OUTPUT_VAR := Object()
 ;   q::run("c")
 
 SetTitleMatchMode, 2 
-
-
+#WinActivateForce
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; COFIGURE APP TITLES TO GROUPS ;;
 
-GroupAdd, switch_a, ahk_exe alacritty.exe
+GroupAdd, switch_a, Alacritty
 GroupAdd, switch_a, MINGW64
 GroupAdd, switch_a, Docker Quickstart Terminal
+GroupAdd, switch_a, - OneNote
 GroupAdd, switch_s, Notepad++
 GroupAdd, switch_s, miMind
 GroupAdd, switch_s, Freeplane
@@ -33,7 +33,9 @@ GroupAdd, switch_g, Astah
 GroupAdd, switch_g, Pencil
 GroupAdd, switch_z, Gmail
 GroupAdd, switch_z, Google Calendar
+GroupAdd, switch_z, - Outlook
 GroupAdd, switch_x, MightyText
+GroupAdd, switch_x, | Microsoft Teams
 GroupAdd, switch_x, WhatsApp
 GroupAdd, switch_x, Viber
 GroupAdd, switch_x, Slack
@@ -43,9 +45,9 @@ GroupAdd, switch_x, Skype
 GroupAdd, switch_c, Chrome
 GroupAdd, switch_c, Opera
 GroupAdd, switch_c, Firefox
+GroupAdd, switch_c, - Microsoft Edge
 GroupAdd, switch_v, Chromium
-GroupAdd, switch_b, ahk_class Qt5QWindowIcon
-GroupAdd, switch_b, ahk_exe AcroRd32.exe
+GroupAdd, switch_v, Remote Desktop Connection
 GroupAdd, switch_b, Adobe Acrobat Reader
 
 
@@ -60,7 +62,12 @@ APP_TO_RUN_ON_KEY["v"] := "C:\Users\jakub\AppData\Local\Chromium\Application\chr
 
 switch(which)
 {
+  WinGet, beforeApp, ID, A
+  WinGetTitle beforeT, ahk_id %beforeApp%
   GroupActivate, switch_%which%, R
+  WinGet, afterApp, ID, A
+  WinGetTitle afterT, ahk_id %afterApp%
+  ;;TrayTip,, %beforeT% (%beforeApp%) `r`r %afterT% (%afterApp%), 1, 17
   return
 }
 
