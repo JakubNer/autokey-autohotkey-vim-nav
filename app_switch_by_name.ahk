@@ -14,7 +14,8 @@ SetTitleMatchMode, 2
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; COFIGURE APP TITLES TO GROUPS ;;
 
-GroupAdd, switch_a, Alacritty
+GroupAdd, switch_a, Windows PowerShell
+GroupAdd, switch_a, Administrator: C:\windows\system32\cmd.exe
 GroupAdd, switch_a, MINGW64
 GroupAdd, switch_a, Docker Quickstart Terminal
 GroupAdd, switch_s, Notepad++
