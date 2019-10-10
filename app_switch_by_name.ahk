@@ -56,7 +56,7 @@ GroupAdd, switch_b, Adobe Acrobat Reader
 
 APP_TO_RUN_ON_KEY := {}
 
-APP_TO_RUN_ON_KEY["a"] := "c:\windows\system32\cmd.exe"
+APP_TO_RUN_ON_KEY["a"] := "powershell"
 APP_TO_RUN_ON_KEY["s"] := "powershell -Command ""Start-Process cmd -Verb RunAs"""
 APP_TO_RUN_ON_KEY["c"] := "C:\Program Files (x86)\Google\Chrome\Application\chrome.exe"
 APP_TO_RUN_ON_KEY["v"] := "C:\Users\jakub\AppData\Local\Chromium\Application\chrome.exe --profile-directory=""Profile 1"""
