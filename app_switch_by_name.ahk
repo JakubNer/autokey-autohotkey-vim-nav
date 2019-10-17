@@ -15,7 +15,8 @@ SetTitleMatchMode, 2
 ;; COFIGURE APP TITLES TO GROUPS ;;
 
 GroupAdd, switch_a, Windows PowerShell
-GroupAdd, switch_a, Administrator: C:\windows\system32\cmd.exe
+GroupAdd, switch_a, Administrator: 
+GroupAdd, switch_a, powershell (running as
 GroupAdd, switch_a, MINGW64
 GroupAdd, switch_a, Docker Quickstart Terminal
 GroupAdd, switch_s, Notepad++
@@ -32,11 +33,11 @@ GroupAdd, switch_g, Snip & Sketch
 GroupAdd, switch_g, ahk_exe PaintDotNet.exe
 GroupAdd, switch_g, Astah
 GroupAdd, switch_g, Pencil
-GroupAdd, switch_z, Gmail
-GroupAdd, switch_z, Google Calendar
 GroupAdd, switch_z, - Outlook
+GroupAdd, switch_z, | Microsoft Teams
+GroupAdd, switch_x, Gmail
+GroupAdd, switch_x, Google Calendar
 GroupAdd, switch_x, MightyText
-GroupAdd, switch_x, | Microsoft Teams
 GroupAdd, switch_x, WhatsApp
 GroupAdd, switch_x, Viber
 GroupAdd, switch_x, Slack
@@ -58,7 +59,6 @@ GroupAdd, switch_b, Adobe Acrobat Reader
 APP_TO_RUN_ON_KEY := {}
 
 APP_TO_RUN_ON_KEY["a"] := "powershell"
-APP_TO_RUN_ON_KEY["s"] := "powershell -Command ""Start-Process cmd -Verb RunAs"""
 APP_TO_RUN_ON_KEY["c"] := "C:\Program Files (x86)\Google\Chrome\Application\chrome.exe"
 APP_TO_RUN_ON_KEY["v"] := "C:\Users\jakub\AppData\Local\Chromium\Application\chrome.exe --profile-directory=""Profile 1"""
 
