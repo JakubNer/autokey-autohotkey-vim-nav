@@ -224,6 +224,7 @@ e::
 }
 !e:: 
 {
+    WinRestore, A
     SendEvent {LWin down}{Right down}{LWin up}{Right up}      
     return
 }
@@ -322,6 +323,7 @@ q::
 }
 !q:: 
 {
+    WinRestore, A
     SendEvent {LWin down}{Left down}{LWin up}{Left up}      
     return
 }
@@ -332,6 +334,11 @@ r::
     return
 }
 !r::
+{
+    SendEvent {LWin down}{Down down}{LWin up}{Down up}      
+    return
+}
+!`::
 {
     ;; Windows snapping to sides and maximizing
     ;; Make sure to turn off "show what I can snap next to it" in Windows' "multitasking settings"
@@ -410,7 +417,18 @@ w::
 }
 !w::
 {
-    WinMaximize, A      
+    KeyWait, w
+    KeyWait, w, D T.3
+    If (!ErrorLevel)
+    {
+      ;; CAPS-W x 2 to snap down
+	  WinMaximize, A
+    }
+    Else 
+    {
+      ;;  CAPS-W to snap up
+      SendEvent {LWin down}{Up down}{LWin up}{Up up}      
+    }           
     return
 }
 x::

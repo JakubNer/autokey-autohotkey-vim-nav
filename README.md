@@ -79,15 +79,19 @@ To run the app defined with `APP_TO_RUN_ON_KEY["a"]` press CAPS + SPACE the "a".
 
 I like to quickly snap Windows to the left-half of a wide screen, right-half of a wide screen, or to take up the full screen:
 
-`CAPS + ALT + r` make top 4 windows (in ALT TAB order) snap to screen corners in order top left, top right, bottom left, bottom right, preserving ALT TAB order.
+`CAPS + ALT + \`` make top 4 windows (in ALT TAB order) snap to screen corners in order top left, top right, bottom left, bottom right, preserving ALT TAB order.
 
-**2x** `CAPS + ALT + r` restore top 4 windows back from being snapped to corners: reverse `CAPS + ALT + r`.
+**2x** `CAPS + ALT + \`` restore top 4 windows back from being snapped to corners: reverse `CAPS + ALT + r`.
 
-`CAPS + ALT + q` window to left
+`CAPS + ALT + q` snap window to left
 
-`CAPS + ALT + w` window full size
+`CAPS + ALT + e` snap window to right
 
-`CAPS + ALT + e` window to right
+`CAPS + ALT + w` snap window to top
+
+**2x** `CAPS + ALT + w` maximize window
+
+`CAPS + ALT + r` snap window to bottom
 
 `CAPS + ALT + t` toggle task bar visibility on/off
 
