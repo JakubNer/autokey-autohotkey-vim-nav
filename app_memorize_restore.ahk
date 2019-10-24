@@ -1,4 +1,4 @@
-APP_MEM_OUTPUT_VAR := Object()
+2APP_MEM_OUTPUT_VAR := Object()
 
 ; - memorize current app ID to group by some 'which' key
 ; - toggle through apps in group by some 'which' key
@@ -21,6 +21,17 @@ HasVal(haystack, needle) {
 	return false
 }
 
+Remove(haystack, what) {
+	count := 0
+	newhaystack := []
+	for index,value in haystack {
+		if (value != what) {
+			newhaystack.push((string)value)
+		}
+	}
+	return newhaystack
+}
+
 ensureAppMemGroupCount(which, index) {
   global APP_MEM_GROUP_COUNT
   global APP_MEM_GROUP_IDS
@@ -32,12 +43,18 @@ ensureAppMemGroupCount(which, index) {
 
 incrementAppMemGroupCount(which, index) {
 	global APP_MEM_GROUP_COUNT
+    if (! APP_MEM_GROUP_COUNT.HasKey(%which%_%index%)) {
+      APP_MEM_GROUP_COUNT[%which%_%index%] := 0
+    }	
+    if (APP_MEM_GROUP_COUNT[%which%_%index%] < 0) {
+      APP_MEM_GROUP_COUNT[%which%_%index%] := 0
+    }	
 	APP_MEM_GROUP_COUNT[%which%_%index%] := APP_MEM_GROUP_COUNT[%which%_%index%] + 1
 }
 
-resetAppMemGroupCount(which, index) {
+setAppMemGroupCount(which, index, count) {
 	global APP_MEM_GROUP_COUNT
-	APP_MEM_GROUP_COUNT.Delete(%which%_%index%)
+	APP_MEM_GROUP_COUNT[%which%_%index%] := count
 }
 
 memorize(which)
@@ -64,12 +81,33 @@ memorize(which)
 
 reset_memory(which) {
   global APP_MEM_GROUP_INDICES
+  global APP_MEM_GROUP_IDS
+  WinGet, APP_MEM_CURRENT_APP, ID, A  
   if (! APP_MEM_GROUP_INDICES.HasKey(which)) {
     APP_MEM_GROUP_INDICES[which] := 1
   } else {
 	index := APP_MEM_GROUP_INDICES[which]
-	resetAppMemGroupCount(which, index)
+	toreadd := []
+    if (HasVal(APP_MEM_GROUP_IDS[%which%_%index%], APP_MEM_CURRENT_APP)) {
+		MsgBox, 4,, Forget just current app or all? ("Yes" for current, "No" for all)
+		single := false
+		IfMsgBox Yes 
+			single := true
+		if (single)
+		{
+			toreadd := Remove(APP_MEM_GROUP_IDS[%which%_%index%],APP_MEM_CURRENT_APP)
+		}
+	}
     APP_MEM_GROUP_INDICES[which] := APP_MEM_GROUP_INDICES[which] + 1
+	setAppMemGroupCount(which, index, 0)
+	if (toreadd.length() > 0) {
+		index := index + 1
+		APP_MEM_GROUP_IDS[%which%_%index%] := toreadd
+		for key, value in toreadd {
+			GroupAdd, memorize_app_%which%_%index%, ahk_id %value%
+		}		
+	} 
+	setAppMemGroupCount(which, index, toreadd.Count())
   }
 }
 
