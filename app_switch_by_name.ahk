@@ -47,7 +47,7 @@ GroupAdd, switch_x, Skype
 GroupAdd, switch_c, Chrome
 GroupAdd, switch_c, Opera
 GroupAdd, switch_c, Firefox
-GroupAdd, switch_c, - Microsoft Edge
+GroupAdd, switch_v, - Microsoft Edge
 GroupAdd, switch_v, Chromium
 GroupAdd, switch_v, Remote Desktop Connection
 GroupAdd, switch_b, Adobe Acrobat Reader

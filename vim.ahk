@@ -69,6 +69,11 @@ _::
     SendInput +{End}
     return
 }
+!F1::
+{
+  dump()
+  return
+}
 0::
 {
     SendInput {Home}
