@@ -11,46 +11,27 @@ APP_MEM_OUTPUT_VAR := Object()
 SetTitleMatchMode, 2 
 #WinActivateForce
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; COFIGURE APP TITLES TO GROUPS ;;
+TITLES := {}
 
-GroupAdd, switch_a, Windows PowerShell
-GroupAdd, switch_a, Administrator: 
-GroupAdd, switch_a, powershell (running as
-GroupAdd, switch_a, MINGW64
-GroupAdd, switch_a, Docker Quickstart Terminal
-GroupAdd, switch_s, Notepad++
-GroupAdd, switch_s, miMind
-GroupAdd, switch_s, Freeplane
-GroupAdd, switch_d, Visual Studio Code
-GroupAdd, switch_d, Microsoft Visual Studio
-GroupAdd, switch_f, Sourcetree
-GroupAdd, switch_f, Google Web Designer
-GroupAdd, switch_f, Postman
-GroupAdd, switch_f, VirtualBox 
-GroupAdd, switch_f, - OneNote
-GroupAdd, switch_g, Snip & Sketch
-GroupAdd, switch_g, ahk_exe PaintDotNet.exe
-GroupAdd, switch_g, Astah
-GroupAdd, switch_g, Pencil
-GroupAdd, switch_z, - Outlook
-GroupAdd, switch_z, | Microsoft Teams
-GroupAdd, switch_x, Gmail
-GroupAdd, switch_x, Google Calendar
-GroupAdd, switch_x, MightyText
-GroupAdd, switch_x, WhatsApp
-GroupAdd, switch_x, Viber
-GroupAdd, switch_x, Slack
-GroupAdd, switch_x, Messenger
-GroupAdd, switch_x, Discord
-GroupAdd, switch_x, Skype
-GroupAdd, switch_c, Chrome
-GroupAdd, switch_c, Opera
-GroupAdd, switch_c, Firefox
-GroupAdd, switch_v, - Microsoft Edge
-GroupAdd, switch_v, Chromium
-GroupAdd, switch_v, Remote Desktop Connection
-GroupAdd, switch_b, Adobe Acrobat Reader
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; COFIGURE APP TITLES TO RECALL ;;
+
+TITLES["a"] := ["Windows PowerShell", "Administrator: ", "powershell (running as", "MINGW64", "Docker Quickstart Terminal"]
+TITLES["s"] := ["Notepad++", "miMind", "Freeplane"]
+TITLES["d"] := ["Visual Studio Code", "Microsoft Visual Studio"]
+TITLES["f"] := ["Sourcetree", "Google Web Designer", "Postman", "VirtualBox", "Microsoft SQL Server Management Studio", "Internet Information Services (IIS) Manager"]
+TITLES["g"] := ["Snip & Sketch", "ahk_exe PaintDotNet.exe", "Astah", "Pencil"]
+TITLES["z"] := ["- Outlook", "| Microsoft Teams", "- OneNote"]
+TITLES["x"] := ["Gmail", "Google Calendar", "MightyText", "WhatsApp", "Viber", "Slack", "Messenger", "Discord", "Skype"]
+TITLES["c"] := ["Chrome", "Opera", "Firefox"]
+TITLES["v"] := ["- Microsoft Edge", "Chromium", "Remote Desktop Connection"]
+TITLES["b"] := ["Adobe Acrobat Reader"]
+
+for which, titles in TITLES {
+	for index, title in titles {
+		GroupAdd, switch_%which%, %title%
+	}
+}
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -63,11 +44,28 @@ APP_TO_RUN_ON_KEY["s"] := "C:\Program Files\Notepad++\notepad++.exe"
 APP_TO_RUN_ON_KEY["c"] := "C:\Program Files (x86)\Google\Chrome\Application\chrome.exe"
 APP_TO_RUN_ON_KEY["v"] := "C:\Users\jakub\AppData\Local\Chromium\Application\chrome.exe --profile-directory=""Profile 1"""
 
-switch(which)
+switch(which, LIMITING_APP_IDS)
 {
   WinGet, beforeApp, ID, A
   WinGetTitle beforeT, ahk_id %beforeApp%
   GroupActivate, switch_%which%, R
+  WinGet, FIRST_APP, ID, A
+  CURRENT_APP := FIRST_APP
+  if (LIMITING_APP_IDS.length() > 0 && ! HasVal(LIMITING_APP_IDS, FIRST_APP)) {
+	Loop {
+		GroupActivate, switch_%which%, R
+		if (! HasVal(LIMITING_APP_IDS, CURRENT_APP)) {
+			WinMinimize, ahk_id %CURRENT_APP%
+		}
+		WinGet, CURRENT_APP, ID, A
+		if (FIRST_APP == CURRENT_APP) {
+			break
+		}
+		if (HasVal(LIMITING_APP_IDS, CURRENT_APP)) {
+			break
+		}
+	}
+  }
   WinGet, afterApp, ID, A
   WinGetTitle afterT, ahk_id %afterApp%
   ;;TrayTip,, %beforeT% (%beforeApp%) `r`r %afterT% (%afterApp%), 1, 17

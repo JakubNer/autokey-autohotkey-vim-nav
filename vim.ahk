@@ -33,6 +33,12 @@ space::
   }
   return
 }
+!space::
+{
+	global LIMITING_APP_IDS
+	LIMITING_APP_IDS := []
+	return
+}
 
 alt_mode_off:
     alt_mode := false
@@ -53,6 +59,8 @@ tab::
 alt_mode2_off:
     alt_mode2 := false
 return
+
+LIMITING_APP_IDS := []
 
 -::
 {
@@ -78,7 +86,13 @@ _::
 {
     SendInput {Home}
     return
-}  
+}
+!0:: 
+{
+	global LIMITING_APP_IDS
+	LIMITING_APP_IDS := []
+	return
+}
 1::
 {
     if (alt_mode) {
@@ -92,8 +106,17 @@ _::
 }
 !1::
 {
-  restore("1")
-  return
+	global LIMITING_APP_IDS
+	KeyWait, 1
+	KeyWait, 1, D T.3
+	If (!ErrorLevel)
+	{
+		restoreall("1")
+    } else {
+		restoreone("1")
+	}
+	LIMITING_APP_IDS := retrieve("1")
+	return
 }
 2::
 {
@@ -108,8 +131,17 @@ _::
 }
 !2::
 {
-  restore("2")
-  return
+	global LIMITING_APP_IDS
+    KeyWait, 2
+    KeyWait, 2, D T.3
+    If (!ErrorLevel)
+    {
+		restoreall("2")
+    } else {
+		restoreone("2")
+	}
+	LIMITING_APP_IDS := retrieve("2")
+	return
 }
 3::
 {
@@ -124,7 +156,16 @@ _::
 }
 !3:: 
 {
-    restore("3")
+	global LIMITING_APP_IDS
+    KeyWait, 3
+    KeyWait, 3, D T.3
+    If (!ErrorLevel)
+    {
+		restoreall("3")
+    } else {
+		restoreone("3")
+	}
+	LIMITING_APP_IDS := retrieve("3")
     return
 }
 4::
@@ -140,7 +181,16 @@ _::
 }
 !4:: 
 {
-    restore("4")
+	global LIMITING_APP_IDS
+    KeyWait, 4
+    KeyWait, 4, D T.3
+    If (!ErrorLevel)
+    {
+		restoreall("4")
+    } else {
+		restoreone("4")
+	}
+	LIMITING_APP_IDS := retrieve("4")
     return
 }
 5::
@@ -156,7 +206,16 @@ _::
 }
 !5::
 {
-    restore("5")
+	global LIMITING_APP_IDS
+    KeyWait, 5
+    KeyWait, 5, D T.3
+    If (!ErrorLevel)
+    {
+		restoreall("5")
+    } else {
+		restoreone("5")
+	}
+	LIMITING_APP_IDS := retrieve("5")
     return
 }
 a::
@@ -174,7 +233,8 @@ a::
 }
 !a:: 
 {
-    switch("a")
+	global LIMITING_APP_IDS
+    switch("a", LIMITING_APP_IDS)
     return
 }
 b::
@@ -188,7 +248,8 @@ b::
 }
 !b:: 
 {
-    switch("b")
+	global LIMITING_APP_IDS
+    switch("b", LIMITING_APP_IDS)
     return
 }
 c::
@@ -200,7 +261,8 @@ c::
 }
 !c::
 {
-    switch("c")
+	global LIMITING_APP_IDS
+    switch("c", LIMITING_APP_IDS)
     return
 }
 d::
@@ -219,7 +281,8 @@ d::
 }
 !d:: 
 {
-    switch("d")
+	global LIMITING_APP_IDS
+    switch("d", LIMITING_APP_IDS)
     return
 }
 e::
@@ -244,7 +307,8 @@ f::
 }
 !f:: 
 {
-    switch("f")
+	global LIMITING_APP_IDS
+    switch("f", LIMITING_APP_IDS)
     return
 }
 g::
@@ -263,7 +327,8 @@ g::
 }
 !g:: 
 {
-    switch("g")
+	global LIMITING_APP_IDS
+    switch("g", LIMITING_APP_IDS)
     return
 }
 h::
@@ -376,7 +441,8 @@ s::
 }
 !s:: 
 {
-    switch("s")
+	global LIMITING_APP_IDS
+    switch("s", LIMITING_APP_IDS)
     return
 }
 !t::
@@ -407,7 +473,8 @@ v::
 }
 !v::
 {
-    switch("v")
+	global LIMITING_APP_IDS
+    switch("v", LIMITING_APP_IDS)
     return
 }
 w::
@@ -452,7 +519,8 @@ x::
 }
 !x:: 
 {
-    switch("x")
+	global LIMITING_APP_IDS
+    switch("x", LIMITING_APP_IDS)
     return
 }
 y::
@@ -476,7 +544,8 @@ z::
 }
 !z:: 
 {
-    switch("z")
+	global LIMITING_APP_IDS
+    switch("z", LIMITING_APP_IDS)
     return
 }
 

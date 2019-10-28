@@ -88,15 +88,20 @@ reset_memory(which) {
   } else {
 	index := APP_MEM_GROUP_INDICES[which]
 	toreadd := []
+	single := false
     if (HasVal(APP_MEM_GROUP_IDS[which . "_" . index], APP_MEM_CURRENT_APP)) {
 		MsgBox, 4,, Forget just current app or all? ("Yes" for current, "No" for all)
-		single := false
 		IfMsgBox Yes 
 			single := true
 		if (single)
 		{
 			toreadd := Remove(APP_MEM_GROUP_IDS[which . "_" . index],APP_MEM_CURRENT_APP)
 		}
+	}
+	if (!single) {
+		MsgBox, 4,, Are you sure you want to forget all?
+		IfMsgBox No
+			return
 	}
     APP_MEM_GROUP_INDICES[which] := APP_MEM_GROUP_INDICES[which] + 1
 	setAppMemGroupCount(which, index, 0)
@@ -111,7 +116,18 @@ reset_memory(which) {
   }
 }
 
-restore(which)
+restoreone(which)
+{
+  global APP_MEM_GROUP_INDICES
+  global APP_MEM_GROUP_COUNT
+  index := APP_MEM_GROUP_INDICES[which]
+  ensureAppMemGroupCount(which, index)
+  GroupActivate, memorize_app_%which%_%index%, R
+  WinGet, APP_MEM_CURRENT_APP, ID, A
+  return
+}
+
+restoreall(which)
 {
   global APP_MEM_GROUP_INDICES
   global APP_MEM_GROUP_COUNT
@@ -130,6 +146,14 @@ restore(which)
 	}
   }
   return
+}
+
+retrieve(which) 
+{
+	global APP_MEM_GROUP_IDS
+	global APP_MEM_GROUP_INDICES
+	index := APP_MEM_GROUP_INDICES[which]
+	return APP_MEM_GROUP_IDS[which . "_" . index]
 }
 
 dump()
