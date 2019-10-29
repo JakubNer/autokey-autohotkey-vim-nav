@@ -57,9 +57,9 @@ The following keys allow memorization of application windows for quick restore:
 
 `1,2,3,4,5`
 
-To memorize an application window hold CAPS LOCK then press SPACE and tap one of the above keys:
+To memorize an application window hold CAPS LOCK then press SPACE and tap one of the above keys (while holding CAPS LOCK):
 
-	`CAPS LOCK + SPACE, 1` bind current app to group 1 (you can use 1 through 5)
+	`CAPS LOCK + SPACE, CAPS LOCK + 1` bind current app to group 1 (you can use 1 through 5)
 
 You can memorize many applications to the same button and cycle through them.
 
@@ -73,11 +73,17 @@ To reset a keybinding so that no applications are bound to it simply hold CAPS L
 
 	`CAPS LOCK + TAB, 1` to reset current app or all apps in group 1 (you can use 1 through 5)
 	
+Note that a *double tap* is within .3 second. 
+
 **NOTE: Memorization Groups limit Preconfigured Recall** 
 
-Once apps in a group are being cycled e.g. `CAPS LOCK + ALT + #` (or double tap #), the apps in *Preconfigured Recall* (see previous section) will be limited to apps in this group.
+Once apps in a group are being cycled e.g. `CAPS LOCK + ALT + #` (or double tap #), the apps in *Preconfigured Recall* (see previous section) will be limited to apps in this group.  
+
+There is a visual indication in the lower-right corner of the main monitor indicating the group selected.
 
 To reset this limitation press `CAPS LOCK + ALT + 0` or `CAPS LOCK + ALT + SPACE`.
+
+Please note that the first `CAPS LOCK + ALT + #` invocation does not cycle to the first groupped application: only subsequent uninterrupted key binding invocations do.  The first invocation selects the memorization group 
 
 #### Preconfigured Apps to Run
 

@@ -156,6 +156,25 @@ retrieve(which)
 	return APP_MEM_GROUP_IDS[which . "_" . index]
 }
 
+writeGroup(key) {
+	Gui, Destroy
+	Gui, Color, Black
+	Gui, Font, s18
+	Gui, Margin, 2, 1
+	Gui +LastFound  ; Make the GUI window the last found window for use by the line below.
+	Gui, +LastFound +AlwaysOnTop -Border -SysMenu +Owner -Caption +ToolWindow
+	Gui, Add, Text, cWhite, %key%
+	SysGet, MonitorPrimary, MonitorPrimary
+	SysGet, Coords, Monitor, MonitorPrimary
+	x := coordsRight - 40
+	y := coordsBottom - 53
+	Gui, Show, x%x% y%y%
+}
+
+clearGroup() {
+	Gui, Destroy
+}
+
 dump()
 {
   global APP_MEM_GROUP_INDICES

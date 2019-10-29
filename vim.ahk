@@ -37,6 +37,7 @@ space::
 {
 	global LIMITING_APP_IDS
 	LIMITING_APP_IDS := []
+	clearGroup()
 	return
 }
 
@@ -91,6 +92,7 @@ _::
 {
 	global LIMITING_APP_IDS
 	LIMITING_APP_IDS := []
+	clearGroup()	
 	return
 }
 1::
@@ -113,9 +115,12 @@ _::
 	{
 		restoreall("1")
     } else {
-		restoreone("1")
+		if (A_ThisHotKey == A_PriorHotkey) {
+			restoreone("1")
+		}
 	}
 	LIMITING_APP_IDS := retrieve("1")
+	writeGroup("1")
 	return
 }
 2::
@@ -138,9 +143,12 @@ _::
     {
 		restoreall("2")
     } else {
-		restoreone("2")
+		if (A_ThisHotKey == A_PriorHotkey) {
+			restoreone("2")
+		}
 	}
 	LIMITING_APP_IDS := retrieve("2")
+	writeGroup("2")
 	return
 }
 3::
@@ -163,9 +171,12 @@ _::
     {
 		restoreall("3")
     } else {
-		restoreone("3")
+		if (A_ThisHotKey == A_PriorHotkey) {
+			restoreone("3")
+		}
 	}
 	LIMITING_APP_IDS := retrieve("3")
+	writeGroup("3")
     return
 }
 4::
@@ -188,9 +199,12 @@ _::
     {
 		restoreall("4")
     } else {
-		restoreone("4")
+		if (A_ThisHotKey == A_PriorHotkey) {
+			restoreone("4")
+		}
 	}
 	LIMITING_APP_IDS := retrieve("4")
+	writeGroup("4")
     return
 }
 5::
@@ -213,9 +227,12 @@ _::
     {
 		restoreall("5")
     } else {
-		restoreone("5")
+		if (A_ThisHotKey == A_PriorHotkey) {	
+			restoreone("5")
+		}
 	}
 	LIMITING_APP_IDS := retrieve("5")
+	writeGroup("5")
     return
 }
 a::
