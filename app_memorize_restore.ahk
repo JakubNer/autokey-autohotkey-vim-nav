@@ -166,8 +166,8 @@ writeGroup(key) {
 	Gui, Add, Text, cWhite, %key%
 	SysGet, MonitorPrimary, MonitorPrimary
 	SysGet, Coords, Monitor, MonitorPrimary
-	x := coordsRight - 40
-	y := coordsBottom - 53
+	x := coordsRight - 55
+	y := coordsBottom - 63
 	Gui, Show, x%x% y%y%
 }
 
