@@ -124,6 +124,7 @@ restoreone(which)
   ensureAppMemGroupCount(which, index)
   GroupActivate, memorize_app_%which%_%index%, R
   WinGet, APP_MEM_CURRENT_APP, ID, A
+  centerMouse()
   return
 }
 
@@ -154,25 +155,6 @@ retrieve(which)
 	global APP_MEM_GROUP_INDICES
 	index := APP_MEM_GROUP_INDICES[which]
 	return APP_MEM_GROUP_IDS[which . "_" . index]
-}
-
-writeGroup(key) {
-	Gui, Destroy
-	Gui, Color, Black
-	Gui, Font, s18
-	Gui, Margin, 2, 1
-	Gui +LastFound  ; Make the GUI window the last found window for use by the line below.
-	Gui, +LastFound +AlwaysOnTop -Border -SysMenu +Owner -Caption +ToolWindow
-	Gui, Add, Text, cWhite, %key%
-	SysGet, MonitorPrimary, MonitorPrimary
-	SysGet, Coords, Monitor, MonitorPrimary
-	x := coordsRight - 55
-	y := coordsBottom - 63
-	Gui, Show, x%x% y%y%
-}
-
-clearGroup() {
-	Gui, Destroy
 }
 
 dump()

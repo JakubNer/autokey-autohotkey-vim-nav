@@ -1,3 +1,4 @@
+#Include utils.ahk
 #Include app_memorize_restore.ahk
 #Include app_switch_by_name.ahk
 #Include window.ahk
@@ -564,6 +565,16 @@ z::
 	global LIMITING_APP_IDS
     switch("z", LIMITING_APP_IDS)
     return
+}
+!LEFT::
+{
+    SendInput #+{Left}
+	return
+}
+!RIGHT::
+{
+    SendInput #+{Right}
+	return
 }
 
 CapsLock::Suspend Off

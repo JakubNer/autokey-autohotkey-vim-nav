@@ -69,6 +69,7 @@ switch(which, LIMITING_APP_IDS)
   WinGet, afterApp, ID, A
   WinGetTitle afterT, ahk_id %afterApp%
   ;;TrayTip,, %beforeT% (%beforeApp%) `r`r %afterT% (%afterApp%), 1, 17
+  centerMouse()
   return
 }
 
@@ -77,4 +78,5 @@ run(which)
   global APP_TO_RUN_ON_KEY
   app := APP_TO_RUN_ON_KEY[which]
   Run, %app%
+  centerMouse()
 }
