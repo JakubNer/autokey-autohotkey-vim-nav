@@ -573,11 +573,13 @@ z::
 !LEFT::
 {
     SendInput #+{Left}
+	centerMouse()
 	return
 }
 !RIGHT::
 {
     SendInput #+{Right}
+	centerMouse()
 	return
 }
 
