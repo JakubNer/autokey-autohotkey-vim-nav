@@ -17,7 +17,7 @@ TITLES := {}
 ;; COFIGURE APP TITLES TO RECALL ;;
 
 TITLES["a"] := ["Windows PowerShell", "Administrator: ", "powershell (running as", "MINGW64", "Docker Quickstart Terminal"]
-TITLES["s"] := ["Notepad++", "miMind", "Freeplane"]
+TITLES["s"] := ["miMind"]
 TITLES["d"] := ["Visual Studio Code", "Microsoft Visual Studio"]
 TITLES["f"] := ["Sourcetree", "Google Web Designer", "Postman", "VirtualBox", "Microsoft SQL Server Management Studio", "Internet Information Services (IIS) Manager"]
 TITLES["g"] := ["Snip & Sketch", "ahk_exe PaintDotNet.exe", "Astah", "Pencil"]
@@ -43,6 +43,7 @@ APP_TO_RUN_ON_KEY["a"] := "powershell"
 APP_TO_RUN_ON_KEY["s"] := "C:\Program Files\Notepad++\notepad++.exe"
 APP_TO_RUN_ON_KEY["c"] := "C:\Program Files (x86)\Google\Chrome\Application\chrome.exe"
 APP_TO_RUN_ON_KEY["v"] := "C:\Users\jakub\AppData\Local\Chromium\Application\chrome.exe --profile-directory=""Profile 1"""
+APP_TO_RUN_ON_KEY["f"] := "C:\Program Files\Freeplane\freeplane.exe"
 
 switch(which, LIMITING_APP_IDS)
 {
@@ -77,6 +78,17 @@ run(which)
 {
   global APP_TO_RUN_ON_KEY
   app := APP_TO_RUN_ON_KEY[which]
+  WinGet, ORIGINAL_APP, ID, A
   Run, %app%
-  centerMouse()
+  tries := 0
+  While (tries < 30) {
+	WinGet, CURRENT_APP, ID, A
+	if (ORIGINAL_APP != CURRENT_APP) {
+		centerMouse()
+		return
+	}
+	Sleep, 100
+	tries := tries + 1
+  }
+  return
 }

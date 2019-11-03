@@ -27,3 +27,22 @@ writeGroup(key) {
 clearGroup() {
 	Gui, Destroy
 }
+
+writeMessage(key) {
+	Gui, Destroy
+	Gui, Color, Black
+	Gui, Font, s36
+	Gui, Margin, 2, 1
+	Gui +LastFound  ; Make the GUI window the last found window for use by the line below.
+	Gui, +LastFound +AlwaysOnTop -Border -SysMenu +Owner -Caption +ToolWindow
+	Gui, Add, Text, cWhite, %key%
+	SysGet, MonitorPrimary, MonitorPrimary
+	SysGet, Coords, Monitor, MonitorPrimary
+	x := coordsLeft
+	y := coordsTop
+	Gui, Show, x%x% y%y%
+}
+
+clearMessage() {
+	Gui, Destroy
+}

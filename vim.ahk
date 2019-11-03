@@ -312,6 +312,7 @@ e::
 {
     WinRestore, A
     SendEvent {LWin down}{Right down}{LWin up}{Right up}      
+	centerMouse()
     return
 }
 f::
@@ -413,6 +414,7 @@ q::
 {
     WinRestore, A
     SendEvent {LWin down}{Left down}{LWin up}{Left up}      
+	centerMouse()
     return
 }
 r::
@@ -424,6 +426,7 @@ r::
 !r::
 {
     SendEvent {LWin down}{Down down}{LWin up}{Down up}      
+	centerMouse()
     return
 }
 !`::
@@ -519,6 +522,7 @@ w::
       ;;  CAPS-W to snap up
       SendEvent {LWin down}{Up down}{LWin up}{Up up}      
     }           
+	centerMouse()
     return
 }
 x::
