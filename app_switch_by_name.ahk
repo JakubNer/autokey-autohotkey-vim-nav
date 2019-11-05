@@ -41,8 +41,9 @@ APP_TO_RUN_ON_KEY := {}
 
 APP_TO_RUN_ON_KEY["a"] := "powershell"
 APP_TO_RUN_ON_KEY["s"] := "C:\Program Files\Notepad++\notepad++.exe"
-APP_TO_RUN_ON_KEY["c"] := "C:\Program Files (x86)\Google\Chrome\Application\chrome.exe"
-APP_TO_RUN_ON_KEY["v"] := "C:\Users\jakub\AppData\Local\Chromium\Application\chrome.exe --profile-directory=""Profile 1"""
+APP_TO_RUN_ON_KEY["c"] := "shell:Appsfolder\MSEdgeBeta"
+APP_TO_RUN_ON_KEY["v"] := "shell:Appsfolder\chrome"
+APP_TO_RUN_ON_KEY["b"] := "shell:Appsfolder\chrome --profile-directory=""Profile 1"""
 APP_TO_RUN_ON_KEY["f"] := "C:\Program Files\Freeplane\freeplane.exe"
 
 ;; app window titles to consider for app switch before running APP_TO_RUN_ON_KEY above
