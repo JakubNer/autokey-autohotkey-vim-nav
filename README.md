@@ -95,6 +95,8 @@ These are the apps that can be started with pressing one of the following hotkey
 
 To run the app defined with `APP_TO_RUN_ON_KEY["a"]` press CAPS + SPACE the "a".
 
+Some apps do not start a new instance but just switch to a current instance.  To speed this up you can switch to the instance based on the window title.  Configure this with `APP_TITLE_TO_SWITCH_TO_ON_KEY[".."] := "..."` statements.
+
 ### Window Management Key bindings
 
 I like to quickly snap Windows to the left-half of a wide screen, right-half of a wide screen, or to take up the full screen:

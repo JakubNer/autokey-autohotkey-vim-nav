@@ -45,6 +45,16 @@ APP_TO_RUN_ON_KEY["c"] := "C:\Program Files (x86)\Google\Chrome\Application\chro
 APP_TO_RUN_ON_KEY["v"] := "C:\Users\jakub\AppData\Local\Chromium\Application\chrome.exe --profile-directory=""Profile 1"""
 APP_TO_RUN_ON_KEY["f"] := "C:\Program Files\Freeplane\freeplane.exe"
 
+;; app window titles to consider for app switch before running APP_TO_RUN_ON_KEY above
+APP_TITLE_TO_SWITCH_TO_ON_KEY := {}
+APP_TITLE_TO_SWITCH_TO_ON_KEY["s"] := "- Notepad++"
+APP_TITLE_TO_SWITCH_TO_ON_KEY["f"] := "- Freeplane"
+
+for which, title in APP_TITLE_TO_SWITCH_TO_ON_KEY {
+	GroupAdd, app_title_to_switch_%which%, %title%
+}
+
+
 switch(which, LIMITING_APP_IDS)
 {
   WinGet, beforeApp, ID, A
@@ -77,18 +87,29 @@ switch(which, LIMITING_APP_IDS)
 run(which) 
 {
   global APP_TO_RUN_ON_KEY
-  app := APP_TO_RUN_ON_KEY[which]
-  WinGet, ORIGINAL_APP, ID, A
-  Run, %app%
-  tries := 0
-  While (tries < 30) {
-	WinGet, CURRENT_APP, ID, A
-	if (ORIGINAL_APP != CURRENT_APP) {
-		centerMouse()
-		return
-	}
-	Sleep, 100
-	tries := tries + 1
+  
+  WinGet, BEFOREAPP, ID, A
+  WinGetTitle beforeT, ahk_id %beforeApp%
+  GroupActivate, app_title_to_switch_%which%, R
+  WinGet, NOWAPP, ID, A
+  
+  if (BEFOREAPP == NOWAPP) {
+	  app := APP_TO_RUN_ON_KEY[which]
+	  WinGet, ORIGINAL_APP, ID, A
+	  Run, %app%
+	  tries := 0
+	  While (tries < 30) {
+		WinGet, CURRENT_APP, ID, A
+		if (ORIGINAL_APP != CURRENT_APP) {
+			centerMouse()
+			return
+		}
+		Sleep, 100
+		tries := tries + 1
+	  }
+  } else {
+	  centerMouse()
   }
+  
   return
 }
