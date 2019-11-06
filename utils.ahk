@@ -7,10 +7,10 @@ centerMouse() {
     ;MouseMove, X, Y, 0 ; does not work with multi-monitor
     DllCall("SetCursorPos", int, winCenter_x, int, winCenter_y)
     ;Tooltip winTopL_x:%winTopL_x% winTopL_y:%winTopL_y% winCenter_x:%winCenter_x% winCenter_y:%winCenter_y%
+	return
 }
 
 writeGroup(key) {
-	Gui, Destroy
 	Gui, Color, Black
 	Gui, Font, s18
 	Gui, Margin, 2, 1
@@ -22,27 +22,35 @@ writeGroup(key) {
 	x := coordsRight - 55
 	y := coordsBottom - 63
 	Gui, Show, x%x% y%y%
+	return
 }
 
 clearGroup() {
 	Gui, Destroy
+	return
 }
 
 writeMessage(key) {
-	Gui, Destroy
-	Gui, Color, Black
-	Gui, Font, s36
+	Gui, Color, Green
+	Gui, Font, s18
 	Gui, Margin, 2, 1
 	Gui +LastFound  ; Make the GUI window the last found window for use by the line below.
 	Gui, +LastFound +AlwaysOnTop -Border -SysMenu +Owner -Caption +ToolWindow
-	Gui, Add, Text, cWhite, %key%
+	Gui, Add, Text, cRed BackgroundTrans, %key%
 	SysGet, MonitorPrimary, MonitorPrimary
 	SysGet, Coords, Monitor, MonitorPrimary
+	WinSet, TransColor, Green
 	x := coordsLeft
 	y := coordsTop
 	Gui, Show, x%x% y%y%
+	return
 }
 
 clearMessage() {
 	Gui, Destroy
+	return
 }
+
+
+
+

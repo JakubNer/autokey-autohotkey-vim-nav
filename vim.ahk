@@ -122,6 +122,7 @@ _::
 		}
 	}
 	LIMITING_APP_IDS := retrieve("1")
+	clearGroup()
 	writeGroup("1")
 	return
 }
@@ -150,6 +151,7 @@ _::
 		}
 	}
 	LIMITING_APP_IDS := retrieve("2")
+	clearGroup()
 	writeGroup("2")
 	return
 }
@@ -178,6 +180,7 @@ _::
 		}
 	}
 	LIMITING_APP_IDS := retrieve("3")
+	clearGroup()
 	writeGroup("3")
     return
 }
@@ -206,6 +209,7 @@ _::
 		}
 	}
 	LIMITING_APP_IDS := retrieve("4")
+	clearGroup()
 	writeGroup("4")
     return
 }
@@ -234,6 +238,7 @@ _::
 		}
 	}
 	LIMITING_APP_IDS := retrieve("5")
+	clearGroup()
 	writeGroup("5")
     return
 }
