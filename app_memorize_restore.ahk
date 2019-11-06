@@ -157,7 +157,19 @@ retrieve(which)
 	return APP_MEM_GROUP_IDS[which . "_" . index]
 }
 
-dump()
+dump(ids)
+{
+	output := ""  
+	for key, id in ids {
+		WinGetTitle, title, ahk_id %id%
+		output .= title . "`n`n"
+	}
+
+	MsgBox, %output%
+	return
+}
+
+debug()
 {
   global APP_MEM_GROUP_INDICES
   global APP_MEM_GROUP_COUNT

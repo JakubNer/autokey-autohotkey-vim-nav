@@ -81,7 +81,8 @@ _::
 }
 !F1::
 {
-  dump()
+  global LIMITING_APP_IDS
+  dump(LIMITING_APP_IDS)
   return
 }
 0::
