@@ -64,16 +64,15 @@ switch(which, LIMITING_APP_IDS)
   WinGet, FIRST_APP, ID, A
   CURRENT_APP := FIRST_APP
   if (LIMITING_APP_IDS.length() > 0 && ! HasVal(LIMITING_APP_IDS, FIRST_APP)) {
-	WinMinimize, ahk_id %FIRST_APP%
 	Loop {
 		GroupActivate, switch_%which%, R
+		WinMinimize, ahk_id %CURRENT_APP%
 		WinGet, CURRENT_APP, ID, A
 		if (HasVal(LIMITING_APP_IDS, CURRENT_APP)) {
 			break
-		} else {
-			WinMinimize, ahk_id %CURRENT_APP%
-		}
+		} 
 		if (FIRST_APP == CURRENT_APP) {
+			WinMinimize, ahk_id %CURRENT_APP%		
 			break
 		}
 	}
