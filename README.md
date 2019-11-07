@@ -125,6 +125,10 @@ Unfortunately Windows laptops have varying qualities of touchpads, and scrolling
 
 `CAPS+a` wheel up
 
+`CAPS+c` wheel left
+
+`CAPS+v` wheel right
+
 Mouse keys for navigating within browsers are very nice for most editors, map them:
 
 `CAPS+z` browser back, alt left

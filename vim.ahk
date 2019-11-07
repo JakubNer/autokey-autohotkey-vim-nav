@@ -107,6 +107,7 @@ _::
       reset_memory("1")
       return
     }    
+	return
 }
 !1::
 {
@@ -136,6 +137,7 @@ _::
       reset_memory("2")
       return
     }    
+	return
 }
 !2::
 {
@@ -165,6 +167,7 @@ _::
       reset_memory("3")
       return
     }    
+	return
 }
 !3:: 
 {
@@ -194,6 +197,7 @@ _::
       reset_memory("4")
       return
     }    
+	return
 }
 !4:: 
 {
@@ -222,7 +226,8 @@ _::
     if (alt_mode2) {
       reset_memory("5")
       return
-    }    
+    }  
+	return	
 }
 !5::
 {
@@ -282,6 +287,12 @@ c::
         run("c")
         return
     }
+    while GetKeyState("c", "P")
+    {
+	  Send {WheelLeft}
+      Sleep, 45
+    }	
+	return
 }
 !c::
 {
@@ -497,6 +508,13 @@ v::
         run("v")
         return
     }
+    while GetKeyState("v", "P")
+    {
+	  Send {WheelRight}
+      Sleep, 45
+    }
+
+	return
 }
 !v::
 {
