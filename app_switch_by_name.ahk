@@ -27,12 +27,11 @@ TITLES["c"] := ["Chrome", "Opera", "Firefox", "- Microsoft Edge", "Chromium", "R
 TITLES["v"] := ["- OneNote", "Google Calendar"]
 TITLES["b"] := ["Adobe Acrobat Reader"]
 
-for which, titles in TITLES {
-	for index, title in titles {
+for which, titlez in TITLES {
+	for index, title in titlez {
 		GroupAdd, switch_%which%, %title%
 	}
 }
-
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; COFIGURE APP TO RUN ;;
@@ -55,8 +54,54 @@ for which, title in APP_TITLE_TO_SWITCH_TO_ON_KEY {
 	GroupAdd, app_title_to_switch_%which%, %title%
 }
 
+getIds() {
+	WinGet, idlist, list,,, Program Manager
+	listids := []
+    loop, %idlist% {
+		listids[A_Index] := idlist%A_Index%
+	}
+	listidsreversed := []
+	for i, v in listids {
+		listidsreversed[i] := listids[listids.length()-i+1]
+	}
+
+	return listidsreversed
+}
 
 switch(which, LIMITING_APP_IDS)
+{
+  global TITLES
+  
+  if (LIMITING_APP_IDS.length() > 0) {
+	WinGet, active_id, id,A
+	
+	listids := getIds()
+    for i,id in listids {
+		if (active_id != id) {
+			for j,value in LIMITING_APP_IDS {
+				if (id == value) {
+					WinGetTitle title, ahk_id %value%
+					for k, targettitle in TITLES[which] {
+						if InStr(title, targettitle) {
+							WinActivate, ahk_id %value%
+							LAST_ID := value
+							centerMouse()
+							return
+						}
+					}
+				}
+			}
+		}
+	}
+  } else {
+    GroupActivate, switch_%which%, R
+    centerMouse()
+  }
+  return
+}
+
+
+_switch(which, LIMITING_APP_IDS)
 {
   WinGet, beforeApp, ID, A
   WinGetTitle beforeT, ahk_id %beforeApp%
