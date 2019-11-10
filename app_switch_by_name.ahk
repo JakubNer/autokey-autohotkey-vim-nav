@@ -60,72 +60,52 @@ getIds() {
     loop, %idlist% {
 		listids[A_Index] := idlist%A_Index%
 	}
-	listidsreversed := []
-	for i, v in listids {
-		listidsreversed[i] := listids[listids.length()-i+1]
-	}
-
-	return listidsreversed
+	return listids
 }
+
+ID_FLIPPED_ALREADY := []
+LAST_TIME_CALLING_SWITCH := A_TickCount
 
 switch(which, LIMITING_APP_IDS)
 {
   global TITLES
+  global ID_FLIPPED_ALREADY
+  global LAST_TIME_CALLING_SWITCH
   
   if (LIMITING_APP_IDS.length() > 0) {
 	WinGet, active_id, id,A
+
+	if ((A_TickCount - LAST_TIME_CALLING_SWITCH) > 3000) {
+		ID_FLIPPED_ALREADY := []
+	}
+	l := ID_FLIPPED_ALREADY.length()
+	LAST_TIME_CALLING_SWITCH := A_TickCount
 	
 	listids := getIds()
     for i,id in listids {
 		if (active_id != id) {
-			for j,value in LIMITING_APP_IDS {
-				if (id == value) {
-					WinGetTitle title, ahk_id %value%
-					for k, targettitle in TITLES[which] {
-						if InStr(title, targettitle) {
-							WinActivate, ahk_id %value%
-							LAST_ID := value
-							centerMouse()
-							return
+			if (!HasVal(ID_FLIPPED_ALREADY, id)) {
+				for j,value in LIMITING_APP_IDS {
+					if (id == value) {
+						WinGetTitle title, ahk_id %value%
+						for k, targettitle in TITLES[which] {
+							if InStr(title, targettitle) {
+								WinActivate, ahk_id %value%
+								ID_FLIPPED_ALREADY.Push(value)
+								centerMouse()
+								return
+							}
 						}
 					}
 				}
 			}
 		}
 	}
+	ID_FLIPPED_ALREADY := []	
   } else {
     GroupActivate, switch_%which%, R
     centerMouse()
   }
-  return
-}
-
-
-_switch(which, LIMITING_APP_IDS)
-{
-  WinGet, beforeApp, ID, A
-  WinGetTitle beforeT, ahk_id %beforeApp%
-  GroupActivate, switch_%which%, R
-  WinGet, FIRST_APP, ID, A
-  CURRENT_APP := FIRST_APP
-  if (LIMITING_APP_IDS.length() > 0 && ! HasVal(LIMITING_APP_IDS, FIRST_APP)) {
-	Loop {
-		GroupActivate, switch_%which%, R
-		WinMinimize, ahk_id %CURRENT_APP%
-		WinGet, CURRENT_APP, ID, A
-		if (HasVal(LIMITING_APP_IDS, CURRENT_APP)) {
-			break
-		} 
-		if (FIRST_APP == CURRENT_APP) {
-			WinMinimize, ahk_id %CURRENT_APP%		
-			break
-		}
-	}
-  }
-  WinGet, afterApp, ID, A
-  WinGetTitle afterT, ahk_id %afterApp%
-  ;;TrayTip,, %beforeT% (%beforeApp%) `r`r %afterT% (%afterApp%), 1, 17
-  centerMouse()
   return
 }
 
