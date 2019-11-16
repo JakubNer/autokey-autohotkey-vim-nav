@@ -125,19 +125,19 @@ Unfortunately Windows laptops have varying qualities of touchpads, and scrolling
 
 `CAPS+a` wheel up
 
-`CAPS+c` wheel left
+`CAPS+z` wheel left
 
-`CAPS+v` wheel right
+`CAPS+x` wheel right
 
 Mouse keys for navigating within browsers are very nice for most editors, map them:
 
-`CAPS+z` browser back, alt left
+`CAPS+c` browser back, alt left
 
-`CAPS+x` browser forward, alt right
+`CAPS+v` browser forward, alt right
 
-`CAPS+SHIFT+z` ctrl alt left // for some applications going back is this combo
+`CAPS+SHIFT+c` ctrl alt left // for some applications going back is this combo
 
-`CAPS+SHIFT+x` ctrl alt right  // for some applications going forward is this combo
+`CAPS+SHIFT+v` ctrl alt right  // for some applications going forward is this combo
 
 ### VIM Editing Key Bindings
 

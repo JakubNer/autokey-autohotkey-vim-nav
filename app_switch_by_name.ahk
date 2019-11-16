@@ -17,10 +17,10 @@ TITLES := {}
 ;; COFIGURE APP TITLES TO RECALL ;;
 
 TITLES["a"] := ["powershell.exe", "MINGW64", "Docker Quickstart Terminal"]
-TITLES["s"] := ["miMind"]
+TITLES["s"] := ["- Notepad++"]
 TITLES["d"] := ["Visual Studio Code", "Microsoft Visual Studio"]
-TITLES["f"] := ["Sourcetree", "Google Web Designer", "Postman", "VirtualBox", "Microsoft SQL Server Management Studio", "Internet Information Services (IIS) Manager"]
-TITLES["g"] := ["Snip & Sketch", "ahk_exe PaintDotNet.exe", "Astah", "Pencil"]
+TITLES["f"] := ["Sourcetree", "Google Web Designer", "Postman", "VirtualBox", "Microsoft SQL Server Management Studio", "Internet Information Services (IIS) Manager", "Fiddler"]
+TITLES["g"] := ["Snip & Sketch", "ahk_exe PaintDotNet.exe", "Astah", "Pencil", "- MarkdownPad 2"]
 TITLES["z"] := ["- Outlook", "Gmail"]
 TITLES["x"] := ["| Microsoft Teams", "MightyText", "WhatsApp", "Viber", "Slack", "Messenger", "Discord", "Skype"]
 TITLES["c"] := ["Chrome", "Opera", "Firefox", "- Microsoft Edge", "Chromium", "Remote Desktop Connection"]
@@ -41,6 +41,7 @@ APP_TO_RUN_ON_KEY := {}
 
 APP_TO_RUN_ON_KEY["a"] := "powershell"
 APP_TO_RUN_ON_KEY["s"] := "C:\Program Files\Notepad++\notepad++.exe"
+APP_TO_RUN_ON_KEY["g"] := "C:\Program Files (x86)\MarkdownPad 2\MarkdownPad2.exe"
 APP_TO_RUN_ON_KEY["c"] := "shell:Appsfolder\MSEdgeBeta"
 APP_TO_RUN_ON_KEY["v"] := "shell:Appsfolder\chrome"
 APP_TO_RUN_ON_KEY["b"] := "shell:Appsfolder\chrome --profile-directory=""Profile 1"""
@@ -50,6 +51,7 @@ APP_TO_RUN_ON_KEY["f"] := "C:\Program Files\Freeplane\freeplane.exe"
 APP_TITLE_TO_SWITCH_TO_ON_KEY := {}
 APP_TITLE_TO_SWITCH_TO_ON_KEY["s"] := "- Notepad++"
 APP_TITLE_TO_SWITCH_TO_ON_KEY["f"] := "- Freeplane"
+APP_TITLE_TO_SWITCH_TO_ON_KEY["g"] := "- MarkdownPad 2"
 
 for which, title in APP_TITLE_TO_SWITCH_TO_ON_KEY {
 	GroupAdd, app_title_to_switch_%which%, %title%

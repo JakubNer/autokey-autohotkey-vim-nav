@@ -287,17 +287,18 @@ c::
         run("c")
         return
     }
-    while GetKeyState("c", "P")
-    {
-	  Send {WheelLeft}
-      Sleep, 45
-    }	
-	return
+    SendInput !{Left}
+    return
 }
 !c::
 {
 	global LIMITING_APP_IDS
     switch("c", LIMITING_APP_IDS)
+    return
+}
++c::
+{
+    SendInput !^{Left}
     return
 }
 d::
@@ -508,18 +509,18 @@ v::
         run("v")
         return
     }
-    while GetKeyState("v", "P")
-    {
-	  Send {WheelRight}
-      Sleep, 45
-    }
-
-	return
+    SendInput !{Right}
+    return
 }
 !v::
 {
 	global LIMITING_APP_IDS
     switch("v", LIMITING_APP_IDS)
+    return
+}
++v::
+{
+    SendInput !^{Right}
     return
 }
 w::
@@ -555,13 +556,13 @@ x::
         run("x")
         return
     }
-    SendInput !{Right}
-    return
-}
-+x::
-{
-    SendInput !^{Right}
-    return
+    while GetKeyState("x", "P")
+    {
+	  Send {WheelRight}
+      Sleep, 45
+    }
+
+	return
 }
 !x:: 
 {
@@ -580,13 +581,12 @@ z::
         run("z")
         return
     }
-    SendInput !{Left}
-    return
-}
-+z::
-{
-    SendInput !^{Left}
-    return
+    while GetKeyState("z", "P")
+    {
+	  Send {WheelLeft}
+      Sleep, 45
+    }	
+	return
 }
 !z:: 
 {
