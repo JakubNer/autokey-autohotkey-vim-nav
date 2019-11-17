@@ -51,6 +51,16 @@ clearMessage() {
 	return
 }
 
+dump(ids)
+{
+	length := ids.length()
+    output := "" . length . "`n`n"
+    for key, id in ids {
+        WinGetTitle, title, ahk_id %id%
+        output .= title . "`n`n"
+    }
 
-
-
+    MsgBox, %output%
+    
+    return
+}

@@ -31,6 +31,8 @@ The following hotkeys are pre-configured:
 
 To cycle/recall an application window hold CAPS LOCK + ALT then tap the corresponding key repeatedly until you land on the desired open app.
 
+Douple tapping CAPS LOCK + ALT and a corresponding key will recall the most recent desired open app in ALT-TAB order.
+
 The specific applications recalled are controlled by the [app_switch_by_name.ahk](app_switch_by_name.ahk) script.
 
 To reconfigure you must edit the [app_switch_by_name.ahk](app_switch_by_name.ahk) and restart the [vim.ahk](vim.ahk) script in your taskbar.

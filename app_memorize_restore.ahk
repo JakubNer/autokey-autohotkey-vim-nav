@@ -7,7 +7,7 @@
 ;
 
 APP_MEM_GROUP := {}
-APP_MEM_MAX_APPS_TO_MEM := 20
+APP_MEM_MAX_APPS_TO_MEM := 7
 
 AltTab_window_list() {
   Global
@@ -71,18 +71,4 @@ restoreall(which)
 	}
 
 	return
-}
-
-dump(ids)
-{
-	length := ids.length()
-    output := "" . length . "`n`n"
-    for key, id in ids {
-        WinGetTitle, title, ahk_id %id%
-        output .= title . "`n`n"
-    }
-
-    MsgBox, %output%
-    
-    return
 }

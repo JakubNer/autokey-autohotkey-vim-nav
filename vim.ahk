@@ -155,7 +155,13 @@ a::
 }
 !a:: 
 {
-    switch("a")
+	KeyWait, a
+	KeyWait, a, D T.3
+	If (!ErrorLevel) {
+		switchImmediate("a")
+	} Else {
+		switch("a")
+	}
     return
 }
 b::
@@ -169,7 +175,13 @@ b::
 }
 !b:: 
 {
-    switch("b")
+	KeyWait, b
+	KeyWait, b, D T.3
+	If (!ErrorLevel) {
+		switchImmediate("b")
+	} Else {
+		switch("b")
+	}
     return
 }
 c::
@@ -183,7 +195,13 @@ c::
 }
 !c::
 {
-    switch("c")
+	KeyWait, c
+	KeyWait, c, D T.3
+	If (!ErrorLevel) {
+		switchImmediate("c")
+	} Else {
+		switch("c")
+	}
     return
 }
 +c::
@@ -194,7 +212,7 @@ c::
 d::
 {
     if (alt_mode) {
-        run("d")
+		run("d")		
         return
     }
     SendInput {Delete}
@@ -207,7 +225,13 @@ d::
 }
 !d:: 
 {
-    switch("d")
+	KeyWait, d
+	KeyWait, d, D T.3
+	If (!ErrorLevel) {
+		switchImmediate("d")
+	} Else {
+		switch("d")
+	}
     return
 }
 e::
@@ -233,7 +257,13 @@ f::
 }
 !f:: 
 {
-    switch("f")
+	KeyWait, f
+	KeyWait, f, D T.3
+	If (!ErrorLevel) {
+		switchImmediate("f")
+	} Else {
+		switch("f")
+	}
     return
 }
 g::
@@ -252,7 +282,13 @@ g::
 }
 !g:: 
 {
-    switch("g")
+	KeyWait, g
+	KeyWait, g, D T.3
+	If (!ErrorLevel) {
+		switchImmediate("g")
+	} Else {
+		switch("g")
+	}
     return
 }
 h::
@@ -367,7 +403,13 @@ s::
 }
 !s:: 
 {
-    switch("s")
+	KeyWait, s
+	KeyWait, s, D T.3
+	If (!ErrorLevel) {
+		switchImmediate("s")
+	} Else {
+		switch("s")
+	}
     return
 }
 !t::
@@ -400,7 +442,13 @@ v::
 }
 !v::
 {
-    switch("v")
+	KeyWait, v
+	KeyWait, v, D T.3
+	If (!ErrorLevel) {
+		switchImmediate("v")
+	} Else {
+		switch("v")
+	}
     return
 }
 +v::
@@ -451,7 +499,13 @@ x::
 }
 !x:: 
 {
-    switch("x")
+	KeyWait, x
+	KeyWait, x, D T.3
+	If (!ErrorLevel) {
+		switchImmediate("x")
+	} Else {
+		switch("x")
+	}
     return
 }
 y::
@@ -474,7 +528,13 @@ z::
 }
 !z:: 
 {
-    switch("z")
+	KeyWait, z
+	KeyWait, z, D T.3
+	If (!ErrorLevel) {
+		switchImmediate("z")
+	} Else {
+		switch("z")
+	}
     return
 }
 !LEFT::
