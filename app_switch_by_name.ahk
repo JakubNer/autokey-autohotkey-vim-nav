@@ -57,88 +57,11 @@ for which, title in APP_TITLE_TO_SWITCH_TO_ON_KEY {
 	GroupAdd, app_title_to_switch_%which%, %title%
 }
 
-getIds() {
-	WinGet, idlist, list,,, Program Manager
-	listids := []
-    loop, %idlist% {
-		listids[A_Index] := idlist%A_Index%
-	}
-	return listids
-}
-
-SortArray(Array, Order="A") {
-    ;Order A: Ascending, D: Descending, R: Reverse
-    MaxIndex := ObjMaxIndex(Array)
-    If (Order = "R") {
-        count := 0
-        Loop, % MaxIndex
-            ObjInsert(Array, ObjRemove(Array, MaxIndex - count++))
-        Return
-    }
-    Partitions := "|" ObjMinIndex(Array) "," MaxIndex
-    Loop {
-        comma := InStr(this_partition := SubStr(Partitions, InStr(Partitions, "|", False, 0)+1), ",")
-        spos := pivot := SubStr(this_partition, 1, comma-1) , epos := SubStr(this_partition, comma+1)    
-        if (Order = "A") {    
-            Loop, % epos - spos {
-                if (Array[pivot] > Array[A_Index+spos])
-                    ObjInsert(Array, pivot++, ObjRemove(Array, A_Index+spos))    
-            }
-        } else {
-            Loop, % epos - spos {
-                if (Array[pivot] < Array[A_Index+spos])
-                    ObjInsert(Array, pivot++, ObjRemove(Array, A_Index+spos))    
-            }
-        }
-        Partitions := SubStr(Partitions, 1, InStr(Partitions, "|", False, 0)-1)
-        if (pivot - spos) > 1    ;if more than one elements
-            Partitions .= "|" spos "," pivot-1        ;the left partition
-        if (epos - pivot) > 1    ;if more than one elements
-            Partitions .= "|" pivot+1 "," epos        ;the right partition
-    } Until !Partitions
-}
-
-ID_FLIPPED_ALREADY := []
-
-switch(which, LIMITING_APP_IDS)
+switch(which)
 {
   global TITLES
-  global ID_FLIPPED_ALREADY
-  
-  if (LIMITING_APP_IDS.length() > 0) {
-	WinGet, active_id, id,A
-	listids := getIds()
-	SortArray(listids)
-	Loop {
-		for i,id in listids {
-			if (active_id != id) {
-				if (!HasVal(ID_FLIPPED_ALREADY, id)) {
-					for j,value in LIMITING_APP_IDS {
-						if (id == value) {
-							WinGetTitle title, ahk_id %value%
-							WinGet, process, ProcessName, ahk_id %value%
-							for k, targettitle in TITLES[which] {
-								if (InStr(title, targettitle) or InStr(process, targettitle)) {
-									WinActivate, ahk_id %value%
-									ID_FLIPPED_ALREADY.Push(value)
-									centerMouse()
-									return
-								}
-							}
-						}
-					}
-				}
-			}
-		}
-		if (ID_FLIPPED_ALREADY.Length() == 0) {
-			break
-		}
-		ID_FLIPPED_ALREADY := []	
-	}
-  } else {
-    GroupActivate, switch_%which%, R
-    centerMouse()
-  }
+  GroupActivate, switch_%which%, R
+  centerMouse()
   return
 }
 

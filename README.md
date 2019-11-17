@@ -5,7 +5,7 @@ Scripts for Windows AutoHotKey:
 * allow vim like navigation across the OS.
 * allow mouse scroll and navigation with keyboard (useful when using bad touchpads)
 * allow quick recall of applications by title (see [app_switch_by_name.ahk](app_switch_by_name.ahk))
-* allow quick binding of application windows to shortcut keys: quick window switching
+* allow quick binding of current ALT-TAB ordered windows to shortcut keys: quick window layout switching
 
 *vim.ahk* file to be loaded by Windows AutoHotKey.
 
@@ -49,42 +49,22 @@ Many different title substrings (different apps) can be added to a signle hotkey
 
 #### Memorization to a Group
 
-This approach allows binding of running any applications' windows to shortcut keys.
+This approach allows binding of running applications' windows ALT-TAB order to shortcut keys.
 
-Unlike *Preconfigured Recall* above, these bindings reset when the system is reboot or when you reset them explicitly (below).
+This is useful for memorizing and recalling layout on multi-display setups.
 
-The following keys allow memorization of application windows for quick restore:
+The following keys allow memorization of application windows' ALT-TAB order for quick restore:
 
 `1,2,3,4,5`
 
-To memorize an application window hold CAPS LOCK then press SPACE and tap one of the above keys (while holding CAPS LOCK):
+To memorize an order hold CAPS LOCK then press SPACE and tap one of the above keys (while holding CAPS LOCK):
 
 	`CAPS LOCK + SPACE, CAPS LOCK + 1` bind current app to group 1 (you can use 1 through 5)
 
-You can memorize many applications to the same button and cycle through them.
+To restore an order hold CAPS LOCK + ALT tap the corresponding key:
 
-To cycle/restore an application window hold CAPS LOCK + ALT tap the corresponding key repeatedly until you land on the desired open app:
-
-	`CAPS LOCK + ALT + 1` to cycle through apps in group 1 (you can use 1 through 5)
+	`CAPS LOCK + ALT + 1` to resore apps' ALT-TAB order as per group 1 (you can use 1 through 5)
 	
-	`CAPS LOCK + ALT + double tap 1` to show all apps in group 1 (you can use 1 through 5)
-
-To reset a keybinding so that no applications are bound to it simply hold CAPS LOCK then pres TAB, then tap one of the above keys: 
-
-	`CAPS LOCK + TAB, 1` to reset current app or all apps in group 1 (you can use 1 through 5)
-	
-Note that a *double tap* is within .3 second. 
-
-**NOTE: Memorization Groups limit Preconfigured Recall** 
-
-Once apps in a group are being cycled e.g. `CAPS LOCK + ALT + #` (or double tap #), the apps in *Preconfigured Recall* (see previous section) will be limited to apps in this group.  
-
-There is a visual indication in the lower-right corner of the main monitor indicating the group selected.
-
-To reset this limitation press `CAPS LOCK + ALT + 0` or `CAPS LOCK + ALT + SPACE`.
-
-Please note that the first `CAPS LOCK + ALT + #` invocation does not cycle to the first groupped application: only subsequent uninterrupted key binding invocations do.  The first invocation selects the memorization group 
-
 #### Preconfigured Apps to Run
 
 Looking at the [app_switch_by_name.ahk](app_switch_by_name.ahk) script you will find several `APP_TO_RUN_ON_KEY[".."] := "..."` statements after the `;; COFIGURE APP TO RUN ;;` comment.

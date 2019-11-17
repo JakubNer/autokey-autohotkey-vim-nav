@@ -34,13 +34,6 @@ space::
   }
   return
 }
-!space::
-{
-	global LIMITING_APP_IDS
-	LIMITING_APP_IDS := []
-	clearGroup()
-	return
-}
 
 alt_mode_off:
     alt_mode := false
@@ -62,8 +55,6 @@ alt_mode2_off:
     alt_mode2 := false
 return
 
-LIMITING_APP_IDS := []
-
 -::
 {
     SendInput {End}
@@ -79,23 +70,10 @@ _::
     SendInput +{End}
     return
 }
-!F1::
-{
-  global LIMITING_APP_IDS
-  dump(LIMITING_APP_IDS)
-  return
-}
 0::
 {
     SendInput {Home}
     return
-}
-!0:: 
-{
-	global LIMITING_APP_IDS
-	LIMITING_APP_IDS := []
-	clearGroup()	
-	return
 }
 1::
 {
@@ -103,28 +81,11 @@ _::
       memorize("1")          
       return
     }
-    if (alt_mode2) {
-      reset_memory("1")
-      return
-    }    
 	return
 }
 !1::
 {
-	global LIMITING_APP_IDS
-	KeyWait, 1
-	KeyWait, 1, D T.3
-	If (!ErrorLevel)
-	{
-		restoreall("1")
-    } else {
-		if (A_ThisHotKey == A_PriorHotkey) {
-			restoreone("1")
-		}
-	}
-	LIMITING_APP_IDS := retrieve("1")
-	clearGroup()
-	writeGroup("1")
+	restoreall("1")
 	return
 }
 2::
@@ -133,28 +94,11 @@ _::
       memorize("2")          
       return
     }
-    if (alt_mode2) {
-      reset_memory("2")
-      return
-    }    
 	return
 }
 !2::
 {
-	global LIMITING_APP_IDS
-    KeyWait, 2
-    KeyWait, 2, D T.3
-    If (!ErrorLevel)
-    {
-		restoreall("2")
-    } else {
-		if (A_ThisHotKey == A_PriorHotkey) {
-			restoreone("2")
-		}
-	}
-	LIMITING_APP_IDS := retrieve("2")
-	clearGroup()
-	writeGroup("2")
+	restoreall("2")
 	return
 }
 3::
@@ -163,28 +107,11 @@ _::
       memorize("3")
       return
     }
-    if (alt_mode2) {
-      reset_memory("3")
-      return
-    }    
 	return
 }
 !3:: 
 {
-	global LIMITING_APP_IDS
-    KeyWait, 3
-    KeyWait, 3, D T.3
-    If (!ErrorLevel)
-    {
-		restoreall("3")
-    } else {
-		if (A_ThisHotKey == A_PriorHotkey) {
-			restoreone("3")
-		}
-	}
-	LIMITING_APP_IDS := retrieve("3")
-	clearGroup()
-	writeGroup("3")
+	restoreall("3")
     return
 }
 4::
@@ -193,28 +120,11 @@ _::
       memorize("4")          
       return
     }
-    if (alt_mode2) {
-      reset_memory("4")
-      return
-    }    
 	return
 }
 !4:: 
 {
-	global LIMITING_APP_IDS
-    KeyWait, 4
-    KeyWait, 4, D T.3
-    If (!ErrorLevel)
-    {
-		restoreall("4")
-    } else {
-		if (A_ThisHotKey == A_PriorHotkey) {
-			restoreone("4")
-		}
-	}
-	LIMITING_APP_IDS := retrieve("4")
-	clearGroup()
-	writeGroup("4")
+	restoreall("4")
     return
 }
 5::
@@ -223,28 +133,11 @@ _::
       memorize("5")          
       return
     }
-    if (alt_mode2) {
-      reset_memory("5")
-      return
-    }  
 	return	
 }
 !5::
 {
-	global LIMITING_APP_IDS
-    KeyWait, 5
-    KeyWait, 5, D T.3
-    If (!ErrorLevel)
-    {
-		restoreall("5")
-    } else {
-		if (A_ThisHotKey == A_PriorHotkey) {	
-			restoreone("5")
-		}
-	}
-	LIMITING_APP_IDS := retrieve("5")
-	clearGroup()
-	writeGroup("5")
+	restoreall("5")
     return
 }
 a::
@@ -262,8 +155,7 @@ a::
 }
 !a:: 
 {
-	global LIMITING_APP_IDS
-    switch("a", LIMITING_APP_IDS)
+    switch("a")
     return
 }
 b::
@@ -277,8 +169,7 @@ b::
 }
 !b:: 
 {
-	global LIMITING_APP_IDS
-    switch("b", LIMITING_APP_IDS)
+    switch("b")
     return
 }
 c::
@@ -292,8 +183,7 @@ c::
 }
 !c::
 {
-	global LIMITING_APP_IDS
-    switch("c", LIMITING_APP_IDS)
+    switch("c")
     return
 }
 +c::
@@ -317,8 +207,7 @@ d::
 }
 !d:: 
 {
-	global LIMITING_APP_IDS
-    switch("d", LIMITING_APP_IDS)
+    switch("d")
     return
 }
 e::
@@ -344,8 +233,7 @@ f::
 }
 !f:: 
 {
-	global LIMITING_APP_IDS
-    switch("f", LIMITING_APP_IDS)
+    switch("f")
     return
 }
 g::
@@ -364,8 +252,7 @@ g::
 }
 !g:: 
 {
-	global LIMITING_APP_IDS
-    switch("g", LIMITING_APP_IDS)
+    switch("g")
     return
 }
 h::
@@ -480,8 +367,7 @@ s::
 }
 !s:: 
 {
-	global LIMITING_APP_IDS
-    switch("s", LIMITING_APP_IDS)
+    switch("s")
     return
 }
 !t::
@@ -514,8 +400,7 @@ v::
 }
 !v::
 {
-	global LIMITING_APP_IDS
-    switch("v", LIMITING_APP_IDS)
+    switch("v")
     return
 }
 +v::
@@ -566,8 +451,7 @@ x::
 }
 !x:: 
 {
-	global LIMITING_APP_IDS
-    switch("x", LIMITING_APP_IDS)
+    switch("x")
     return
 }
 y::
@@ -590,8 +474,7 @@ z::
 }
 !z:: 
 {
-	global LIMITING_APP_IDS
-    switch("z", LIMITING_APP_IDS)
+    switch("z")
     return
 }
 !LEFT::

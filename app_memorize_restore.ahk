@@ -1,192 +1,88 @@
-2APP_MEM_OUTPUT_VAR := Object()
-
 ; - memorize current app ID to group by some 'which' key
-; - toggle through apps in group by some 'which' key
-; - reset group for 'which' key
+; - restore group for 'which' key
 ;
 ; sample use:
 ;   +!q::memorize("a")
 ;   !q::restore("a")
-;   ^+!q::reset_memory("a")
 ;
 
-APP_MEM_GROUP_INDICES := {}
-APP_MEM_GROUP_COUNT := {}
-APP_MEM_GROUP_IDS := {}
+APP_MEM_GROUP := {}
+APP_MEM_MAX_APPS_TO_MEM := 20
 
-HasVal(haystack, needle) {
-	for index,value in haystack
-		if (value = needle)
-			return true
-	return false
+AltTab_window_list() {
+  Global
+  Static WS_EX_TOOLWINDOW = 0x80, WS_EX_APPWINDOW = 0x40000, GW_OWNER = 4
+  DetectHiddenWindows, Off
+  listids := []
+  WinGet, wid_List, List,,, Program Manager ; gather a list of running programs
+  Loop, %wid_List%
+    {
+    ownerID := wid := wid_List%A_Index%
+    Loop {
+      ownerID := Decimal_to_Hex( DllCall("GetWindow", "UInt", ownerID, "UInt", GW_OWNER))
+    } Until !Decimal_to_Hex( DllCall("GetWindow", "UInt", ownerID, "UInt", GW_OWNER))
+    ownerID := ownerID ? ownerID : wid
+    If (Decimal_to_Hex(DllCall("GetLastActivePopup", "UInt", ownerID)) = wid)
+      {
+      WinGet, es, ExStyle, ahk_id %wid%
+      If !((es & WS_EX_TOOLWINDOW) && !(es & WS_EX_APPWINDOW))
+        {
+			listids.Push(wid)
+        }
+      }
+    }
+	return listids
 }
 
-Remove(haystack, what) {
-	count := 0
-	newhaystack := []
-	for index,value in haystack {
-		if (value != what) {
-			newhaystack.push((string)value)
+;; transform array of IDs by reversing and trimming to APP_MEM_MAX_APPS_TO_MEM
+transform(listids) {
+	global APP_MEM_MAX_APPS_TO_MEM
+	result := []
+	for i,id in listids {
+		if (result.length() >= APP_MEM_MAX_APPS_TO_MEM) {
+			break
+		}
+		wingettitle, title, ahk_id %id%
+		winget, wstate, minmax, ahk_id %id%
+		if (title != "") && (wstate == 1 || wstate == 0) {
+			result.InsertAt(1, id)
 		}
 	}
-	return newhaystack
-}
-
-ensureAppMemGroupCount(which, index) {
-  global APP_MEM_GROUP_COUNT
-  global APP_MEM_GROUP_IDS
-  if (! APP_MEM_GROUP_COUNT.HasKey(which . "_" . index)) {
-    APP_MEM_GROUP_COUNT[which . "_" . index] := 0
-	APP_MEM_GROUP_IDS[which . "_" . index] := []
-  }
-}
-
-incrementAppMemGroupCount(which, index) {
-	global APP_MEM_GROUP_COUNT
-    if (! APP_MEM_GROUP_COUNT.HasKey(which . "_" . index)) {
-      APP_MEM_GROUP_COUNT[which . "_" . index] := 0
-    }	
-    if (APP_MEM_GROUP_COUNT[which . "_" . index] < 0) {
-      APP_MEM_GROUP_COUNT[which . "_" . index] := 0
-    }	
-	APP_MEM_GROUP_COUNT[which . "_" . index] := APP_MEM_GROUP_COUNT[which . "_" . index] + 1
-}
-
-setAppMemGroupCount(which, index, count) {
-	global APP_MEM_GROUP_COUNT
-	APP_MEM_GROUP_COUNT[which . "_" . index] := count
+	return result
 }
 
 memorize(which)
 {
-  global APP_MEM_GROUP_INDICES
-  global APP_MEM_GROUP_COUNT
-  global APP_MEM_GROUP_IDS
+	global APP_MEM_GROUP
 
-  if (! APP_MEM_GROUP_INDICES.HasKey(which)) {
-    APP_MEM_GROUP_INDICES[which] := 1
-  }
-  index := APP_MEM_GROUP_INDICES[which]
-  ensureAppMemGroupCount(which, index)
+	listids := AltTab_window_list()
+	listids := transform(listids)
 
-  WinGet, APP_MEM_CURRENT_APP, ID, A
-  Winget,APP_TITLE,ProcessName,A
-  if (! HasVal(APP_MEM_GROUP_IDS[which . "_" . index], APP_MEM_CURRENT_APP)) {
-  	  APP_MEM_GROUP_IDS[which . "_" . index].Push(APP_MEM_CURRENT_APP)
-	  GroupAdd, memorize_app_%which%_%index%, ahk_id %APP_MEM_CURRENT_APP%
-	  incrementAppMemGroupCount(which, index)
-  }
-  return
-}
-
-reset_memory(which) {
-  global APP_MEM_GROUP_INDICES
-  global APP_MEM_GROUP_IDS
-  WinGet, APP_MEM_CURRENT_APP, ID, A  
-  if (! APP_MEM_GROUP_INDICES.HasKey(which)) {
-    APP_MEM_GROUP_INDICES[which] := 1
-  } else {
-	index := APP_MEM_GROUP_INDICES[which]
-	toreadd := []
-	single := false
-    if (HasVal(APP_MEM_GROUP_IDS[which . "_" . index], APP_MEM_CURRENT_APP)) {
-		MsgBox, 4,, Forget just current app or all? ("Yes" for current, "No" for all)
-		IfMsgBox Yes 
-			single := true
-		if (single)
-		{
-			toreadd := Remove(APP_MEM_GROUP_IDS[which . "_" . index],APP_MEM_CURRENT_APP)
-		}
-	}
-	if (!single) {
-		MsgBox, 4,, Are you sure you want to forget all?
-		IfMsgBox No
-			return
-	}
-    APP_MEM_GROUP_INDICES[which] := APP_MEM_GROUP_INDICES[which] + 1
-	setAppMemGroupCount(which, index, 0)
-	if (toreadd.length() > 0) {
-		index := index + 1
-		APP_MEM_GROUP_IDS[which . "_" . index] := toreadd
-		for key, value in toreadd {
-			GroupAdd, memorize_app_%which%_%index%, ahk_id %value%
-		}		
-	} 
-	setAppMemGroupCount(which, index, toreadd.Count())
-  }
-}
-
-restoreone(which)
-{
-  global APP_MEM_GROUP_INDICES
-  global APP_MEM_GROUP_COUNT
-  index := APP_MEM_GROUP_INDICES[which]
-  ensureAppMemGroupCount(which, index)
-  GroupActivate, memorize_app_%which%_%index%, R
-  WinGet, APP_MEM_CURRENT_APP, ID, A
-  centerMouse()
-  return
+	APP_MEM_GROUP[which] := listids
+	return
 }
 
 restoreall(which)
 {
-  global APP_MEM_GROUP_INDICES
-  global APP_MEM_GROUP_COUNT
-  index := APP_MEM_GROUP_INDICES[which]
-  ensureAppMemGroupCount(which, index)
-  count := APP_MEM_GROUP_COUNT[which . "_" . index]
-  seen := []
-  while count > 0 {
-    GroupActivate, memorize_app_%which%_%index%, R
-	count := count - 1
-	WinGet, APP_MEM_CURRENT_APP, ID, A
-	if (! HasVal(seen, APP_MEM_CURRENT_APP)) {
-		seen.Push(APP_MEM_CURRENT_APP)
-	} else {
-		break
-	}
-  }
-  return
-}
+	global APP_MEM_GROUP
 
-retrieve(which) 
-{
-	global APP_MEM_GROUP_IDS
-	global APP_MEM_GROUP_INDICES
-	index := APP_MEM_GROUP_INDICES[which]
-	return APP_MEM_GROUP_IDS[which . "_" . index]
+	for i,id in APP_MEM_GROUP[which] {
+		WinActivate, ahk_id %id%
+	}
+
+	return
 }
 
 dump(ids)
 {
-	output := ""  
-	for key, id in ids {
-		WinGetTitle, title, ahk_id %id%
-		output .= title . "`n`n"
-	}
+	length := ids.length()
+    output := "" . length . "`n`n"
+    for key, id in ids {
+        WinGetTitle, title, ahk_id %id%
+        output .= title . "`n`n"
+    }
 
-	MsgBox, %output%
-	
-	return
-}
-
-debug()
-{
-  global APP_MEM_GROUP_INDICES
-  global APP_MEM_GROUP_COUNT
-  global APP_MEM_GROUP_IDS
-  
-  output := "vim.ahk DUMP`n`n"  
-
-  for which, index in APP_MEM_GROUP_INDICES {
-	output .= "`n`nWHICH: " . which . "    INDEX: " . index . "     COUNT: " . APP_MEM_GROUP_COUNT[which . "_" . index]
-	ids := APP_MEM_GROUP_IDS[which . "_" . index]
-	for key, id in ids {
-		WinGetTitle, title, ahk_id %id%
-		output .= "`n   " . id . "`n      " title
-	}
-  }
-
-  MsgBox, %output%
-  return
+    MsgBox, %output%
+    
+    return
 }
