@@ -2,6 +2,7 @@
 #Include app_memorize_restore.ahk
 #Include app_switch_by_name.ahk
 #Include window.ahk
+#Include portrait_snap.ahk
 
 #NoEnv  ; Recommended for performance and compatibility with future AutoHotkey releases.
 DetectHiddenWindows, On
@@ -241,9 +242,17 @@ e::
 }
 !e:: 
 {
-    WinRestore, A
-    SendEvent {LWin down}{Right down}{LWin up}{Right up}      
-	centerMouse()
+	KeyWait, e
+	KeyWait, e, D T.3
+	If (!ErrorLevel) {
+		ResizeWin(1,0)
+		centerMouse()
+	}
+	else {
+		WinRestore, A
+		SendEvent {LWin down}{Right down}{LWin up}{Right up}      
+		centerMouse()
+	}
     return
 }
 f::
@@ -353,9 +362,17 @@ q::
 }
 !q:: 
 {
-    WinRestore, A
-    SendEvent {LWin down}{Left down}{LWin up}{Left up}      
-	centerMouse()
+	KeyWait, q
+	KeyWait, q, D T.3
+	If (!ErrorLevel) {
+		ResizeWin(0,0)
+		centerMouse()
+	}
+	else {
+		WinRestore, A
+		SendEvent {LWin down}{Left down}{LWin up}{Left up}      
+		centerMouse()
+	}
     return
 }
 r::

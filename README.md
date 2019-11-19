@@ -89,7 +89,11 @@ I like to quickly snap Windows to the left-half of a wide screen, right-half of 
 
 `CAPS + ALT + q` snap window to left
 
+**2x** `CAPS + ALT + q` snap window to top
+
 `CAPS + ALT + e` snap window to right
+
+**2x** `CAPS + ALT + e` snap window to bottom
 
 `CAPS + ALT + w` snap window to top
 
