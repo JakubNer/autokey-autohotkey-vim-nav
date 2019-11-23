@@ -23,8 +23,8 @@ TITLES["f"] := ["Sourcetree", "Google Web Designer", "Postman", "VirtualBox", "M
 TITLES["g"] := ["Snip & Sketch", "ahk_exe PaintDotNet.exe", "Astah", "Pencil", "- MarkdownPad 2"]
 TITLES["z"] := ["- Outlook", "| Microsoft Teams"]
 TITLES["x"] := ["Gmail", "MightyText", "WhatsApp", "Viber", "Slack", "Messenger", "Discord", "Skype", "Google Calendar"]
-TITLES["c"] := ["- Microsoft Edge"]
-TITLES["v"] := ["Chrome", "Opera", "Firefox", "Chromium"]
+TITLES["c"] := ["- Google Chrome"]
+TITLES["v"] := ["- Chromium"]
 TITLES["b"] := ["- OneNote", "Adobe Acrobat Reader"]
 
 for which, titlez in TITLES {
@@ -42,9 +42,8 @@ APP_TO_RUN_ON_KEY := {}
 APP_TO_RUN_ON_KEY["a"] := "*RunAs shell:Appsfolder\Microsoft.WindowsTerminal_8wekyb3d8bbwe!App"
 APP_TO_RUN_ON_KEY["s"] := "C:\Program Files\Notepad++\notepad++.exe"
 APP_TO_RUN_ON_KEY["g"] := "C:\Program Files (x86)\MarkdownPad 2\MarkdownPad2.exe"
-APP_TO_RUN_ON_KEY["c"] := "shell:Appsfolder\MSEdgeBeta"
-APP_TO_RUN_ON_KEY["v"] := "shell:Appsfolder\chrome"
-APP_TO_RUN_ON_KEY["b"] := """C:\Program Files (x86)\Google\Chrome\Application\chrome.exe"" --profile-directory=""Profile 1"""
+APP_TO_RUN_ON_KEY["c"] := "shell:Appsfolder\chrome"
+APP_TO_RUN_ON_KEY["v"] := "C:\Users\janer\AppData\Local\Chromium\Application\chrome.exe"
 APP_TO_RUN_ON_KEY["f"] := "C:\Program Files\Freeplane\freeplane.exe"
 APP_TO_RUN_ON_KEY["x"] := """C:\Program Files (x86)\Google\Chrome\Application\chrome_proxy.exe""  --profile-directory=Default --app-id=kjbdgfilnfhdoflbpgamdcdgpehopbep"
 
@@ -55,8 +54,8 @@ APP_TITLE_TO_SWITCH_TO_ON_KEY["s"] := "- Notepad++"
 APP_TITLE_TO_SWITCH_TO_ON_KEY["f"] := "- Freeplane"
 APP_TITLE_TO_SWITCH_TO_ON_KEY["g"] := "- MarkdownPad 2"
 APP_TITLE_TO_SWITCH_TO_ON_KEY["x"] := "Google Calendar"
-APP_TITLE_TO_SWITCH_TO_ON_KEY["c"] := "- Microsoft Edge"
-APP_TITLE_TO_SWITCH_TO_ON_KEY["v"] := "Chrome"
+APP_TITLE_TO_SWITCH_TO_ON_KEY["c"] := "- Google Chrome"
+APP_TITLE_TO_SWITCH_TO_ON_KEY["v"] := "- Chromium"
 
 for which, title in APP_TITLE_TO_SWITCH_TO_ON_KEY {
 	GroupAdd, app_title_to_switch_%which%, %title%
