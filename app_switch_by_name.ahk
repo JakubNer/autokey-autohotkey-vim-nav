@@ -16,7 +16,7 @@ TITLES := {}
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; COFIGURE APP TITLES TO RECALL ;;
 
-TITLES["a"] := ["cmd.exe", "WindowsTerminal.exe", "powershell.exe", "MINGW64", "Docker Quickstart Terminal"]
+TITLES["a"] := ["ConsoleZ", "cmd.exe", "WindowsTerminal.exe", "powershell.exe", "MINGW64", "Docker Quickstart Terminal"]
 TITLES["s"] := ["Remote Desktop Connection"]
 TITLES["d"] := ["Visual Studio Code", "Microsoft Visual Studio"]
 TITLES["f"] := ["Sourcetree", "Google Web Designer", "Postman", "VirtualBox", "Microsoft SQL Server Management Studio", "Internet Information Services (IIS) Manager", "Fiddler"]
@@ -39,7 +39,7 @@ for which, titlez in TITLES {
 
 APP_TO_RUN_ON_KEY := {}
 
-APP_TO_RUN_ON_KEY["a"] := "*RunAs shell:Appsfolder\Microsoft.WindowsTerminal_8wekyb3d8bbwe!App"
+APP_TO_RUN_ON_KEY["a"] := "*RunAs c:\jj\usr\ConsoleZ\Console.exe"
 APP_TO_RUN_ON_KEY["s"] := "C:\Program Files\Notepad++\notepad++.exe"
 APP_TO_RUN_ON_KEY["g"] := "C:\Program Files (x86)\MarkdownPad 2\MarkdownPad2.exe"
 APP_TO_RUN_ON_KEY["c"] := "shell:Appsfolder\chrome"
@@ -49,7 +49,7 @@ APP_TO_RUN_ON_KEY["x"] := """C:\Program Files (x86)\Google\Chrome\Application\ch
 
 ;; app window titles to consider for app switch before running APP_TO_RUN_ON_KEY above
 APP_TITLE_TO_SWITCH_TO_ON_KEY := {}
-APP_TITLE_TO_SWITCH_TO_ON_KEY["a"] := "WindowsTerminal.exe"
+APP_TITLE_TO_SWITCH_TO_ON_KEY["a"] := "ConsoleZ"
 APP_TITLE_TO_SWITCH_TO_ON_KEY["s"] := "- Notepad++"
 APP_TITLE_TO_SWITCH_TO_ON_KEY["f"] := "- Freeplane"
 APP_TITLE_TO_SWITCH_TO_ON_KEY["g"] := "- MarkdownPad 2"
