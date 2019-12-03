@@ -431,6 +431,12 @@ s::
 }
 !t::
 {
+    SendInput #+{Right}
+	centerMouse()
+	return
+}
++!t::
+{
     if toggle_taskbar := !toggle_taskbar {
         WinHide ahk_class Shell_TrayWnd
     } else {

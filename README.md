@@ -85,7 +85,7 @@ I like to quickly snap Windows to the left-half of a wide screen, right-half of 
 
 `CAPS + ALT + \`` make top 4 windows (in ALT TAB order) snap to screen corners in order top left, top right, bottom left, bottom right, preserving ALT TAB order.
 
-**2x** `CAPS + ALT + \`` restore top 4 windows back from being snapped to corners: reverse `CAPS + ALT + r`.
+**2x** `CAPS + ALT + \`` restore top 4 windows back from being snapped to corners: reverse `CAPS + ALT + \``.
 
 `CAPS + ALT + q` snap window to left
 
@@ -101,7 +101,13 @@ I like to quickly snap Windows to the left-half of a wide screen, right-half of 
 
 `CAPS + ALT + r` snap window to bottom
 
-`CAPS + ALT + t` toggle task bar visibility on/off
+`CAPS + ALT + t` move window to next monitor clockwise
+
+`CAPS + ALT + RIGHT` move window to next monitor clockwise
+
+`CAPS + ALT + LEFT` move window to next monitor counter-clockwise
+
+`CAPS + SHIFT + ALT + t` toggle task bar visibility on/off
 
 ### Mouse scrolling and Navigation
 
