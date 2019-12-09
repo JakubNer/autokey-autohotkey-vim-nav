@@ -27,13 +27,6 @@ TITLES["c"] := ["- Google Chrome"]
 TITLES["v"] := ["- Chromium"]
 TITLES["b"] := ["- OneNote", "Adobe Acrobat Reader"]
 
-for which, titlez in TITLES {
-	for index, title in titlez {
-		GroupAdd, switch_%which%, %title%
-		GroupAdd, switch_%which%, ahk_exe %title%
-	}
-}
-
 ;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; COFIGURE APP TO RUN ;;
 
@@ -70,34 +63,56 @@ getIds() {
     return listids
 }
 
-switchImmediate(which) {
+getAllMatches(which) {
 	global TITLES
-    WinGet, active_id, id,A
-    listids := getIds()
-    Loop {
-        for i,id in listids {
-            if (active_id != id) {
-				WinGetTitle title, ahk_id %id%
-				WinGet, process, ProcessName, ahk_id %id%
-				for k, targettitle in TITLES[which] {
-					if (InStr(title, targettitle) or InStr(process, targettitle)) {
-						WinActivate, ahk_id %id%
-						centerMouse()
-						return
-					}
-				}
-            }
-        }
-    }
+	ids := []
+    listids := AltTab_window_list()
+	for i,id in listids {
+		WinGetTitle title, ahk_id %id%
+		WinGet, process, ProcessName, ahk_id %id%
+		for k, targettitle in TITLES[which] {
+			if (InStr(title, targettitle) or InStr(process, targettitle)) {
+				ids.Push(id . " -- " . targettitle)
+			}
+		}
+	}
+	return ids
+}
+
+switchImmediate(which) {
+	match := getAllMatches(which)
+	if (match.Count() > 0) {
+		id := match[1]
+		WinActivate, ahk_id %id%
+		centerMouse()
+	}
 	return
 }
 
 switch(which)
 {
   global TITLES
-  GroupActivate, switch_%which%, R
+  global chosenid
+  Gui, Destroy
+  ids := getAllMatches(which)
+  count := ids.Count()
+  idsasstr := ""
+  For i, v In ids
+    idsasstr .= v . "|"
+  idsasstr := RTrim(idsasstr, "|")
+  Gui, Add, ListBox, gidchosen vchosenid w600 r20, %idsasstr%
+  Gui, Show
   centerMouse()
   return
+  
+idchosen:
+	global chosenid
+	Gui, Submit
+	Gui, Destroy
+	id := GetFirstWord(chosenid, 1)
+	WinActivate, ahk_id %id%
+	centerMouse()
+	return  
 }
 
 run(which) 
