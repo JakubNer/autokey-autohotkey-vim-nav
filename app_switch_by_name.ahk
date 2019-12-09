@@ -96,6 +96,10 @@ switch(which)
   Gui, Destroy
   ids := getAllMatches(which)
   count := ids.Count()
+  if (count == 1) {
+	switchImmediate(which)
+	return
+  }
   idsasstr := ""
   For i, v In ids
     idsasstr .= v . "|"
