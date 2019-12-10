@@ -72,7 +72,7 @@ getAllMatches(which) {
 		WinGet, process, ProcessName, ahk_id %id%
 		for k, targettitle in TITLES[which] {
 			if (InStr(title, targettitle) or InStr(process, targettitle)) {
-				ids.Push(id . " -- " . targettitle)
+				ids.Push(id . " -- " . process . " :: " . title)
 			}
 		}
 	}
