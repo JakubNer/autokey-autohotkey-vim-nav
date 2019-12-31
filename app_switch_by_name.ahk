@@ -100,24 +100,38 @@ switch(which)
 	switchImmediate(which)
 	return
   }
-  idsasstr := ""
+  idchoices := ""
   For i, v In ids
-    idsasstr .= v . "|"
-  idsasstr := RTrim(idsasstr, "|")
-  Gui, Add, ListBox, gidchosen vchosenid w600 r20, %idsasstr%
+    idchoices .= v . "|"
+  idchoices := RTrim(idchoices, "|")
+  idchoices := StrReplace(idchoices, "|", "||",,1)
+  Gui, Add, ListBox, gidchosen vchosenid w600 r20, %idchoices%
+  Gui, Add, Button, Hidden Default, IDCHOSEN  
   Gui, Show
   centerMouse()
   return
-  
-idchosen:
-	global chosenid
-	Gui, Submit
-	Gui, Destroy
-	id := GetFirstWord(chosenid, 1)
-	WinActivate, ahk_id %id%
-	centerMouse()
-	return  
 }
+
+;; for above listview with keyboard  
+idchosen:
+	If ((A_GuiEvent = "DoubleClick") || (Trigger_idchosen))
+	{
+		global chosenid
+		Gui, Submit
+		Gui, Destroy
+		id := GetFirstWord(chosenid, 1)
+		WinActivate, ahk_id %id%
+		centerMouse()	
+	}
+	return  
+
+;; for above listview with keyboard  
+ButtonIDCHOSEN:
+	ControlGet, number, List, Count Focused, SysListView321, A
+	Trigger_idchosen := true
+	GoSub, idchosen
+	Trigger_idchosen := false
+	return
 
 run(which) 
 {
