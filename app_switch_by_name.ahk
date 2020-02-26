@@ -17,14 +17,14 @@ TITLES := {}
 ;; COFIGURE APP TITLES TO RECALL ;;
 
 TITLES["a"] := ["ConsoleZ", "cmd.exe", "WindowsTerminal.exe", "powershell.exe", "MINGW64", "Docker Quickstart Terminal"]
-TITLES["s"] := ["Remote Desktop Connection"]
-TITLES["d"] := ["Visual Studio Code", "Microsoft Visual Studio"]
+TITLES["s"] := ["mstsc.exe", "Virtual Machine Connection", "ahk_exe VmConnect.exe", "VmConnect.exe"]
+TITLES["d"] := ["Visual Studio Code", "Microsoft Visual Studio", "DevTools - "]
 TITLES["f"] := ["Sourcetree", "Google Web Designer", "Postman", "VirtualBox", "Microsoft SQL Server Management Studio", "Internet Information Services (IIS) Manager", "Fiddler"]
-TITLES["g"] := ["Snip & Sketch", "ahk_exe PaintDotNet.exe", "Astah", "Pencil", "- MarkdownPad 2"]
-TITLES["z"] := ["- Outlook", "| Microsoft Teams"]
+TITLES["g"] := ["Snip & Sketch", "ahk_exe PaintDotNet.exe", "Astah", "Pencil", "- Typora"]
+TITLES["z"] := ["outlook.exe", "teams.exe"]
 TITLES["x"] := ["Gmail", "MightyText", "WhatsApp", "Viber", "Slack", "Messenger", "Discord", "Skype", "Google Calendar"]
-TITLES["c"] := ["- Google Chrome"]
-TITLES["v"] := ["- Chromium"]
+TITLES["c"] := ["- Microsoft Edge", "msedge.exe"]
+TITLES["v"] := ["- Chromium", "- Google Chrome"]
 TITLES["b"] := ["- OneNote", "Adobe Acrobat Reader"]
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -34,8 +34,8 @@ APP_TO_RUN_ON_KEY := {}
 
 APP_TO_RUN_ON_KEY["a"] := "*RunAs c:\jj\usr\ConsoleZ\Console.exe"
 APP_TO_RUN_ON_KEY["s"] := "C:\Program Files\Notepad++\notepad++.exe"
-APP_TO_RUN_ON_KEY["g"] := "C:\Program Files (x86)\MarkdownPad 2\MarkdownPad2.exe"
-APP_TO_RUN_ON_KEY["c"] := "shell:Appsfolder\chrome"
+APP_TO_RUN_ON_KEY["g"] := "C:\Program Files\Typora\Typora.exe"
+APP_TO_RUN_ON_KEY["c"] := "shell:Appsfolder\msedge"
 APP_TO_RUN_ON_KEY["v"] := "C:\Users\janer\AppData\Local\Chromium\Application\chrome.exe"
 APP_TO_RUN_ON_KEY["f"] := "C:\Program Files\Freeplane\freeplane.exe"
 APP_TO_RUN_ON_KEY["x"] := """C:\Program Files (x86)\Google\Chrome\Application\chrome_proxy.exe""  --profile-directory=Default --app-id=kjbdgfilnfhdoflbpgamdcdgpehopbep"
@@ -45,9 +45,9 @@ APP_TITLE_TO_SWITCH_TO_ON_KEY := {}
 APP_TITLE_TO_SWITCH_TO_ON_KEY["a"] := "ConsoleZ"
 APP_TITLE_TO_SWITCH_TO_ON_KEY["s"] := "- Notepad++"
 APP_TITLE_TO_SWITCH_TO_ON_KEY["f"] := "- Freeplane"
-APP_TITLE_TO_SWITCH_TO_ON_KEY["g"] := "- MarkdownPad 2"
+APP_TITLE_TO_SWITCH_TO_ON_KEY["g"] := "- Typora"
 APP_TITLE_TO_SWITCH_TO_ON_KEY["x"] := "Google Calendar"
-APP_TITLE_TO_SWITCH_TO_ON_KEY["c"] := "- Google Chrome"
+APP_TITLE_TO_SWITCH_TO_ON_KEY["c"] := "- Microsoft Edge"
 APP_TITLE_TO_SWITCH_TO_ON_KEY["v"] := "- Chromium"
 
 for which, title in APP_TITLE_TO_SWITCH_TO_ON_KEY {
