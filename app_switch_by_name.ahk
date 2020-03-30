@@ -19,7 +19,7 @@ TITLES := {}
 TITLES["a"] := ["ConsoleZ", "cmd.exe", "WindowsTerminal.exe", "powershell.exe", "MINGW64", "Docker Quickstart Terminal"]
 TITLES["s"] := ["mstsc.exe", "Virtual Machine Connection", "ahk_exe VmConnect.exe", "VmConnect.exe"]
 TITLES["d"] := ["Visual Studio Code", "Microsoft Visual Studio", "DevTools - "]
-TITLES["f"] := ["Sourcetree", "Google Web Designer", "Postman", "VirtualBox", "Microsoft SQL Server Management Studio", "Internet Information Services (IIS) Manager", "Fiddler"]
+TITLES["f"] := ["Sourcetree", "Git Extensions", "Google Web Designer", "Postman", "VirtualBox", "Microsoft SQL Server Management Studio", "Internet Information Services (IIS) Manager", "Fiddler"]
 TITLES["g"] := ["Snip & Sketch", "ahk_exe PaintDotNet.exe", "Astah", "Pencil", "- Typora"]
 TITLES["z"] := ["outlook.exe", "teams.exe"]
 TITLES["x"] := ["Gmail", "MightyText", "WhatsApp", "Viber", "Slack", "Messenger", "Discord", "Skype", "Google Calendar"]
@@ -80,6 +80,7 @@ getAllMatches(which) {
 }
 
 switchImmediate(which) {
+	Gui, Destroy
 	match := getAllMatches(which)
 	if (match.Count() > 0) {
 		id := match[1]

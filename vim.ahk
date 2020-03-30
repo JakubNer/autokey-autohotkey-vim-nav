@@ -56,26 +56,14 @@ alt_mode2_off:
     alt_mode2 := false
 return
 
--::
-{
-    SendInput {End}
-    return
-}
-)::
-{
-    SendInput +{Home}
-    return
-}
-_::
-{
-    SendInput +{End}
-    return
-}
-0::
-{
-    SendInput {Home}
-    return
-}
+-::End
+
+)::+Home
+
+_::+End
+
+0::Home
+
 1::
 {
     if (alt_mode) {
@@ -147,21 +135,21 @@ a::
         run("a")
         return
     }
-    while GetKeyState("a", "P")
-    {
-      Send {WheelUp}
+
+    Send {WheelUp}
+	if (A_PriorHotkey = "a") {
       Sleep, 45
     }
     return
 }
 !a:: 
 {
-	KeyWait, a
-	KeyWait, a, D T.3
-	If (!ErrorLevel) {
+	If (toggleLastTime("a") < 300) {
+		SWITCH_TO := false
 		switchImmediate("a")
 	} Else {
-		switch("a")
+		SWITCH_TO := "a"
+		SetTimer, SwitchToTimeout, 300
 	}
     return
 }
@@ -176,12 +164,12 @@ b::
 }
 !b:: 
 {
-	KeyWait, b
-	KeyWait, b, D T.3
-	If (!ErrorLevel) {
+	If (toggleLastTime("b") < 300) {
+		SWITCH_TO := false
 		switchImmediate("b")
 	} Else {
-		switch("b")
+		SWITCH_TO := "b"
+		SetTimer, SwitchToTimeout, 300
 	}
     return
 }
@@ -196,12 +184,12 @@ c::
 }
 !c::
 {
-	KeyWait, c
-	KeyWait, c, D T.3
-	If (!ErrorLevel) {
+	If (toggleLastTime("c") < 300) {
+		SWITCH_TO := false
 		switchImmediate("c")
 	} Else {
-		switch("c")
+		SWITCH_TO := "c"
+		SetTimer, SwitchToTimeout, 300
 	}
     return
 }
@@ -224,17 +212,19 @@ d::
     SendInput +{Delete}
     return
 }
+
 !d:: 
 {
-	KeyWait, d
-	KeyWait, d, D T.3
-	If (!ErrorLevel) {
+	If (toggleLastTime("d") < 300) {
+		SWITCH_TO := false
 		switchImmediate("d")
 	} Else {
-		switch("d")
+		SWITCH_TO := "d"
+		SetTimer, SwitchToTimeout, 300
 	}
     return
 }
+
 e::
 {
     SendInput ^{Up}
@@ -266,12 +256,12 @@ f::
 }
 !f:: 
 {
-	KeyWait, f
-	KeyWait, f, D T.3
-	If (!ErrorLevel) {
+	If (toggleLastTime("f") < 300) {
+		SWITCH_TO := false
 		switchImmediate("f")
 	} Else {
-		switch("f")
+		SWITCH_TO := "f"
+		SetTimer, SwitchToTimeout, 300
 	}
     return
 }
@@ -291,25 +281,18 @@ g::
 }
 !g:: 
 {
-	KeyWait, g
-	KeyWait, g, D T.3
-	If (!ErrorLevel) {
+	If (toggleLastTime("g") < 300) {
+		SWITCH_TO := false
 		switchImmediate("g")
 	} Else {
-		switch("g")
+		SWITCH_TO := "g"
+		SetTimer, SwitchToTimeout, 300
 	}
     return
 }
-h::
-{
-    SendInput {Left}
-    return
-}
-+h::
-{
-    SendInput +{Left}
-    return
-}
+
+h::Left
+
 i::
 {
     SendInput {Up}{Up}{Up}{Up}{Up}
@@ -320,46 +303,15 @@ i::
     SendInput +{Up}+{Up}+{Up}+{Up}+{Up}
     return
 }
-j::
-{
-    SendInput {Down}
-    return
-}
-+j::
-{
-    SendInput +{Down}
-    return
-}
-k::
-{
-    SendInput {Up}
-    return
-}
-+k::
-{
-    SendInput +{Up}
-    return
-}
-l::
-{
-    SendInput {Right}
-    return
-}
-+l::
-{
-    SendInput +{Right}
-    return
-}
-q::
-{
-    SendInput ^{Left}
-    return
-}
-+q::
-{
-    SendInput +^{Left}
-    return
-}
+
+j::Down
+
+k::Up
+
+l::Right
+
+q::^Left
+
 !q:: 
 {
 	KeyWait, q
@@ -411,21 +363,22 @@ s::
         run("s")
         return
     }
-    while GetKeyState("s", "P")
+
+    Send {WheelDown}
+    if (A_PriorHotkey = "s")
     {
-      Send {WheelDown}
       Sleep, 45
     }
     return
 }
 !s:: 
 {
-	KeyWait, s
-	KeyWait, s, D T.3
-	If (!ErrorLevel) {
+	If (toggleLastTime("s") < 300) {
+		SWITCH_TO := false
 		switchImmediate("s")
 	} Else {
-		switch("s")
+		SWITCH_TO := "s"
+		SetTimer, SwitchToTimeout, 300
 	}
     return
 }
@@ -465,12 +418,12 @@ v::
 }
 !v::
 {
-	KeyWait, v
-	KeyWait, v, D T.3
-	If (!ErrorLevel) {
+	If (toggleLastTime("v") < 300) {
+		SWITCH_TO := false
 		switchImmediate("v")
 	} Else {
-		switch("v")
+		SWITCH_TO := "v"
+		SetTimer, SwitchToTimeout, 300
 	}
     return
 }
@@ -479,16 +432,9 @@ v::
     SendInput !^{Right}
     return
 }
-w::
-{
-    SendInput ^{Right}
-    return
-}
-+w::
-{
-    SendInput +^{Right}
-    return
-}
+
+w::^Right
+
 !w::
 {
     KeyWait, w
@@ -512,9 +458,9 @@ x::
         run("x")
         return
     }
-    while GetKeyState("x", "P")
-    {
-	  Send {WheelRight}
+    
+	Send {WheelRight}
+	if (A_PriorHotkey = "x") {
       Sleep, 45
     }
 
@@ -522,12 +468,12 @@ x::
 }
 !x:: 
 {
-	KeyWait, x
-	KeyWait, x, D T.3
-	If (!ErrorLevel) {
+	If (toggleLastTime("x") < 300) {
+		SWITCH_TO := false
 		switchImmediate("x")
 	} Else {
-		switch("x")
+		SWITCH_TO := "x"
+		SetTimer, SwitchToTimeout, 300
 	}
     return
 }
@@ -542,21 +488,21 @@ z::
         run("z")
         return
     }
-    while GetKeyState("z", "P")
-    {
-	  Send {WheelLeft}
+
+    Send {WheelLeft}
+	if (A_PriorHotkey = "z") {
       Sleep, 45
     }	
 	return
 }
 !z:: 
 {
-	KeyWait, z
-	KeyWait, z, D T.3
-	If (!ErrorLevel) {
+	If (toggleLastTime("z") < 300) {
+		SWITCH_TO := false
 		switchImmediate("z")
 	} Else {
-		switch("z")
+		SWITCH_TO := "z"
+		SetTimer, SwitchToTimeout, 300
 	}
     return
 }
@@ -575,3 +521,10 @@ z::
 
 CapsLock::Suspend Off
 ~*CapsLock Up::Suspend On
+
+SwitchToTimeout:
+	if (SWITCH_TO) {
+		switch(SWITCH_TO)
+	}
+	SetTimer,,off
+return

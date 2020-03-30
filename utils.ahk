@@ -94,3 +94,14 @@ GetFirstWord(word, num){
 	StringSplit, wordArray, word, % A_Space
 	return wordArray%num%
 }
+
+PRESS_TRACK := {}
+toggleLastTime(which) {
+	global PRESS_TRACK
+    last := PRESS_TRACK[which]
+	PRESS_TRACK[which] := A_TickCount
+	if (!last) {
+		return 999999
+	}	
+	return A_TickCount - last
+}
