@@ -79,6 +79,8 @@ To run the app defined with `APP_TO_RUN_ON_KEY["a"]` press CAPS + SPACE the "a".
 
 Some apps do not start a new instance but just switch to a current instance.  To speed this up you can switch to the instance based on the window title.  Configure this with `APP_TITLE_TO_SWITCH_TO_ON_KEY[".."] := "..."` statements.
 
+If you want to add your own keybindings and not affect the git repo, add your binding overrides to [overrides.ahk](overrides.ahk).  Notice that [overrides.ahk](overrides.ahk) is `#Include`'d after the above definitions in [app_switch_by_name.ahk](app_switch_by_name.ahk), and it's `.gitignore`'d.
+
 ### Window Management Key bindings
 
 I like to quickly snap Windows to the left-half of a wide screen, right-half of a wide screen, or to take up the full screen:

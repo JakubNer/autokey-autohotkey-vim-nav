@@ -14,41 +14,53 @@ SetTitleMatchMode, 2
 TITLES := {}
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; COFIGURE APP TITLES TO RECALL ;;
+;; COFIGURE APP TITLES TO RECALL 
+;;
+;; - CAPS-ALT combinations 
+;; - cycles already open apps
+;; - provide overrides here or in ./overrides.ahk (not checked in)
+;;
 
-TITLES["a"] := ["ConsoleZ", "cmd.exe", "WindowsTerminal.exe", "powershell.exe", "MINGW64", "Docker Quickstart Terminal"]
-TITLES["s"] := ["mstsc.exe", "Virtual Machine Connection", "ahk_exe VmConnect.exe", "VmConnect.exe"]
-TITLES["d"] := ["Visual Studio Code", "Microsoft Visual Studio", "DevTools - "]
-TITLES["f"] := ["Sourcetree", "Git Extensions", "Google Web Designer", "Postman", "VirtualBox", "Microsoft SQL Server Management Studio", "Internet Information Services (IIS) Manager", "Fiddler"]
-TITLES["g"] := ["Snip & Sketch", "ahk_exe PaintDotNet.exe", "Astah", "Pencil", "- Typora"]
+TITLES["a"] := ["cmd.exe", "powershell.exe"]
+TITLES["s"] := []
+TITLES["d"] := ["Visual Studio Code"]
+TITLES["f"] := []
+TITLES["g"] := []
 TITLES["z"] := ["outlook.exe", "teams.exe"]
-TITLES["x"] := ["Gmail", "MightyText", "WhatsApp", "Viber", "Slack", "Messenger", "Discord", "Skype", "Google Calendar"]
+TITLES["x"] := ["Gmail", "WhatsApp", "Viber", "Slack", "Messenger", "Discord", "Skype"]
 TITLES["c"] := ["- Microsoft Edge", "msedge.exe"]
 TITLES["v"] := ["- Chromium", "- Google Chrome"]
 TITLES["b"] := ["- OneNote", "Adobe Acrobat Reader"]
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;
-;; COFIGURE APP TO RUN ;;
+;; COFIGURE APP TO RUN 
+;;
+;; - CAPS-SPACE combinations 
+;; - opens new or cycles (iff APP_TITLE_TO_SWITH_TO_IN_KEY configured)
+;; - provide overrides here or in ./overrides.ahk (not checked in)
+;;
 
 APP_TO_RUN_ON_KEY := {}
 
-APP_TO_RUN_ON_KEY["a"] := "*RunAs c:\jj\usr\ConsoleZ\Console.exe"
+APP_TO_RUN_ON_KEY["a"] := ""
 APP_TO_RUN_ON_KEY["s"] := "C:\Program Files\Notepad++\notepad++.exe"
-APP_TO_RUN_ON_KEY["g"] := "C:\Program Files\Typora\Typora.exe"
+APP_TO_RUN_ON_KEY["f"] := ""
+APP_TO_RUN_ON_KEY["g"] := ""
+APP_TO_RUN_ON_KEY["x"] := ""
 APP_TO_RUN_ON_KEY["c"] := "shell:Appsfolder\msedge"
-APP_TO_RUN_ON_KEY["v"] := "C:\Users\janer\AppData\Local\Chromium\Application\chrome.exe"
-APP_TO_RUN_ON_KEY["f"] := "C:\Program Files\Freeplane\freeplane.exe"
-APP_TO_RUN_ON_KEY["x"] := """C:\Program Files (x86)\Google\Chrome\Application\chrome_proxy.exe""  --profile-directory=Default --app-id=kjbdgfilnfhdoflbpgamdcdgpehopbep"
+APP_TO_RUN_ON_KEY["v"] := ""
 
 ;; app window titles to consider for app switch before running APP_TO_RUN_ON_KEY above
 APP_TITLE_TO_SWITCH_TO_ON_KEY := {}
-APP_TITLE_TO_SWITCH_TO_ON_KEY["a"] := "ConsoleZ"
+APP_TITLE_TO_SWITCH_TO_ON_KEY["a"] := ""
 APP_TITLE_TO_SWITCH_TO_ON_KEY["s"] := "- Notepad++"
-APP_TITLE_TO_SWITCH_TO_ON_KEY["f"] := "- Freeplane"
-APP_TITLE_TO_SWITCH_TO_ON_KEY["g"] := "- Typora"
-APP_TITLE_TO_SWITCH_TO_ON_KEY["x"] := "Google Calendar"
+APP_TITLE_TO_SWITCH_TO_ON_KEY["f"] := ""
+APP_TITLE_TO_SWITCH_TO_ON_KEY["g"] := ""
+APP_TITLE_TO_SWITCH_TO_ON_KEY["x"] := ""
 APP_TITLE_TO_SWITCH_TO_ON_KEY["c"] := "- Microsoft Edge"
-APP_TITLE_TO_SWITCH_TO_ON_KEY["v"] := "- Chromium"
+APP_TITLE_TO_SWITCH_TO_ON_KEY["v"] := ""
+
+#IncludeAgain overrides.ahk
 
 for which, title in APP_TITLE_TO_SWITCH_TO_ON_KEY {
 	GroupAdd, app_title_to_switch_%which%, %title%
