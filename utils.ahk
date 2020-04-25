@@ -90,9 +90,16 @@ AltTab_window_list() {
 	return listids
 }
 
-GetFirstWord(word, num){
-	StringSplit, wordArray, word, % A_Space
-	return wordArray%num%
+GetFirstWord(word) {
+	wordArray := StrSplit(words, A_Space)
+	num := 1
+	return wordArray[num]
+}
+
+GetLastWord(words) {
+	wordArray := StrSplit(words, A_Space)
+	num := wordArray.MaxIndex()
+	return wordArray[num]
 }
 
 PRESS_TRACK := {}
@@ -104,4 +111,44 @@ toggleLastTime(which) {
 		return 999999
 	}	
 	return A_TickCount - last
+}
+
+getWindowLocationStirng(id) {	
+    WinGetPos, winTopL_x, winTopL_y, width, height, ahk_id %id%
+    winCenter_x := winTopL_x + width/2
+    winCenter_y := winTopL_y + height/2
+    ;;Tooltip winTopL_x:%winTopL_x% winTopL_y:%winTopL_y% winCenter_x:%winCenter_x% winCenter_y:%winCenter_y%
+
+	locationString := "["
+	SysGet, Count, MonitorCount
+	num = 1
+	Loop, %Count%
+	{
+		SysGet, Mon, MonitorWorkArea, %num%
+
+	    ;;MsgBox, %winCenter_x% %winCenter_y% %MonLeft% %MonRight% %MonTop% %MonBottom%
+		if( winCenter_x >= MonLeft && winCenter_x <= MonRight && winCenter_y >= MonTop && winCenter_y <= MonBottom )
+		{
+			if ( winCenter_y > (MonTop + ((MonBottom - MonTop) / 2)) ) {
+				locationChar := "v"
+			} Else If ( winCenter_y < (MonTop + ((MonBottom - MonTop) / 2)) ) {
+				locationChar := "^"
+			} Else {
+				locationChar := "="
+			}
+		
+			if ( winCenter_x < (MonLeft + ((MonRight - MonLeft) / 2)) ) {
+				locationString .= locationChar . " "
+			} Else if ( winCenter_x > (MonLeft + ((MonRight - MonLeft) / 2)) ) {
+				locationString .= " " . locationChar
+			} Else {
+				locationString .= locationChar . locationChar
+			}
+		} else {
+			locationString .= "  "
+		}
+		num += 1
+	}
+	locationString .= "]"
+	return locationString
 }

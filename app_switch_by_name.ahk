@@ -84,7 +84,7 @@ getAllMatches(which) {
 		WinGet, process, ProcessName, ahk_id %id%
 		for k, targettitle in TITLES[which] {
 			if (InStr(title, targettitle) or InStr(process, targettitle)) {
-				ids.Push(id . " -- " . process . " :: " . title)
+				ids.Push(getWindowLocationStirng(id) . " " . process . " :: " . title . " :: " id)
 			}
 		}
 	}
@@ -95,7 +95,7 @@ switchImmediate(which) {
 	Gui, Destroy
 	match := getAllMatches(which)
 	if (match.Count() > 0) {
-		id := match[1]
+		id := GetLastWord(match[1])
 		WinActivate, ahk_id %id%
 		centerMouse()
 	}
@@ -115,10 +115,11 @@ switch(which)
   }
   idchoices := ""
   For i, v In ids
-    idchoices .= v . "|"
+    idchoices .= StrReplace(v, "|", " ") . "|"
   idchoices := RTrim(idchoices, "|")
   idchoices := StrReplace(idchoices, "|", "||",,1)
-  Gui, Add, ListBox, gidchosen vchosenid w600 r20, %idchoices%
+  Gui, Font, s9, Consolas
+  Gui, Add, ListBox, gidchosen vchosenid w700 r20, %idchoices%
   Gui, Add, Button, Hidden Default, IDCHOSEN  
   Gui, Show
   centerMouse()
@@ -132,7 +133,7 @@ idchosen:
 		global chosenid
 		Gui, Submit
 		Gui, Destroy
-		id := GetFirstWord(chosenid, 1)
+		id := GetLastWord(chosenid)
 		WinActivate, ahk_id %id%
 		centerMouse()	
 	}
