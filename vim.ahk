@@ -11,18 +11,19 @@ SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 SetBatchLines -1
 ListLines Off
 
-SetCapsLockState, AlwaysOff
-
-Suspend On
-
 ; avoid bad state of CAPS pressed when not down
-GetKeyState, state, CapsLock
-if state = D
+
+if GetKeyState("CapsLock","T")
 {
   Suspend On
   SetCapsLockState, off
   Send {CapsLock Up}
+  return
 }
+
+SetCapsLockState, AlwaysOff
+
+Suspend On
 
 ;; modifier into alt_mode
 space::
@@ -136,8 +137,9 @@ a::
         return
     }
 
-    Send {WheelUp}
-	if (A_PriorHotkey = "a") {
+    while GetKeyState("a", "P")
+    {
+      Send {WheelUp}
       Sleep, 45
     }
     return
@@ -364,10 +366,10 @@ s::
         return
     }
 
-    Send {WheelDown}
-    if (A_PriorHotkey = "s")
+    while GetKeyState("s", "P")
     {
-      Sleep, 45
+		Send {WheelDown}
+		Sleep, 45
     }
     return
 }
