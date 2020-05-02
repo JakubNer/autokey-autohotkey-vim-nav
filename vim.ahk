@@ -11,18 +11,7 @@ SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 SetBatchLines -1
 ListLines Off
 
-SetCapsLockState, AlwaysOff
-
 Suspend On
-
-; avoid bad state of CAPS pressed when not down
-GetKeyState, state, CapsLock
-if state = D
-{
-  Suspend On
-  SetCapsLockState, off
-  Send {CapsLock Up}
-}
 
 ;; modifier into alt_mode
 space::
@@ -519,8 +508,8 @@ z::
 	return
 }
 
-CapsLock::Suspend Off
-~*CapsLock Up::Suspend On
+F20::Suspend Off
+~*F20 Up::Suspend On
 
 SwitchToTimeout:
 	if (SWITCH_TO) {
