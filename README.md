@@ -66,7 +66,25 @@ To memorize an order hold CAPS LOCK then press SPACE and tap one of the above ke
 To restore an order hold CAPS LOCK + ALT tap the corresponding key:
 
 	`CAPS LOCK + ALT + 1` to resore apps' ALT-TAB order as per group 1 (you can use 1 through 5)
-	
+
+#### Memorize and Restore Screen Layout
+
+This allows saving off current layout of all applications.
+
+This is useful when docking/undocking or using a KVM switch:  whenever Windows is about to mess-up your applications layout because of a change in the number of monitors.
+
+The layout is saved to a file called `WinPos.txt`.
+
+To save current layout:
+
+	`CAPS LOCK + SPACE, CAPS LOCK + \``
+
+To restore layout:
+
+	`CAPS LOCK + ALT + \``
+
+The script remembers distinct layouts for different monitor configurations.
+
 #### Preconfigured Apps to Run
 
 Looking at the [app_switch_by_name.ahk](app_switch_by_name.ahk) script you will find several `APP_TO_RUN_ON_KEY[".."] := "..."` statements after the `;; COFIGURE APP TO RUN ;;` comment.
@@ -85,9 +103,9 @@ If you want to add your own keybindings and not affect the git repo, add your bi
 
 I like to quickly snap Windows to the left-half of a wide screen, right-half of a wide screen, or to take up the full screen:
 
-`CAPS + ALT + \`` make top 4 windows (in ALT TAB order) snap to screen corners in order top left, top right, bottom left, bottom right, preserving ALT TAB order.
+`CAPS + ALT + y` make top 4 windows (in ALT TAB order) snap to screen corners in order top left, top right, bottom left, bottom right, preserving ALT TAB order.
 
-**2x** `CAPS + ALT + \`` restore top 4 windows back from being snapped to corners: reverse `CAPS + ALT + \``.
+**2x** `CAPS + ALT + y` restore top 4 windows back from being snapped to corners: reverse `CAPS + ALT + y`.
 
 `CAPS + ALT + q` snap window to left
 

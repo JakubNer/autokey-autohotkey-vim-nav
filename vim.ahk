@@ -3,6 +3,7 @@
 #Include app_switch_by_name.ahk
 #Include window.ahk
 #Include portrait_snap.ahk
+#Include dockwin.ahk
 
 #NoEnv  ; Recommended for performance and compatibility with future AutoHotkey releases.
 DetectHiddenWindows, On
@@ -62,6 +63,20 @@ return
 )::+Home
 
 _::+End
+
+`::
+{
+    if (alt_mode) {
+      SaveCurrentWindowsToFile()          
+      return
+    }
+	return
+}
+!`::
+{
+	RestoreWindowPositionsFromFile()
+	return
+}
 
 0::Home
 
@@ -341,20 +356,20 @@ r::
 	centerMouse()
     return
 }
-!`::
+!y::
 {
     ;; Windows snapping to sides and maximizing
     ;; Make sure to turn off "show what I can snap next to it" in Windows' "multitasking settings"
-    KeyWait, r
-    KeyWait, r, D T.3
+    KeyWait, y
+    KeyWait, y, D T.3
     If (!ErrorLevel)
     {
-      ;; CAPS-R x 2 to restore top 4 windows from being snapped to corners
+      ;; CAPS-ALT-Y x 2 to restore top 4 windows from being snapped to corners
       RestoreFromTopFourToCorners()
     }
     Else 
     {
-      ;;  CAPS-R to make top 4 windows (in ALT TAB order) to snap into screen corners in order top left, top right, bottom left, bottom right, preserving ALT TAB order.
+      ;;  CAPS-ALT-Y to make top 4 windows (in ALT TAB order) to snap into screen corners in order top left, top right, bottom left, bottom right, preserving ALT TAB order.
       TopFourToCorners()
     }           
     return
