@@ -13,7 +13,7 @@ RestoreWindowPositionsFromFile() {
   DetectHiddenWindows, off	;Off is default
   SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
   CrLf=`r`n
-  FileName:="WinPos.txt"
+  FileName:=GetFileName()
   WinGetActiveTitle, SavedActiveWindow
   ParmVals:="Title x y height width"
   SectionToFind:= SectionHeader()
@@ -76,11 +76,11 @@ SaveCurrentWindowsToFile() {
  DetectHiddenWindows, off	;Off is default
  SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
  CrLf=`r`n
- FileName:="WinPos.txt"
+ FileName:=GetFileName()
 
  WinGetActiveTitle, SavedActiveWindow
 
- file := FileOpen(FileName, "a")
+ file := FileOpen(FileName, "w")
  if !IsObject(file)
  {
 	MsgBox, Can't open "%FileName%" for writing.
@@ -122,11 +122,22 @@ SectionHeader()
 {
 	SysGet, MonitorCount, MonitorCount
 	SysGet, MonitorPrimary, MonitorPrimary
-	line=SECTION: Monitors=%MonitorCount%,MonitorPrimary=%MonitorPrimary%
+    line=SECTION: Monitors=%MonitorCount%
+	
+	;;line=SECTION: Monitors=%MonitorCount%,MonitorPrimary=%MonitorPrimary%
+    WinGetPos, x, y, Width, Height, Program Manager
+	;;line:= line . "; Desktop size:" . x . "," . y . "," . width . "," . height
 
-        WinGetPos, x, y, Width, Height, Program Manager
-	line:= line . "; Desktop size:" . x . "," . y . "," . width . "," . height
+	Return %line%
+}
 
+;Create standardized file name
+GetFileName()
+{
+	SysGet, MonitorCount, MonitorCount
+	SysGet, MonitorPrimary, MonitorPrimary
+
+	line=WinPos__%MonitorCount%.txt
 	Return %line%
 }
 
