@@ -58,6 +58,14 @@ alt_mode2_off:
     alt_mode2 := false
 return
 
+LButton::
+{
+  Suspend On
+  SetCapsLockState, off
+  Send {CapsLock Up}
+  return
+}
+
 -::End
 
 )::+Home
