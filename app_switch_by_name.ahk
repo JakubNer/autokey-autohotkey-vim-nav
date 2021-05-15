@@ -63,7 +63,7 @@ APP_TITLE_TO_SWITCH_TO_ON_KEY["v"] := ""
 #IncludeAgain overrides.ahk
 
 for which, title in APP_TITLE_TO_SWITCH_TO_ON_KEY {
-	GroupAdd, app_title_to_switch_%which%, %title%
+    GroupAdd, app_title_to_switch_%which%, %title%
 }
 
 getIds() {
@@ -76,76 +76,62 @@ getIds() {
 }
 
 getAllMatches(which) {
-	global TITLES
-	ids := []
+    global TITLES
+    ids := []
     listids := AltTab_window_list()
-	for i,id in listids {
-		WinGetTitle title, ahk_id %id%
-		WinGet, process, ProcessName, ahk_id %id%
-		for k, targettitle in TITLES[which] {
-			if (InStr(title, targettitle) or InStr(process, targettitle)) {
-				ids.Push(getWindowLocationStirng(id) . " " . process . " :: " . title . " :: " id)
-			}
-		}
-	}
-	return ids
+    for i,id in listids {
+        WinGetTitle title, ahk_id %id%
+        WinGet, process, ProcessName, ahk_id %id%
+        for k, targettitle in TITLES[which] {
+            if (InStr(title, targettitle) or InStr(process, targettitle)) {
+                ids.Push(getWindowLocationStirng(id) . " " . process . " :: " . title . " :: " id)
+            }
+        }
+    }
+    return ids
 }
 
 switchImmediate(which) {
-	Gui, Destroy
-	match := getAllMatches(which)
-	if (match.Count() > 0) {
-		id := GetLastWord(match[1])
-		WinActivate, ahk_id %id%
-		centerMouse()
-	}
-	return
+    Gui, Destroy
+    match := getAllMatches(which)
+    if (match.Count() > 0) {
+        id := GetLastWord(match[1])
+        WinActivate, ahk_id %id%
+        centerMouse()
+    }
+    return
 }
 
 switch(which)
 {
   global TITLES
   global chosenid
+
   Gui, Destroy
   ids := getAllMatches(which)
   count := ids.Count()
   if (count == 1) {
-	switchImmediate(which)
-	return
+    switchImmediate(which)
+    return
   }
   idchoices := ""
   For i, v In ids
     idchoices .= StrReplace(v, "|", " ") . "|"
   idchoices := RTrim(idchoices, "|")
   idchoices := StrReplace(idchoices, "|", "||",,1)
+    
+  Gui, 1:-Border
   Gui, Font, s9, Consolas
-  Gui, Add, ListBox, gidchosen vchosenid w700 r20, %idchoices%
+  Gui, Add, Button, w700, Close
+  Gui, Add, ListBox, gidchosen vchosenid w700 r10, %idchoices%
   Gui, Add, Button, Hidden Default, IDCHOSEN  
-  Gui, Show
+  Gui, Add, Button, w700, Close
+  Gui, Show,, AppSwitchByNameListBox
+  PostMessage, 0x185, 0, -1, AppSwitchByNameListBox  ; Deselect all items.
   centerMouse()
+ 
   return
 }
-
-;; for above listview with keyboard  
-idchosen:
-	If ((A_GuiEvent = "DoubleClick") || (Trigger_idchosen))
-	{
-		global chosenid
-		Gui, Submit
-		Gui, Destroy
-		id := GetLastWord(chosenid)
-		WinActivate, ahk_id %id%
-		centerMouse()	
-	}
-	return  
-
-;; for above listview with keyboard  
-ButtonIDCHOSEN:
-	ControlGet, number, List, Count Focused, SysListView321, A
-	Trigger_idchosen := true
-	GoSub, idchosen
-	Trigger_idchosen := false
-	return
 
 run(which) 
 {
@@ -157,22 +143,60 @@ run(which)
   WinGet, NOWAPP, ID, A
   
   if (BEFOREAPP == NOWAPP) {
-	  app := APP_TO_RUN_ON_KEY[which]
-	  WinGet, ORIGINAL_APP, ID, A
-	  Run, %app%
-	  tries := 0
-	  While (tries < 30) {
-		WinGet, CURRENT_APP, ID, A
-		if (ORIGINAL_APP != CURRENT_APP) {
-			centerMouse()
-			return
-		}
-		Sleep, 100
-		tries := tries + 1
-	  }
+      app := APP_TO_RUN_ON_KEY[which]
+      WinGet, ORIGINAL_APP, ID, A
+      Run, %app%
+      tries := 0
+      While (tries < 30) {
+        WinGet, CURRENT_APP, ID, A
+        if (ORIGINAL_APP != CURRENT_APP) {
+            centerMouse()
+            return
+        }
+        Sleep, 100
+        tries := tries + 1
+      }
   } else {
-	  centerMouse()
+      centerMouse()
   }
-  
+ 
   return
 }
+
+centerGui() {
+    Sleep 50
+    CoordMode,Mouse,Screen
+    WinGetPos, winTopL_x, winTopL_y, width, height, A
+    winCenter_x := winTopL_x + width/2 - 350
+    winCenter_y := winTopL_y + height/2
+    Gui, Show, x%winCenter_x% y%winCenter_y%, AppSwitchByNameListBox	
+	return
+}
+
+return
+
+;; for above listview with keyboard  
+idchosen:
+    If (A_GuiEvent = "Normal") {
+        global chosenid
+        Gui, Submit
+        id := GetLastWord(chosenid)
+        WinActivate, ahk_id %id%		
+		centerGui()
+        centerMouse()   
+	}
+    return  
+
+;; for above listview with keyboard  
+ButtonIDCHOSEN:
+    ControlGet, number, List, Count Focused, SysListView321, A
+    Trigger_idchosen := true
+    GoSub, idchosen
+    Trigger_idchosen := false
+		
+    return
+
+ButtonClose:
+    Gui, Destroy	
+    return
+	

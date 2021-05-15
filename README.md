@@ -29,7 +29,7 @@ The following hotkeys are pre-configured:
 
 `a,s,d,f,g,z,x,c,v,b`
 
-To cycle/recall an application window hold CAPS LOCK + ALT then tap the corresponding key.  If the keybind currently has multiple associated applications open, a list view is presented in ALT-TAB order.  The list view has an indicator of which screen the application is on for easy picking.
+To cycle/recall an application window hold CAPS LOCK + ALT then tap the corresponding key.  If the keybind currently has multiple associated applications open, a list view is presented in ALT-TAB order.  The list view has an indicator of which screen the application is on for easy picking.  Selecting a choice will move the overlay about the now focues app.  Click away, hit "Close" button, or ALT-F4 to dismiss.
 
 Douple tapping CAPS LOCK + ALT and a corresponding key will recall the most recent desired open app in ALT-TAB order.
 
