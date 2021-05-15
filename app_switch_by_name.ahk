@@ -187,17 +187,16 @@ return
 
 ;; for above listview with keyboard  
 idchosen:
-    If (A_GuiEvent = "Normal") {
+	If (A_GuiEvent = "Normal") {
+		settimer, SwitchToAppTimer, -100
+	}
+    If ((A_GuiEvent = "DoubleClick") || (Trigger_idchosen)) {
+		settimer, SwitchToAppTimer, OFF
         global chosenid
         Gui, Submit
         id := GetLastWord(chosenid)
         WinActivate, ahk_id %id%		
-		If (A_PriorKey = "Enter") {
-			Gui, Destroy
-		}
-		else {
-			centerGui()
-		}
+		Gui, Destroy
         centerMouse()   
 	}
     return  
@@ -217,4 +216,13 @@ ButtonClose:
 	
 ClearToolTip:
 	ToolTip
+	return
+	
+SwitchToAppTimer:
+	global chosenid
+	Gui, Submit
+	id := GetLastWord(chosenid)
+	WinActivate, ahk_id %id%		
+	centerGui()
+	centerMouse()   
 	return
