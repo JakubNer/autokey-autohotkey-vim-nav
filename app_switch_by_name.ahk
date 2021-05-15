@@ -112,6 +112,7 @@ switch(which)
   count := ids.Count()
   if (count == 0) {
 	ToolTip, no apps to switch to
+	settimer, ClearToolTip, -500
 	return
   }
   if (count == 1) {
@@ -214,3 +215,6 @@ ButtonClose:
     Gui, Destroy	
     return
 	
+ClearToolTip:
+	ToolTip
+	return
