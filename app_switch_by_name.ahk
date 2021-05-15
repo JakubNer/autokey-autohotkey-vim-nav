@@ -110,25 +110,34 @@ switch(which)
   Gui, Destroy
   ids := getAllMatches(which)
   count := ids.Count()
+  if (count == 0) {
+	ToolTip, no apps to switch to
+	return
+  }
   if (count == 1) {
     switchImmediate(which)
     return
   }
   idchoices := ""
-  For i, v In ids
+  firstid := ""
+  For i, v In ids {
+    if (i == 1) {
+		firstid := GetLastWord(v)
+	}
     idchoices .= StrReplace(v, "|", " ") . "|"
+  }
   idchoices := RTrim(idchoices, "|")
   idchoices := StrReplace(idchoices, "|", "||",,1)
-    
+
   Gui, 1:-Border
   Gui, Font, s9, Consolas
-  Gui, Add, Button, w700, Close
   Gui, Add, ListBox, gidchosen vchosenid w700 r10, %idchoices%
   Gui, Add, Button, Hidden Default, IDCHOSEN  
   Gui, Add, Button, w700, Close
-  Gui, Show,, AppSwitchByNameListBox
-  PostMessage, 0x185, 0, -1, AppSwitchByNameListBox  ; Deselect all items.
+  WinActivate, ahk_id %firstid%
+  centerGui()
   centerMouse()
+  Gui, Show,, AppSwitchByNameListBox
  
   return
 }
@@ -182,7 +191,12 @@ idchosen:
         Gui, Submit
         id := GetLastWord(chosenid)
         WinActivate, ahk_id %id%		
-		centerGui()
+		If (A_PriorKey = "Enter") {
+			Gui, Destroy
+		}
+		else {
+			centerGui()
+		}
         centerMouse()   
 	}
     return  
