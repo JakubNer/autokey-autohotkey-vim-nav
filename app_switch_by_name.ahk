@@ -92,8 +92,6 @@ getAllMatches(which) {
 }
 
 killGui() {
-	global LAST_WHICH
-	LAST_WHICH := ""
     Gui, Destroy
 }
 
@@ -108,21 +106,19 @@ switchImmediate(which) {
     return
 }
 
-LAST_WHICH := ""
-
 switch(which)
 {
   global TITLES
-  global LAST_WHICH
   global chosenid
 
-  if (LAST_WHICH == which) { 
+  WinGetTitle, Title, A
+
+  if (Title == "AppSwitchByNameListBox") { 
     Send { Down }
 	return
   }
 
   killGui()
-  LAST_WHICH := which
   ids := getAllMatches(which)
   count := ids.Count()
   if (count == 0) {
