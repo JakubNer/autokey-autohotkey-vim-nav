@@ -136,14 +136,20 @@ switch(which)
   }
   idchoices := ""
   firstid := ""
+  secondid := ""
   For i, v In ids {
     if (i == 1) {
 		firstid := GetLastWord(v)
+	}
+    if (i == 2) {
+		secondid := GetLastWord(v)
 	}
     idchoices .= StrReplace(v, "|", " ") . "|"
   }
   idchoices := RTrim(idchoices, "|")
   idchoices := StrReplace(idchoices, "|", "||",,1)
+
+  WinGet, original_app, ID, A
 
   Gui, 1:-Border
   Gui, Font, s9, Consolas
@@ -154,6 +160,10 @@ switch(which)
   centerGui()
   centerMouse()
   Gui, Show,, AppSwitchByNameListBox
+
+  if (original_app == firstid) {
+	Send { Down }
+  }
  
   return
 }
