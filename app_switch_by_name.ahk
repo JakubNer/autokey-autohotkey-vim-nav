@@ -91,8 +91,14 @@ getAllMatches(which) {
     return ids
 }
 
-switchImmediate(which) {
+killGui() {
+	global LAST_WHICH
+	LAST_WHICH := ""
     Gui, Destroy
+}
+
+switchImmediate(which) {
+    killGui()
     match := getAllMatches(which)
     if (match.Count() > 0) {
         id := GetLastWord(match[1])
@@ -102,12 +108,21 @@ switchImmediate(which) {
     return
 }
 
+LAST_WHICH := ""
+
 switch(which)
 {
   global TITLES
+  global LAST_WHICH
   global chosenid
 
-  Gui, Destroy
+  if (LAST_WHICH == which) { 
+    Send { Down }
+	return
+  }
+
+  killGui()
+  LAST_WHICH := which
   ids := getAllMatches(which)
   count := ids.Count()
   if (count == 0) {
@@ -196,7 +211,7 @@ idchosen:
         Gui, Submit
         id := GetLastWord(chosenid)
         WinActivate, ahk_id %id%		
-		Gui, Destroy
+		killGui()
         centerMouse()   
 	}
     return  
@@ -211,7 +226,7 @@ ButtonIDCHOSEN:
     return
 
 ButtonClose:
-    Gui, Destroy	
+    killGui()
     return
 	
 ClearToolTip:
