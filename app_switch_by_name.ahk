@@ -91,17 +91,15 @@ getAllMatches(which) {
     return ids
 }
 
-killGui() {
-    Gui, Destroy
-}
-
 switchImmediate(which) {
-    killGui()
     match := getAllMatches(which)
     if (match.Count() > 0) {
         id := GetLastWord(match[1])
         WinActivate, ahk_id %id%
         centerMouse()
+        WinGetTitle, title, A
+        ToolTip, %title%
+        settimer, ClearToolTip, -2000
     }
     return
 }
@@ -109,58 +107,43 @@ switchImmediate(which) {
 switch(which)
 {
   global TITLES
-  global chosenid
 
-  WinGetTitle, Title, A
-
-  if (Title == "AppSwitchByNameListBox") { 
-    Send { Down }
-	return
-  }
-
-  killGui()
   ids := getAllMatches(which)
   count := ids.Count()
   if (count == 0) {
-	ToolTip, no apps to switch to
-	settimer, ClearToolTip, -500
-	return
+    ToolTip, no apps to switch to
+    settimer, ClearToolTip, -500
+    return
   }
   if (count == 1) {
     switchImmediate(which)
     return
   }
-  idchoices := ""
-  firstid := ""
-  secondid := ""
+  
+  WinGet, original_app, ID, A
+  
+  firstid := "" 
+  lastid := ""
+  chosenid := ""
   For i, v In ids {
     if (i == 1) {
-		firstid := GetLastWord(v)
-	}
-    if (i == 2) {
-		secondid := GetLastWord(v)
-	}
-    idchoices .= StrReplace(v, "|", " ") . "|"
+        firstid := GetLastWord(v)
+    }
+    if (lastid == original_app) {
+        chosenid := GetLastWord(v)
+    }
+    lastid := GetLastWord(v)
   }
-  idchoices := RTrim(idchoices, "|")
-  idchoices := StrReplace(idchoices, "|", "||",,1)
+  if (chosenid == "") {
+    chosenid := firstid
+  }
 
-  WinGet, original_app, ID, A
-
-  Gui, 1:-Border
-  Gui, Font, s9, Consolas
-  Gui, Add, ListBox, gidchosen vchosenid w700 r10, %idchoices%
-  Gui, Add, Button, Hidden Default, IDCHOSEN  
-  Gui, Add, Button, w700, Close
-  WinActivate, ahk_id %firstid%
-  centerGui()
+  WinActivate, ahk_id %chosenid%
   centerMouse()
-  Gui, Show,, AppSwitchByNameListBox
-
-  if (original_app == firstid) {
-	Send { Down }
-  }
- 
+  WinGetTitle, title, A
+  ToolTip, %title%
+  settimer, ClearToolTip, -2000
+    
   return
 }
 
@@ -194,56 +177,8 @@ run(which)
   return
 }
 
-centerGui() {
-    Sleep 50
-    CoordMode,Mouse,Screen
-    WinGetPos, winTopL_x, winTopL_y, width, height, A
-    winCenter_x := winTopL_x + width/2 - 350
-    winCenter_y := winTopL_y + height/2
-    Gui, Show, x%winCenter_x% y%winCenter_y%, AppSwitchByNameListBox	
-	return
-}
-
 return
 
-;; for above listview with keyboard  
-idchosen:
-	If (A_GuiEvent = "Normal") {
-		settimer, SwitchToAppTimer, -100
-	}
-    If ((A_GuiEvent = "DoubleClick") || (Trigger_idchosen)) {
-		settimer, SwitchToAppTimer, OFF
-        global chosenid
-        Gui, Submit
-        id := GetLastWord(chosenid)
-        WinActivate, ahk_id %id%		
-		killGui()
-        centerMouse()   
-	}
-    return  
-
-;; for above listview with keyboard  
-ButtonIDCHOSEN:
-    ControlGet, number, List, Count Focused, SysListView321, A
-    Trigger_idchosen := true
-    GoSub, idchosen
-    Trigger_idchosen := false
-		
-    return
-
-ButtonClose:
-    killGui()
-    return
-	
 ClearToolTip:
-	ToolTip
-	return
-	
-SwitchToAppTimer:
-	global chosenid
-	Gui, Submit
-	id := GetLastWord(chosenid)
-	WinActivate, ahk_id %id%		
-	centerGui()
-	centerMouse()   
-	return
+    ToolTip
+    return
