@@ -90,7 +90,7 @@ AltTab_window_list() {
 	return listids
 }
 
-GetFirstWord(word) {
+GetFirstWord(words) {
 	wordArray := StrSplit(words, A_Space)
 	num := 1
 	return wordArray[num]

@@ -91,6 +91,13 @@ getAllMatches(which) {
     return ids
 }
 
+getTitle(words) {
+	wordArray := StrSplit(words, "::")
+	num := 2
+	return wordArray[num]
+}
+
+
 switchImmediate(which) {
     match := getAllMatches(which)
     if (match.Count() > 0) {
@@ -123,25 +130,42 @@ switch(which)
   WinGet, original_app, ID, A
   
   firstid := "" 
+  firsttitle := ""
   lastid := ""
+  lasttitle := ""
   chosenid := ""
+  chosentitle := ""
   For i, v In ids {
     if (i == 1) {
         firstid := GetLastWord(v)
+		firsttitle := getTitle(v)
     }
     if (lastid == original_app) {
         chosenid := GetLastWord(v)
+		chosentitle := getTitle(v)
     }
     lastid := GetLastWord(v)
+	lasttitle := getTitle(v)
   }
   if (chosenid == "") {
     chosenid := firstid
+	chosentitle := firsttitle
+  }
+
+  tooltipString := ""
+  For i, v In ids {
+    prefix := "`t"
+    if (getTitle(v) == chosentitle) {
+	  prefix := "    -->`t"
+    }
+	title := getTitle(v)
+	tooltipString = %tooltipString% `n %prefix% %title%
   }
 
   WinActivate, ahk_id %chosenid%
   centerMouse()
   WinGetTitle, title, A
-  ToolTip, %title%
+  ToolTip, %tooltipString%
   settimer, ClearToolTip, -2000
     
   return
