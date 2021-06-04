@@ -75,10 +75,13 @@ getIds() {
     return listids
 }
 
-getAllMatches(which) {
+getAllMatches(which, consistentOrder) {
     global TITLES
     ids := []
     listids := AltTab_window_list()
+	if (consistentOrder) {
+		SortArray(listids)
+	}
     for i,id in listids {
         WinGetTitle title, ahk_id %id%
         WinGet, process, ProcessName, ahk_id %id%
@@ -99,7 +102,7 @@ getTitle(words) {
 
 
 switchImmediate(which) {
-    match := getAllMatches(which)
+    match := getAllMatches(which, false)
     if (match.Count() > 0) {
         id := GetLastWord(match[1])
         WinActivate, ahk_id %id%
@@ -115,7 +118,7 @@ switch(which)
 {
   global TITLES
 
-  ids := getAllMatches(which)
+  ids := getAllMatches(which, true)
   count := ids.Count()
   if (count == 0) {
     ToolTip, no apps to switch to
